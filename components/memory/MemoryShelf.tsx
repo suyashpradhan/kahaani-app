@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { savedHostRequestTokens } from "@/lib/hostRequests";
+import { removeHostRequestToken, savedHostRequestTokens } from "@/lib/hostRequests";
 import { Icon } from "@/components/illustrations";
 
 export function MemoryShelf() {
@@ -13,6 +13,20 @@ export function MemoryShelf() {
   const entries = useQuery(api.invitations.getHostShelf, {
     shareTokens: tokens,
   });
+  const deleteHostMemory = useMutation(api.invitations.deleteHostMemory);
+  const [deletingToken, setDeletingToken] = useState<string | null>(null);
+
+  const deleteMemory = async (shareToken: string, storytellerName: string) => {
+    if (!window.confirm(`Delete ${storytellerName}'s memory? This permanently removes the recording and its written translations.`)) return;
+    setDeletingToken(shareToken);
+    try {
+      const result = await deleteHostMemory({ shareToken });
+      if (result.deleted) setTokens((current) => current.filter((token) => token !== shareToken));
+      removeHostRequestToken(shareToken);
+    } finally {
+      setDeletingToken(null);
+    }
+  };
 
   return (
     <main className="page">
@@ -103,30 +117,33 @@ export function MemoryShelf() {
                         : "Waiting for her story…"}
                   </p>
                 </div>
-                {ready ? (
-                  <Link
-                    href={`/memory/${memory?.memoryToken}`}
-                    className="play"
-                    aria-label={`Open ${invitation.storytellerName}'s memory`}
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flex: "none" }}>
+                  {ready ? (
+                    <Link
+                      href={`/memory/${memory?.memoryToken}`}
+                      className="play"
+                      aria-label={`Open ${invitation.storytellerName}'s memory`}
+                    >
+                      <Icon name="play" size={28} />
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/create/${shareToken}`}
+                      className="secondary"
+                      style={{ width: "auto", minHeight: 48, padding: "0 15px", fontSize: 15, textDecoration: "none" }}
+                    >
+                      View
+                    </Link>
+                  )}
+                  <button
+                    className="quiet-button"
+                    disabled={deletingToken === shareToken}
+                    onClick={() => void deleteMemory(shareToken, invitation.storytellerName)}
+                    style={{ width: "auto", minHeight: 48, padding: "0 15px", color: "var(--voice)" }}
                   >
-                    <Icon name="play" size={28} />
-                  </Link>
-                ) : (
-                  <Link
-                    href={`/create/${shareToken}`}
-                    className="secondary"
-                    style={{
-                      width: "auto",
-                      minHeight: 48,
-                      padding: "0 15px",
-                      fontSize: 15,
-                      textDecoration: "none",
-                      flex: "none",
-                    }}
-                  >
-                    View
-                  </Link>
-                )}
+                    {deletingToken === shareToken ? "Deleting…" : "Delete"}
+                  </button>
+                </div>
               </article>
             );
           })}

@@ -12,3 +12,8 @@ export function saveHostRequestToken(token: string) {
   const saved = savedHostRequestTokens();
   window.localStorage.setItem(storageKey, JSON.stringify([token, ...saved.filter((item) => item !== token)].slice(0, 30)));
 }
+
+export function removeHostRequestToken(token: string) {
+  const saved = savedHostRequestTokens();
+  window.localStorage.setItem(storageKey, JSON.stringify(saved.filter((item) => item !== token)));
+}

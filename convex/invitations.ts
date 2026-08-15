@@ -153,3 +153,31 @@ export const getHostShelf = query({
     return entries.filter((entry): entry is NonNullable<typeof entry> => entry !== null);
   },
 });
+
+export const deleteHostMemory = mutation({
+  args: { shareToken: v.string() },
+  handler: async (ctx, { shareToken }) => {
+    // The host browser owns this unguessable private token in local storage.
+    // No document IDs are exposed in the UI or accepted from the client.
+    const invitation = await ctx.db
+      .query("invitations")
+      .withIndex("by_share_token", (q) => q.eq("shareToken", shareToken))
+      .unique();
+    if (!invitation) return { deleted: false };
+
+    const memories = await ctx.db
+      .query("memories")
+      .withIndex("by_invitation", (q) => q.eq("invitationId", invitation._id))
+      .collect();
+
+    for (const memory of memories) {
+      await ctx.storage.delete(memory.audioStorageId);
+      await ctx.db.delete(memory._id);
+    }
+    if (invitation.promptAudioStorageId) {
+      await ctx.storage.delete(invitation.promptAudioStorageId);
+    }
+    await ctx.db.delete(invitation._id);
+    return { deleted: true };
+  },
+});

@@ -27,8 +27,9 @@ export const saveAnswer = mutation({
 export const setProcessing = internalMutation({
   args: { memoryId: v.id("memories"), status: v.union(v.literal("transcribing"), v.literal("translating"), v.literal("ready"), v.literal("failed")), error: v.optional(v.union(v.literal("storage"), v.literal("transcription"), v.literal("translation"), v.literal("unknown"))) },
   handler: async (ctx, { memoryId, status, error }) => {
-    await ctx.db.patch(memoryId, { processingStatus: status, processingError: error });
     const memory = await ctx.db.get(memoryId);
+    if (!memory) return;
+    await ctx.db.patch(memoryId, { processingStatus: status, processingError: error });
     if (memory && status === "ready") await ctx.db.patch(memory.invitationId, { status: "ready" });
     if (memory && status === "failed") await ctx.db.patch(memory.invitationId, { status: "failed" });
   },
