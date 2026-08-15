@@ -8,7 +8,7 @@ import {
 import { internal } from "./_generated/api";
 import { v } from "convex/values";
 import { language } from "./schema";
-import { synthesize, translate } from "./sarvam";
+import { synthesize, transcribe, translate } from "./sarvam";
 
 const invitationInput = {
   hostName: v.string(),
@@ -51,6 +51,46 @@ export const prepare = action({
     return ctx.runMutation(internal.invitations.createPrepared, {
       ...args,
       questionLocalized,
+    });
+  },
+});
+
+const voiceInvitationInput = {
+  hostName: v.string(),
+  storytellerName: v.string(),
+  relationship: v.string(),
+  storytellerLanguage: language,
+  promptAudioStorageId: v.id("_storage"),
+};
+
+export const createVoicePrepared = internalMutation({
+  args: { ...voiceInvitationInput, questionOriginal: v.string() },
+  handler: async (ctx, args) =>
+    ctx.db.insert("invitations", {
+      ...args,
+      questionSourceLanguage: args.storytellerLanguage,
+      questionLocalized: args.questionOriginal,
+      shareToken: token(),
+      promptAudioSource: "host-recorded",
+      status: "created",
+      createdAt: Date.now(),
+    }),
+});
+
+// Voice-first asks are intentionally same-language: the person answering hears
+// the host's actual voice and reads an exact transcript, never a dubbed voice.
+export const prepareVoice = action({
+  args: voiceInvitationInput,
+  handler: async (ctx, args): Promise<any> => {
+    const promptAudio = await ctx.storage.get(args.promptAudioStorageId);
+    if (!promptAudio) throw new Error("Host recording not found");
+    const questionOriginal = await transcribe(
+      promptAudio,
+      args.storytellerLanguage,
+    );
+    return ctx.runMutation(internal.invitations.createVoicePrepared, {
+      ...args,
+      questionOriginal,
     });
   },
 });

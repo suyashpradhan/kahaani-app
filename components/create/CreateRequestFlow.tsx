@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useAction, useMutation, useQuery } from "convex/react";
 import type { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { languageLabel, languages, type LanguageCode } from "@/lib/languages";
 import { supportedRecordingMimeType } from "@/lib/audio";
 import { saveHostRequestToken } from "@/lib/hostRequests";
@@ -39,15 +39,22 @@ export function CreateRequestFlow() {
     useState<LanguageCode>("en-IN");
   const [question, setQuestion] = useState(presets[0]);
   const [chosenPreset, setChosenPreset] = useState(0);
+  const [questionMode, setQuestionMode] = useState<"typed" | "voice">("typed");
   const [invitationId, setInvitationId] = useState<any>(null);
   const [busy, setBusy] = useState(false);
   const [recording, setRecording] = useState(false);
+  const [voiceQuestion, setVoiceQuestion] = useState<Blob | null>(null);
+  const [voiceStorageId, setVoiceStorageId] = useState<Id<"_storage"> | null>(
+    null,
+  );
   const [message, setMessage] = useState<string | null>(null);
+  const voiceRecorderRef = useRef<MediaRecorder | null>(null);
+  const voiceStreamRef = useRef<MediaStream | null>(null);
 
   const prepare = useAction(api.invitations.prepare);
+  const prepareVoice = useAction(api.invitations.prepareVoice);
   const generatePrompt = useAction(api.invitations.generatePrompt);
   const uploadUrl = useMutation(api.invitations.generateUploadUrl);
-  const attachHostPrompt = useMutation(api.invitations.attachHostPrompt);
   const shareToken = useQuery(
     api.invitations.shareTokenFor,
     invitationId ? { invitationId } : "skip",
@@ -60,6 +67,11 @@ export function CreateRequestFlow() {
   useEffect(() => {
     if (shareToken) saveHostRequestToken(shareToken);
   }, [shareToken]);
+  useEffect(
+    () => () =>
+      voiceStreamRef.current?.getTracks().forEach((track) => track.stop()),
+    [],
+  );
 
   const createFast = async () => {
     setBusy(true);
@@ -84,8 +96,33 @@ export function CreateRequestFlow() {
     }
   };
 
-  const recordHostPrompt = async () => {
-    if (!invitationId || recording) return;
+  const createVoiceQuestion = async () => {
+    if (!voiceQuestion) return;
+    setBusy(true);
+    setMessage(null);
+    try {
+      const storageId =
+        voiceStorageId ?? (await uploadBlob(voiceQuestion, await uploadUrl()));
+      setVoiceStorageId(storageId);
+      const id = await prepareVoice({
+        hostName: hostName.trim(),
+        storytellerName: storytellerName.trim(),
+        relationship: relationship.trim(),
+        storytellerLanguage,
+        promptAudioStorageId: storageId,
+      });
+      setInvitationId(id);
+    } catch {
+      setMessage(
+        "We could not turn this recording into a written question yet. Your recording is still here—please try again.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const recordVoiceQuestion = async () => {
+    if (recording) return;
     setMessage(null);
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -97,39 +134,32 @@ export function CreateRequestFlow() {
       const chunks: BlobPart[] = [];
       recorder.ondataavailable = (event) =>
         event.data.size && chunks.push(event.data);
-      recorder.onstop = async () => {
+      recorder.onstop = () => {
         stream.getTracks().forEach((track) => track.stop());
+        voiceStreamRef.current = null;
         setRecording(false);
-        setBusy(true);
-        try {
-          const storageId = await uploadBlob(
-            new Blob(chunks, { type: recorder.mimeType || "audio/webm" }),
-            await uploadUrl(),
-          );
-          await attachHostPrompt({ invitationId, storageId });
-          setMessage("Your own recording will now be played instead.");
-        } catch {
-          setMessage(
-            "Your question is still ready. Your voice recording could not be saved, so please try once more.",
-          );
-        } finally {
-          setBusy(false);
-        }
+        setVoiceQuestion(
+          new Blob(chunks, { type: recorder.mimeType || "audio/webm" }),
+        );
+        setVoiceStorageId(null);
+        setMessage(
+          "Your question is recorded. Create the private link when you are ready.",
+        );
       };
       recorder.start();
       setRecording(true);
-      (window as any).__kahaaniHostRecorder = recorder;
+      voiceRecorderRef.current = recorder;
+      voiceStreamRef.current = stream;
     } catch {
       setMessage(
-        "We could not reach your microphone. Kahaani's spoken prompt is ready to use instead.",
+        "We could not reach your microphone. Please allow microphone access and try again.",
       );
     }
   };
 
-  const stopHostPrompt = () => {
-    const recorder = (window as any).__kahaaniHostRecorder as
-      MediaRecorder | undefined;
-    if (recorder?.state === "recording") recorder.stop();
+  const stopVoiceQuestion = () => {
+    if (voiceRecorderRef.current?.state === "recording")
+      voiceRecorderRef.current.stop();
   };
   const origin = typeof window === "undefined" ? "" : window.location.origin;
   const privateLink = shareToken ? `${origin}/story/${shareToken}` : "";
@@ -147,7 +177,9 @@ export function CreateRequestFlow() {
     }
   };
   const valid = Boolean(
-    hostName.trim() && storytellerName.trim() && question.trim(),
+    hostName.trim() &&
+    storytellerName.trim() &&
+    (questionMode === "typed" ? question.trim() : voiceQuestion),
   );
 
   if (invitationId)
@@ -217,26 +249,6 @@ export function CreateRequestFlow() {
                 </Link>
               </>
             )}
-            {recording ? (
-              <button
-                className="secondary"
-                style={{ marginTop: 10 }}
-                onClick={stopHostPrompt}
-              >
-                <Icon name="stop" />
-                Finish recording my voice
-              </button>
-            ) : (
-              <button
-                className="quiet-button"
-                disabled={busy}
-                onClick={recordHostPrompt}
-                style={{ marginTop: 8 }}
-              >
-                <Icon name="mic" />
-                Record this question in my voice instead
-              </button>
-            )}
             {memory && (
               <div className="processing-note">
                 {memory.processingStatus === "ready" ? (
@@ -301,37 +313,32 @@ export function CreateRequestFlow() {
               They will see one question and one recording button. Nothing else.
             </p>
           </div>
-          <div
-            className="card"
-            style={{ padding: 20, display: "grid", gap: 16 }}
-          >
+          <div>
             <div className="eyebrow">Who is this for?</div>
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr)",
+                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: 12,
               }}
             >
               <label className="field">
                 Their name
                 <input
+                  required
                   value={storytellerName}
                   onChange={(event) => setStorytellerName(event.target.value)}
-                  placeholder="Nani, Dadi, Aai…"
+                  placeholder="Nani, Maa, Chachi"
                 />
               </label>
-              <label className="field">
+              {/* <label className="field">
                 Relationship{" "}
-                <span style={{ fontWeight: 400, color: "var(--muted)" }}>
-                  (optional)
-                </span>
                 <input
                   value={relationship}
                   onChange={(event) => setRelationship(event.target.value)}
-                  placeholder="Grandmother"
+                  placeholder="Grandmother, Mother, Aunt"
                 />
-              </label>
+              </label> */}
               <label className="field">
                 Your name
                 <input
@@ -360,40 +367,108 @@ export function CreateRequestFlow() {
           </div>
           <div>
             <div className="eyebrow" style={{ marginBottom: 10 }}>
-              Your question
+              How would you like to ask?
             </div>
-            <div style={{ display: "grid", gap: 10 }}>
-              {presets.map((preset, index) => (
-                <button
-                  key={preset}
-                  className={`preset ${chosenPreset === index ? "selected" : ""}`}
-                  onClick={() => {
-                    setChosenPreset(index);
-                    setQuestion(preset);
-                  }}
-                >
-                  {preset}
-                </button>
-              ))}
+            <div className="language-grid" style={{ marginBottom: 16 }}>
+              <button
+                className={`choice ${questionMode === "typed" ? "selected" : ""}`}
+                onClick={() => setQuestionMode("typed")}
+              >
+                Choose a question
+              </button>
+              <button
+                className={`choice ${questionMode === "voice" ? "selected" : ""}`}
+                onClick={() => setQuestionMode("voice")}
+              >
+                <Icon name="mic" size={21} />
+                Ask in my own voice
+              </button>
             </div>
-            <label className="field" style={{ marginTop: 12 }}>
-              Or write your own question
-              <textarea
-                value={question}
-                onChange={(event) => {
-                  setQuestion(event.target.value);
-                  setChosenPreset(-1);
-                }}
-              />
-            </label>
+            {questionMode === "typed" ? (
+              <>
+                <div className="eyebrow" style={{ marginBottom: 10 }}>
+                  Your question
+                </div>
+                <div style={{ display: "grid", gap: 10 }}>
+                  {presets.map((preset, index) => (
+                    <button
+                      key={preset}
+                      className={`preset ${chosenPreset === index ? "selected" : ""}`}
+                      onClick={() => {
+                        setChosenPreset(index);
+                        setQuestion(preset);
+                      }}
+                    >
+                      {preset}
+                    </button>
+                  ))}
+                </div>
+                <label className="field" style={{ marginTop: 12 }}>
+                  Or write your own question
+                  <textarea
+                    value={question}
+                    onChange={(event) => {
+                      setQuestion(event.target.value);
+                      setChosenPreset(-1);
+                    }}
+                  />
+                </label>
+              </>
+            ) : (
+              <div
+                className="card"
+                style={{ padding: 20, display: "grid", gap: 14 }}
+              >
+                <div>
+                  <div className="eyebrow">
+                    Your voice, in {languageLabel(storytellerLanguage)}
+                  </div>
+                  <p
+                    style={{
+                      margin: "8px 0 0",
+                      color: "var(--ink2)",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    Say the question exactly as you would like{" "}
+                    {storytellerName.trim() || "them"} to hear it. Kahaani will
+                    preserve your voice and use the transcription as the visible
+                    question.
+                  </p>
+                </div>
+                {recording ? (
+                  <button className="secondary" onClick={stopVoiceQuestion}>
+                    <Icon name="stop" />
+                    Finish recording your question
+                  </button>
+                ) : (
+                  <button className="primary" onClick={recordVoiceQuestion}>
+                    <Icon name="mic" />
+                    {voiceQuestion ? "Record again" : "Record your question"}
+                  </button>
+                )}
+                {voiceQuestion && (
+                  <div className="processing-note">
+                    Your question is recorded. It will be spoken in your own
+                    voice.
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <button
             className="primary"
             disabled={!valid || busy}
-            onClick={createFast}
+            onClick={
+              questionMode === "typed" ? createFast : createVoiceQuestion
+            }
           >
             <Icon name="sound" />
-            {busy ? "Preparing your question…" : "Create and share"}
+            {busy
+              ? questionMode === "voice"
+                ? "Preparing your recorded question…"
+                : "Preparing your question…"
+              : "Create and share"}
           </button>
           <p
             style={{
@@ -403,8 +478,9 @@ export function CreateRequestFlow() {
               fontSize: 14,
             }}
           >
-            The host experience stays in English. Kahaani translates and speaks
-            the question in their chosen language.
+            {questionMode === "voice"
+              ? "For a voice question, speak in the language you selected above."
+              : "The host experience stays in English. Kahaani translates and speaks the question in their chosen language."}
           </p>
           {message && (
             <p
