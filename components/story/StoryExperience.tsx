@@ -7,6 +7,7 @@ import { clearPendingAudio, keepPendingAudio } from "@/lib/pendingAudio";
 import { durationLabel, supportedRecordingMimeType } from "@/lib/audio";
 import { Icon, SettleIllustration } from "@/components/illustrations";
 import { languageMeta, type LanguageCode } from "@/lib/languages";
+import { track } from "@/lib/analytics";
 
 type Screen = "invite" | "recording" | "short-confirm" | "uploading" | "success" | "mic-error" | "upload-error";
 
@@ -30,11 +31,19 @@ export function StoryExperience({ shareToken }: { shareToken: string }) {
   const interval = useRef<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const confirmedShort = useRef(false);
+  const openedTracked = useRef(false);
   const audioContextRef = useRef<AudioContext | null>(null);
   const waveformFrame = useRef<number | null>(null);
   const [waveform, setWaveform] = useState<number[]>(() => Array.from({ length: 28 }, () => 8));
 
-  useEffect(() => { if (invitation) void markOpened({ shareToken }); }, [invitation, markOpened, shareToken]);
+  useEffect(() => {
+    if (!invitation) return;
+    void markOpened({ shareToken });
+    if (!openedTracked.current) {
+      openedTracked.current = true;
+      track("story_link_opened", { storyteller_language: invitation.storytellerLanguage, prompt_audio_source: invitation.promptAudioSource });
+    }
+  }, [invitation, markOpened, shareToken]);
   useEffect(() => () => { if (interval.current) window.clearInterval(interval.current); if (waveformFrame.current) window.cancelAnimationFrame(waveformFrame.current); void audioContextRef.current?.close(); streamRef.current?.getTracks().forEach((track) => track.stop()); }, []);
 
   const startTimer = () => { startedAt.current = Date.now() - elapsed * 1000; interval.current = window.setInterval(() => setElapsed(Math.floor((Date.now() - startedAt.current) / 1000)), 250); };
@@ -71,8 +80,9 @@ export function StoryExperience({ shareToken }: { shareToken: string }) {
       if (!result.ok) throw new Error("upload failed");
       const { storageId } = await result.json();
       await saveAnswer({ invitationId: invitation._id, storageId, durationSec: Math.max(1, elapsed) });
+      track("recording_uploaded", { storyteller_language: invitation.storytellerLanguage, duration_sec: Math.max(1, elapsed) });
       await clearPendingAudio(shareToken); setScreen("success");
-    } catch { await keepPendingAudio(shareToken, blob).catch(()=>undefined); setScreen("upload-error"); }
+    } catch { track("recording_upload_failed", { storyteller_language: invitation.storytellerLanguage }); await keepPendingAudio(shareToken, blob).catch(()=>undefined); setScreen("upload-error"); }
   };
 
   const startRecording = async () => {
@@ -84,8 +94,8 @@ export function StoryExperience({ shareToken }: { shareToken: string }) {
       const chunks: BlobPart[] = [];
       recorder.ondataavailable = (event) => { if (event.data.size) chunks.push(event.data); };
       recorder.onstop = () => { stopWaveform(); stream.getTracks().forEach((track)=>track.stop()); streamRef.current=null; const blob = new Blob(chunks,{type:recorder.mimeType || "audio/webm"}); setRecordingBlob(blob); void upload(blob); };
-      recorder.start(1000); recorderRef.current=recorder; streamRef.current=stream; startWaveform(stream); setElapsed(0); confirmedShort.current=false; setScreen("recording"); startedAt.current=Date.now(); startTimer();
-    } catch { setScreen("mic-error"); }
+      recorder.start(1000); recorderRef.current=recorder; streamRef.current=stream; startWaveform(stream); setElapsed(0); confirmedShort.current=false; setScreen("recording"); startedAt.current=Date.now(); startTimer(); track("recording_started", { storyteller_language: invitation?.storytellerLanguage ?? "unknown" });
+    } catch { track("microphone_access_failed", { storyteller_language: invitation?.storytellerLanguage ?? "unknown" }); setScreen("mic-error"); }
   };
 
   const finish = () => {
@@ -104,7 +114,7 @@ export function StoryExperience({ shareToken }: { shareToken: string }) {
   const storyClass = languageMeta[language].storyClass;
 
   return <main className="story-shell"><header className="story-head"><div className="wordmark">Kahaani</div></header>
-    {screen === "invite" && <div className="story-main"><div className="story-host">{invitation.hostIntroLocalized ?? text.hostIntro(invitation.hostName)}</div><div className={`prompt-question ${storyClass}`}>{invitation.questionLocalized}</div>{invitation.promptAudioUrl && <><audio ref={audioRef} src={invitation.promptAudioUrl}/><button className="hear-button" onClick={()=>void audioRef.current?.play()}><Icon name="sound" size={28}/>{text.generatedPrompt}</button></>}<div className="story-action"><button className="primary story-primary" onClick={startRecording}><Icon name="mic" size={40}/>{text.record}</button></div></div>}
+    {screen === "invite" && <div className="story-main"><div className="story-host">{invitation.hostIntroLocalized ?? text.hostIntro(invitation.hostName)}</div><div className={`prompt-question ${storyClass}`}>{invitation.questionLocalized}</div>{invitation.promptAudioUrl && <><audio ref={audioRef} src={invitation.promptAudioUrl}/><button className="hear-button" onClick={()=>{track("prompt_audio_played", { storyteller_language: invitation.storytellerLanguage, prompt_audio_source: invitation.promptAudioSource }); void audioRef.current?.play();}}><Icon name="sound" size={28}/>{text.generatedPrompt}</button></>}<div className="story-action"><button className="primary story-primary" onClick={startRecording}><Icon name="mic" size={40}/>{text.record}</button></div></div>}
     {screen === "recording" && <><div className={`recording-question ${storyClass}`}>{invitation.questionLocalized}</div><div className="recording-area"><div className="mic-orbit"><div className="mic-disc"><Icon name="mic" size={46}/></div></div><div className={`listening ${storyClass}`}>{text.listening}</div><div className="wave" aria-label="Live sound level while recording">{waveform.map((height,index)=><span key={index} style={{height}}/>)}</div><div className="timer">{durationLabel(elapsed)}</div></div><button className="primary finish" onClick={finish}><Icon name="stop" size={36}/>{text.finish}</button></>}
     {screen === "short-confirm" && <div className="success-screen"><div className="mic-disc" style={{width:108,height:108,background:"var(--voice-wash)",color:"var(--voice)",boxShadow:"none"}}><Icon name="stop" size={46}/></div><h1>{text.short}</h1><p>{text.shortBody}</p><div className="timer" style={{fontSize:26,color:"var(--muted)"}}>{durationLabel(elapsed)}</div><div style={{width:"100%"}}><button className="primary story-primary" onClick={keepGoing}><Icon name="mic" size={32}/>{text.keep}</button><button className="secondary" style={{marginTop:12,minHeight:72,fontSize:21}} onClick={finish}><Icon name="check" size={28}/>{text.done}</button></div></div>}
     {screen === "uploading" && <div className="success-screen"><SettleIllustration/><h1>{text.sendingTitle}</h1><p>{text.sendingBody}</p></div>}

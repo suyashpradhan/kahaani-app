@@ -2,12 +2,21 @@
 
 import Link from "next/link";
 import { useQuery } from "convex/react";
+import { useEffect, useRef } from "react";
 import { api } from "@/convex/_generated/api";
 import { Icon, SettleIllustration } from "@/components/illustrations";
+import { track } from "@/lib/analytics";
 
 export function MemoryStatus({ shareToken }: { shareToken: string }) {
   const invitation = useQuery(api.invitations.getStory, { shareToken });
   const memory = useQuery(api.memories.getForInvitation, invitation ? { invitationId: invitation._id } : "skip");
+  const readyTracked = useRef(false);
+
+  useEffect(() => {
+    if (!memory || memory.processingStatus !== "ready" || readyTracked.current) return;
+    readyTracked.current = true;
+    track("memory_ready");
+  }, [memory]);
 
   if (invitation === undefined) return <main className="page"><div className="shell"><header style={{display:"flex",justifyContent:"space-between",marginBottom:48}}><div className="wordmark">Kahaani</div></header><p style={{color:"var(--muted)"}}>Opening this request…</p></div></main>;
   if (!invitation) return <main className="page"><div className="shell"><header style={{display:"flex",justifyContent:"space-between",marginBottom:48}}><div className="wordmark">Kahaani</div></header><div className="unavailable">This private request could not be found.</div></div></main>;

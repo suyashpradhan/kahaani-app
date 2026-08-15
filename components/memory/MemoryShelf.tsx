@@ -6,6 +6,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { removeHostRequestToken, savedHostRequestTokens } from "@/lib/hostRequests";
 import { Icon } from "@/components/illustrations";
+import { track } from "@/lib/analytics";
 
 export function MemoryShelf() {
   const [tokens, setTokens] = useState<string[]>([]);
@@ -23,6 +24,7 @@ export function MemoryShelf() {
       const result = await deleteHostMemory({ shareToken });
       if (result.deleted) setTokens((current) => current.filter((token) => token !== shareToken));
       removeHostRequestToken(shareToken);
+      if (result.deleted) track("memory_deleted");
     } finally {
       setDeletingToken(null);
     }

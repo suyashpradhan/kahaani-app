@@ -9,6 +9,7 @@ import { languageLabel, languages, type LanguageCode } from "@/lib/languages";
 import { supportedRecordingMimeType } from "@/lib/audio";
 import { saveHostRequestToken } from "@/lib/hostRequests";
 import { shareMessage } from "@/lib/share";
+import { track } from "@/lib/analytics";
 import { Icon } from "@/components/illustrations";
 
 const presets = [
@@ -72,6 +73,7 @@ export function CreateRequestFlow() {
       voiceStreamRef.current?.getTracks().forEach((track) => track.stop()),
     [],
   );
+  useEffect(() => { track("create_started"); }, []);
 
   const createFast = async () => {
     setBusy(true);
@@ -87,6 +89,8 @@ export function CreateRequestFlow() {
       });
       setInvitationId(id);
       await generatePrompt({ invitationId: id });
+      track("prompt_tts_used", { storyteller_language: storytellerLanguage });
+      track("invitation_created", { question_mode: "typed", storyteller_language: storytellerLanguage, prompt_audio_source: "sarvam_tts" });
     } catch {
       setMessage(
         "We could not prepare this question just now. Please try once more.",
@@ -112,7 +116,9 @@ export function CreateRequestFlow() {
         promptAudioStorageId: storageId,
       });
       setInvitationId(id);
+      track("invitation_created", { question_mode: "voice", storyteller_language: storytellerLanguage, prompt_audio_source: "host_recorded" });
     } catch {
+      track("voice_question_preparation_failed", { storyteller_language: storytellerLanguage });
       setMessage(
         "We could not turn this recording into a written question yet. Your recording is still here—please try again.",
       );
@@ -145,6 +151,7 @@ export function CreateRequestFlow() {
         setMessage(
           "Your question is recorded. Create the private link when you are ready.",
         );
+        track("prompt_voice_recorded", { storyteller_language: storytellerLanguage });
       };
       recorder.start();
       setRecording(true);
@@ -165,15 +172,17 @@ export function CreateRequestFlow() {
   const privateLink = shareToken ? `${origin}/story/${shareToken}` : "";
   const share = async () => {
     if (!privateLink) return;
-    if (navigator.share)
+    if (navigator.share) {
       await navigator.share({
         title: "A little question for you",
         text: shareMessage,
         url: privateLink,
       });
-    else {
+      track("memory_shared", { share_method: "native_share" });
+    } else {
       await navigator.clipboard.writeText(privateLink);
       setMessage("Private link copied.");
+      track("private_link_copied");
     }
   };
   const valid = Boolean(
@@ -223,6 +232,7 @@ export function CreateRequestFlow() {
                 onClick={async () => {
                   await navigator.clipboard.writeText(privateLink);
                   setMessage("Private link copied.");
+                  track("private_link_copied");
                 }}
               >
                 <Icon name="copy" />
