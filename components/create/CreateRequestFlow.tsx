@@ -1,14 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useAction, useMutation, useQuery } from "convex/react";
+import type { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { languageLabel, languages, type LanguageCode } from "@/lib/languages";
 import { supportedRecordingMimeType } from "@/lib/audio";
+import { saveHostRequestToken } from "@/lib/hostRequests";
 import { shareMessage } from "@/lib/share";
 import { Icon } from "@/components/illustrations";
-import type { Id } from "@/convex/_generated/dataModel";
-import Link from "next/link";
 
 const presets = [
   "What was the home you grew up in like?",
@@ -24,40 +25,33 @@ async function uploadBlob(blob: Blob, uploadUrl: string): Promise<Id<"_storage">
 }
 
 export function CreateRequestFlow() {
-  const [step, setStep] = useState(0);
-  const [hostName, setHostName] = useState("Suyash");
-  const [storytellerName, setStorytellerName] = useState("Ajji");
-  const [relationship, setRelationship] = useState("Grandmother");
+  const [hostName, setHostName] = useState("");
+  const [storytellerName, setStorytellerName] = useState("");
+  const [relationship, setRelationship] = useState("");
   const [storytellerLanguage, setStorytellerLanguage] = useState<LanguageCode>("hi-IN");
   const [question, setQuestion] = useState(presets[0]);
-  const [questionSourceLanguage, setQuestionSourceLanguage] = useState<LanguageCode>("en-IN");
   const [chosenPreset, setChosenPreset] = useState(0);
   const [invitationId, setInvitationId] = useState<any>(null);
   const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
   const [recording, setRecording] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
 
   const prepare = useAction(api.invitations.prepare);
+  const generatePrompt = useAction(api.invitations.generatePrompt);
   const uploadUrl = useMutation(api.invitations.generateUploadUrl);
   const attachHostPrompt = useMutation(api.invitations.attachHostPrompt);
-  const generatePrompt = useAction(api.invitations.generatePrompt);
   const shareToken = useQuery(api.invitations.shareTokenFor, invitationId ? { invitationId } : "skip");
   const memory = useQuery(api.memories.getForInvitation, invitationId ? { invitationId } : "skip");
 
-  const createInvitation = async () => {
+  useEffect(() => { if (shareToken) saveHostRequestToken(shareToken); }, [shareToken]);
+
+  const createFast = async () => {
     setBusy(true); setMessage(null);
     try {
-      const id = await prepare({ hostName: hostName.trim(), storytellerName: storytellerName.trim(), relationship: relationship.trim(), storytellerLanguage, questionOriginal: question.trim(), questionSourceLanguage });
-      setInvitationId(id); setStep(3);
-    } catch { setMessage("We could not prepare the question just now. Please try once more."); }
-    finally { setBusy(false); }
-  };
-
-  const useKahaaniVoice = async () => {
-    if (!invitationId) return;
-    setBusy(true); setMessage(null);
-    try { await generatePrompt({ invitationId }); setStep(4); }
-    catch { setMessage("Kahaani's voice is taking a little longer. You can try again, or record it in your voice."); }
+      const id = await prepare({ hostName: hostName.trim(), storytellerName: storytellerName.trim(), relationship: relationship.trim(), storytellerLanguage, questionOriginal: question.trim(), questionSourceLanguage: "en-IN" });
+      setInvitationId(id);
+      await generatePrompt({ invitationId: id });
+    } catch { setMessage("We could not prepare this question just now. Please try once more."); }
     finally { setBusy(false); }
   };
 
@@ -72,14 +66,12 @@ export function CreateRequestFlow() {
       recorder.ondataavailable = (event) => event.data.size && chunks.push(event.data);
       recorder.onstop = async () => {
         stream.getTracks().forEach((track) => track.stop()); setRecording(false); setBusy(true);
-        try { const storageId = await uploadBlob(new Blob(chunks, { type: recorder.mimeType || "audio/webm" }), await uploadUrl()); await attachHostPrompt({ invitationId, storageId }); setStep(4); }
-        catch { setMessage("Your question is still here. The recording could not be saved, so please try once more."); }
+        try { const storageId = await uploadBlob(new Blob(chunks, { type: recorder.mimeType || "audio/webm" }), await uploadUrl()); await attachHostPrompt({ invitationId, storageId }); setMessage("Your own recording will now be played instead."); }
+        catch { setMessage("Your question is still ready. Your voice recording could not be saved, so please try once more."); }
         finally { setBusy(false); }
       };
-      recorder.start(); setRecording(true);
-      window.setTimeout(() => recorder.state === "recording" && recorder.stop(), 45_000);
-      (window as any).__kahaaniHostRecorder = recorder;
-    } catch { setMessage("We could not reach your microphone. You can still use Kahaani's voice."); }
+      recorder.start(); setRecording(true); (window as any).__kahaaniHostRecorder = recorder;
+    } catch { setMessage("We could not reach your microphone. Kahaani's Hindi voice is ready to use instead."); }
   };
 
   const stopHostPrompt = () => { const recorder = (window as any).__kahaaniHostRecorder as MediaRecorder | undefined; if (recorder?.state === "recording") recorder.stop(); };
@@ -87,16 +79,12 @@ export function CreateRequestFlow() {
   const privateLink = shareToken ? `${origin}/story/${shareToken}` : "";
   const share = async () => {
     if (!privateLink) return;
-    if (navigator.share) { await navigator.share({ title: "A little question for you", text: shareMessage, url: privateLink }); }
+    if (navigator.share) await navigator.share({ title: "A little question for you", text: shareMessage, url: privateLink });
     else { await navigator.clipboard.writeText(privateLink); setMessage("Private link copied."); }
   };
+  const valid = Boolean(hostName.trim() && storytellerName.trim() && relationship.trim() && question.trim());
 
-  return <main className="page"><div className="shell"><header style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:34 }}><div className="wordmark">Kahaani</div><span className="eyebrow">a small question</span></header><div className="stepper" aria-label={`Step ${Math.min(step + 1, 4)} of 4`}>{[0,1,2,3].map((value)=><span className={value <= step ? "active" : ""} key={value}/>)}</div>
-    {step === 0 && <section style={{ display:"flex", flexDirection:"column", gap:24 }}><div><div className="eyebrow">Step 1</div><h1 className="memory-title" style={{ marginTop:8 }}>Who would you like to hear from?</h1></div><label className="field">Their name<input value={storytellerName} onChange={(e)=>setStorytellerName(e.target.value)} placeholder="Ajji"/></label><label className="field">Your relationship<input value={relationship} onChange={(e)=>setRelationship(e.target.value)} placeholder="Grandmother"/></label><label className="field">Your name<input value={hostName} onChange={(e)=>setHostName(e.target.value)} placeholder="Suyash"/></label><button className="primary" disabled={!hostName.trim() || !storytellerName.trim() || !relationship.trim()} onClick={()=>setStep(1)}>Continue</button></section>}
-    {step === 1 && <section style={{ display:"flex", flexDirection:"column", gap:24 }}><div><div className="eyebrow">Step 2</div><h1 className="memory-title" style={{ marginTop:8 }}>Which language feels most natural to them?</h1></div><div className="language-grid">{languages.map((code)=><button key={code} className={`choice ${storytellerLanguage===code ? "selected" : ""}`} onClick={()=>setStorytellerLanguage(code)}>{languageLabel(code)}</button>)}</div><button className="primary" onClick={()=>setStep(2)}>Continue</button><button className="quiet-button" onClick={()=>setStep(0)}>Back</button></section>}
-    {step === 2 && <section style={{ display:"flex", flexDirection:"column", gap:20 }}><div><div className="eyebrow">Step 3</div><h1 className="memory-title" style={{ marginTop:8 }}>What would you like to ask?</h1></div><div style={{ display:"flex", flexDirection:"column", gap:10 }}>{presets.map((preset,index)=><button key={preset} className={`preset ${chosenPreset===index ? "selected" : ""}`} onClick={()=>{setChosenPreset(index);setQuestion(preset);setQuestionSourceLanguage("en-IN");}}>{preset}</button>)}</div><label className="field">Or write your own question<textarea value={question} onChange={(e)=>{setQuestion(e.target.value);setChosenPreset(-1);}}/></label><label className="field">Written in<select value={questionSourceLanguage} onChange={(e)=>setQuestionSourceLanguage(e.target.value as LanguageCode)} style={{ minHeight:52, border:"1.5px solid #DCCDB8", borderRadius:16, background:"var(--surface)", padding:"0 16px" }}>{languages.map(code=><option key={code} value={code}>{languageLabel(code)}</option>)}</select></label><button className="primary" disabled={busy || !question.trim()} onClick={createInvitation}>{busy ? "Preparing your question…" : "Prepare this question"}</button><button className="quiet-button" onClick={()=>setStep(1)}>Back</button></section>}
-    {step === 3 && <section style={{ display:"flex", flexDirection:"column", gap:22 }}><div><div className="eyebrow">One more thing</div><h1 className="memory-title" style={{ marginTop:8 }}>How should {storytellerName} hear this question?</h1></div><div className="card" style={{ padding:20 }}><div className="eyebrow" style={{ color:"var(--voice)" }}>The question</div><p className="story-latin" style={{ fontSize:24, lineHeight:1.45, margin:"10px 0 0" }}>{question}</p></div>{recording ? <button className="primary story-primary" onClick={stopHostPrompt}><Icon name="stop" size={30}/>Finish recording</button> : <button className="primary" disabled={busy} onClick={recordHostPrompt}><Icon name="mic"/>Record this question in my voice</button>}<button className="secondary" disabled={busy || recording} onClick={useKahaaniVoice}><Icon name="sound"/>Use Kahaani&apos;s voice</button></section>}
-    {step === 4 && <section className="share-card card"><div className="eyebrow" style={{ color:"var(--success)" }}>Ready to share</div><h2>This question is ready.</h2><p>{storytellerName} can simply open this private link, listen or read, and tell their story.</p><div className="share-actions"><button className="primary" onClick={share}><Icon name="share"/>Share</button><button className="secondary" onClick={async()=>{await navigator.clipboard.writeText(privateLink);setMessage("Private link copied.");}}><Icon name="copy"/>Copy private link</button></div>{privateLink && <p style={{ fontSize:13, overflowWrap:"anywhere", marginTop:18 }}>{privateLink}</p>}{memory && <div className="processing-note">{memory.processingStatus === "ready" ? <Link href={`/memory/${memory.memoryToken}`} style={{ color:"var(--voice)",fontWeight:600 }}>This memory is ready to open.</Link> : "Keeping this memory… The original recording is already safe."}</div>}</section>}
-    {message && <p role="status" style={{ color:"var(--ink2)", lineHeight:1.5, marginTop:16 }}>{message}</p>}
-  </div></main>;
+  if (invitationId) return <main className="page"><div className="shell" style={{maxWidth:640}}><header style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:36}}><div className="wordmark">Kahaani</div><Link href="/memories" className="quiet-button" style={{width:"auto",textDecoration:"none"}}>View memories</Link></header><section className="share-card card"><div className="eyebrow" style={{color:"var(--success)"}}>Ready to share</div><h2>This question is ready.</h2><p>{storytellerName} can simply open this private link, hear the Hindi question, and tell their story.</p><div className="share-actions"><button className="primary" onClick={share}><Icon name="share"/>Share</button><button className="secondary" onClick={async()=>{await navigator.clipboard.writeText(privateLink);setMessage("Private link copied.");}}><Icon name="copy"/>Copy private link</button></div>{privateLink && <><p style={{fontSize:13,overflowWrap:"anywhere",marginTop:18}}>{privateLink}</p><Link className="quiet-button" href={`/create/${shareToken}`} style={{marginTop:8,textDecoration:"none"}}>See when this memory arrives</Link></>}{recording ? <button className="secondary" style={{marginTop:10}} onClick={stopHostPrompt}><Icon name="stop"/>Finish recording my voice</button> : <button className="quiet-button" disabled={busy} onClick={recordHostPrompt} style={{marginTop:8}}><Icon name="mic"/>Record this question in my voice instead</button>}{memory && <div className="processing-note">{memory.processingStatus === "ready" ? <Link href={`/memory/${memory.memoryToken}`} style={{color:"var(--voice)",fontWeight:600}}>This memory is ready to open.</Link> : "Keeping this memory… The original recording is already safe."}</div>}</section>{message && <p role="status" style={{color:"var(--ink2)",lineHeight:1.5,marginTop:16}}>{message}</p>}</div></main>;
+
+  return <main className="page"><div className="shell" style={{maxWidth:760}}><header style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:34}}><div className="wordmark">Kahaani</div><Link href="/memories" className="quiet-button" style={{width:"auto",textDecoration:"none"}}>View memories</Link></header><section style={{display:"flex",flexDirection:"column",gap:24}}><div><div className="eyebrow">A small question</div><h1 className="memory-title" style={{marginTop:8}}>Make a private page for someone you love.</h1><p style={{color:"var(--ink2)",fontSize:17,lineHeight:1.55,margin:"12px 0 0"}}>They will see one question and one recording button. Nothing else.</p></div><div className="card" style={{padding:20,display:"grid",gap:16}}><div className="eyebrow">Who is this for?</div><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr)",gap:12}}><label className="field">Their name<input value={storytellerName} onChange={(event)=>setStorytellerName(event.target.value)} placeholder="Nani or Dadi"/></label><label className="field">Relationship<input value={relationship} onChange={(event)=>setRelationship(event.target.value)} placeholder="Grandmother"/></label><label className="field">Your name<input value={hostName} onChange={(event)=>setHostName(event.target.value)} placeholder="Suyash"/></label></div></div><div><div className="eyebrow" style={{marginBottom:10}}>Their language</div><div className="language-grid">{languages.map((code)=><button key={code} className={`choice ${storytellerLanguage===code ? "selected" : ""}`} onClick={()=>setStorytellerLanguage(code)}>{languageLabel(code)}</button>)}</div></div><div><div className="eyebrow" style={{marginBottom:10}}>Your question</div><div style={{display:"grid",gap:10}}>{presets.map((preset,index)=><button key={preset} className={`preset ${chosenPreset===index ? "selected" : ""}`} onClick={()=>{setChosenPreset(index);setQuestion(preset);}}>{preset}</button>)}</div><label className="field" style={{marginTop:12}}>Or write your own question<textarea value={question} onChange={(event)=>{setQuestion(event.target.value);setChosenPreset(-1);}}/></label></div><button className="primary" disabled={!valid || busy} onClick={createFast}><Icon name="sound"/>{busy ? "Preparing your question…" : "Create and share"}</button><p style={{margin:0,textAlign:"center",color:"var(--muted)",fontSize:14}}>Kahaani will translate it and prepare a spoken prompt automatically.</p>{message && <p role="status" style={{color:"var(--ink2)",lineHeight:1.5,margin:0}}>{message}</p>}</section></div></main>;
 }

@@ -1,4 +1,10 @@
-import { action, internalMutation, internalQuery, mutation, query } from "./_generated/server";
+import {
+  action,
+  internalMutation,
+  internalQuery,
+  mutation,
+  query,
+} from "./_generated/server";
 import { internal } from "./_generated/api";
 import { v } from "convex/values";
 import { language } from "./schema";
@@ -10,7 +16,9 @@ const invitationInput = {
   relationship: v.string(),
   storytellerLanguage: language,
   questionOriginal: v.string(),
-  questionSourceLanguage: language,
+  // P0 host questions are authored in English. The single language choice is
+  // always the storyteller's output language, so it can never suppress translation.
+  questionSourceLanguage: v.literal("en-IN"),
 };
 
 function token() {
@@ -131,4 +139,17 @@ export const shareTokenFor = query({
   args: { invitationId: v.id("invitations") },
   handler: async (ctx, { invitationId }) =>
     (await ctx.db.get(invitationId))?.shareToken ?? null,
+});
+
+export const getHostShelf = query({
+  args: { shareTokens: v.array(v.string()) },
+  handler: async (ctx, { shareTokens }) => {
+    const entries = await Promise.all(shareTokens.slice(0, 30).map(async (shareToken) => {
+      const invitation = await ctx.db.query("invitations").withIndex("by_share_token", (q) => q.eq("shareToken", shareToken)).unique();
+      if (!invitation) return null;
+      const memory = await ctx.db.query("memories").withIndex("by_invitation", (q) => q.eq("invitationId", invitation._id)).order("desc").first();
+      return { shareToken, invitation: { storytellerName: invitation.storytellerName, relationship: invitation.relationship, questionLocalized: invitation.questionLocalized, status: invitation.status, createdAt: invitation.createdAt }, memory: memory && { memoryToken: memory.memoryToken, processingStatus: memory.processingStatus } };
+    }));
+    return entries.filter((entry): entry is NonNullable<typeof entry> => entry !== null);
+  },
 });
