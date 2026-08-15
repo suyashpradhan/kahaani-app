@@ -16,7 +16,7 @@ The first Convex run creates `.env.local`. Add your Sarvam key to the Convex dep
 npx convex env set SARVAM_API_KEY
 ```
 
-Use `NEXT_PUBLIC_APP_URL` for the deployed application origin. P0 supports only English (`en-IN`) and Hindi (`hi-IN`).
+Use `NEXT_PUBLIC_APP_URL` for the deployed application origin. P0 supports English (`en-IN`), Hindi (`hi-IN`), and Marathi (`mr-IN`).
 
 ## Demo flow
 

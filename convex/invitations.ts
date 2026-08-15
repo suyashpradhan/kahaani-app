@@ -148,7 +148,7 @@ export const getHostShelf = query({
       const invitation = await ctx.db.query("invitations").withIndex("by_share_token", (q) => q.eq("shareToken", shareToken)).unique();
       if (!invitation) return null;
       const memory = await ctx.db.query("memories").withIndex("by_invitation", (q) => q.eq("invitationId", invitation._id)).order("desc").first();
-      return { shareToken, invitation: { storytellerName: invitation.storytellerName, relationship: invitation.relationship, questionLocalized: invitation.questionLocalized, status: invitation.status, createdAt: invitation.createdAt }, memory: memory && { memoryToken: memory.memoryToken, processingStatus: memory.processingStatus } };
+      return { shareToken, invitation: { storytellerName: invitation.storytellerName, relationship: invitation.relationship, questionOriginal: invitation.questionOriginal, status: invitation.status, createdAt: invitation.createdAt }, memory: memory && { memoryToken: memory.memoryToken, processingStatus: memory.processingStatus } };
     }));
     return entries.filter((entry): entry is NonNullable<typeof entry> => entry !== null);
   },

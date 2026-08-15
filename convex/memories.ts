@@ -40,7 +40,7 @@ export const saveTranscript = internalMutation({
 });
 
 export const saveTranslation = internalMutation({
-  args: { memoryId: v.id("memories"), key: v.union(v.literal("en"), v.literal("hi")), text: v.string() },
+  args: { memoryId: v.id("memories"), key: v.union(v.literal("en"), v.literal("hi"), v.literal("mr")), text: v.string() },
   handler: async (ctx, { memoryId, key, text }) => {
     const memory = await ctx.db.get(memoryId);
     if (!memory) return;
@@ -56,7 +56,7 @@ export const getMemory = query({
     const memory = await ctx.db.query("memories").withIndex("by_memory_token", (q) => q.eq("memoryToken", memoryToken)).unique();
     if (!memory) return null;
     const invitation = await ctx.db.get(memory.invitationId);
-    return { ...memory, audioUrl: await ctx.storage.getUrl(memory.audioStorageId), invitation: invitation && { hostName: invitation.hostName, storytellerName: invitation.storytellerName, relationship: invitation.relationship, questionLocalized: invitation.questionLocalized } };
+    return { ...memory, audioUrl: await ctx.storage.getUrl(memory.audioStorageId), invitation: invitation && { hostName: invitation.hostName, storytellerName: invitation.storytellerName, relationship: invitation.relationship, questionOriginal: invitation.questionOriginal, questionLocalized: invitation.questionLocalized } };
   },
 });
 

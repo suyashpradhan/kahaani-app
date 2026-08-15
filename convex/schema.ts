@@ -4,6 +4,7 @@ import { v } from "convex/values";
 export const language = v.union(
   v.literal("en-IN"),
   v.literal("hi-IN"),
+  v.literal("mr-IN"),
 );
 
 const invitationStatus = v.union(
@@ -27,7 +28,7 @@ export default defineSchema({
   memories: defineTable({
     memoryToken: v.string(), invitationId: v.id("invitations"), audioStorageId: v.id("_storage"),
     durationSec: v.number(), originalLanguage: language, originalTranscript: v.optional(v.string()),
-    translations: v.optional(v.object({ en: v.optional(v.string()), hi: v.optional(v.string()) })),
+    translations: v.optional(v.object({ en: v.optional(v.string()), hi: v.optional(v.string()), mr: v.optional(v.string()) })),
     processingStatus,
     processingError: v.optional(v.union(v.literal("storage"), v.literal("transcription"), v.literal("translation"), v.literal("unknown"))),
     createdAt: v.number(),

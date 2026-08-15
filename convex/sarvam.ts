@@ -39,11 +39,19 @@ export async function synthesize(text: string, targetLanguage: LanguageCode) {
 }
 
 export async function transcribe(audio: Blob, language: LanguageCode) {
+  // Chrome records WebM with an optional codecs parameter. Saaras expects the
+  // container MIME type itself, so normalize only the processing upload; the
+  // original browser recording remains untouched in Convex storage.
+  const mimeType = audio.type.startsWith("audio/webm")
+    ? "audio/webm"
+    : audio.type.split(";")[0] || "audio/webm";
+  const normalizedAudio = new Blob([await audio.arrayBuffer()], { type: mimeType });
   const formData = new FormData();
-  formData.append("file", audio, "kahaani-story.webm");
+  formData.append("file", normalizedAudio, "kahaani-story.webm");
   formData.append("model", "saaras:v3");
   formData.append("mode", "transcribe");
   formData.append("language_code", language);
+  console.log("Kahaani transcription input", { mimeType, language });
   const response = await fetch(`${baseUrl}/speech-to-text`, { method: "POST", headers: headers(), body: formData });
   if (!response.ok) await readError(response);
   const body = await response.json();

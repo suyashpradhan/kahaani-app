@@ -81,13 +81,13 @@ export function MemoryShelf() {
               >
                 <div style={{ minWidth: 0 }}>
                   <div className="eyebrow">
-                    {invitation.storytellerName} · {invitation.relationship}
+                    {invitation.storytellerName}{invitation.relationship ? ` · ${invitation.relationship}` : ""}
                   </div>
                   <div
-                    className="story-devanagari"
+                    className="story-latin"
                     style={{ fontSize: 22, lineHeight: 1.4, marginTop: 7 }}
                   >
-                    {invitation.questionLocalized}
+                    {invitation.questionOriginal}
                   </div>
                   <p
                     style={{

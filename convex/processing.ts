@@ -4,7 +4,7 @@ import { v } from "convex/values";
 import { transcribe, translate } from "./sarvam";
 
 const targets = [
-  ["en-IN", "en"], ["hi-IN", "hi"],
+  ["en-IN", "en"], ["hi-IN", "hi"], ["mr-IN", "mr"],
 ] as const;
 
 export const processMemory = internalAction({
