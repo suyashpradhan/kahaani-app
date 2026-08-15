@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Kannada:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Kannada:wght@400;500;600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EAE1D2;color:#241C17;font-family:'Hanken Grotesk',ui-sans-serif,system-ui,'Noto Sans Devanagari','Noto Sans Kannada',sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;text-align:left}
+a{color:#A94E2B;text-decoration:none}
+a:hover{color:#8A3F21}
+p{margin:0}
+::selection{background:#F3E1D5}
+div::-webkit-scrollbar{width:0;height:0}
+div{scrollbar-width:none}
+@keyframes kFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes kFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes kBar{0%{transform:scaleY(.18)}100%{transform:scaleY(1)}}
+@keyframes kRing{0%{transform:scale(.82);opacity:.55}70%{opacity:0}100%{transform:scale(1.5);opacity:0}}
+@keyframes kBreathe{0%,100%{transform:scale(.94);opacity:.75}50%{transform:scale(1.04);opacity:1}}
+@keyframes kSpin{to{transform:rotate(360deg)}}
+@keyframes kDot{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes kSettleBars{0%,40%{opacity:1;transform:scaleY(1)}70%,100%{opacity:0;transform:scaleY(.12)}}
+@keyframes kSettleCard{0%,45%{opacity:0;transform:scale(.94)}75%,100%{opacity:1;transform:scale(1)}}
+@keyframes kSettleLine{0%,55%{transform:scaleX(0)}85%,100%{transform:scaleX(1)}}
+@keyframes kSway{0%,100%{transform:rotate(-2.2deg)}50%{transform:rotate(2.2deg)}}
+@keyframes kSteam{0%{transform:translateY(3px);opacity:0}25%{opacity:.8}60%{opacity:.55}100%{transform:translateY(-18px);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;padding:26px 28px 48px;background:radial-gradient(120% 80% at 50% 0%,#F1E9DB 0%,#E6DCCA 100%)">
+
+  <div style="max-width:1240px;margin:0 auto 22px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:26px;letter-spacing:-.01em">Kahaani</div>
+      <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Two experiences · one product · 390px</div>
+    </div>
+    <div style="display:flex;gap:6px;padding:5px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:999px">
+      <button onClick="{{ viewMobile }}" style="{{ tabMobile }}">Host · family app</button>
+      <button onClick="{{ viewElder }}" style="{{ tabElder }}">Storyteller · private link</button>
+      <button onClick="{{ viewDesktop }}" style="{{ tabDesktop }}">Desktop · Memory</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width:1240px;margin:0 auto;display:flex;gap:44px;align-items:flex-start;justify-content:center;flex-wrap:wrap">
+
+    <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ phoneW }}" height="{{ phoneH }}" hint-size="390px,844px">
+      <div style="height:100%;display:flex;flex-direction:column;background:#F7F2E9;padding:56px 0 30px">
+
+        <sc-if value="{{ isElder }}" hint-placeholder-val="{{ true }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+
+          <sc-if value="{{ eAtInvite }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 22px 8px;animation:kFade .5s ease both">
+            <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:14px;letter-spacing:.02em;color:#A08C7C;flex:none">Kahaani</div>
+            <div style="flex:1;min-height:0;overflow-y:auto;display:flex">
+            <div style="margin:auto 0;width:100%;display:flex;flex-direction:column;gap:20px;padding:8px 0">
+              <div style="display:flex;align-items:center;gap:13px">
+                <div style="width:52px;height:52px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+                <div style="font-size:19px;line-height:1.4;color:#5C4E44">{{ t.askedYou }}</div>
+              </div>
+              <sc-if value="{{ cueHome }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 128 80" style="width:158px;height:99px;opacity:.95">
+                <polygon points="6,36 30,16 54,36" style="fill:#D08A63;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></polygon>
+                <rect x="10" y="36" width="40" height="34" rx="2" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></rect>
+                <rect x="25" y="52" width="12" height="18" rx="1.5" style="fill:none;stroke:#A94E2B;stroke-width:2"></rect>
+                <rect x="15" y="42" width="9" height="8" style="fill:none;stroke:#A94E2B;stroke-width:1.5"></rect>
+                <circle cx="66" cy="62" r="8" style="fill:none;stroke:#5B7C8D;stroke-width:2"></circle>
+                <circle cx="84" cy="62" r="8" style="fill:none;stroke:#5B7C8D;stroke-width:2"></circle>
+                <path d="M66 62 L74 50 L84 62" fill="none" style="stroke:#5B7C8D;stroke-width:2;stroke-linejoin:round"></path>
+                <line x1="70" y1="50" x2="79" y2="50" style="stroke:#5B7C8D;stroke-width:2;stroke-linecap:round"></line>
+                <g style="transform-origin:106px 70px;animation:kSway 8s ease-in-out infinite">
+                  <rect x="104" y="50" width="5" height="20" style="fill:#7C3B33"></rect>
+                  <circle cx="100" cy="44" r="11" style="fill:#6B8A5A;opacity:.92"></circle>
+                  <circle cx="111" cy="41" r="9" style="fill:#6B8A5A;opacity:.92"></circle>
+                </g>
+                <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.3"></line>
+              </svg>
+              </sc-if>
+              <sc-if value="{{ cueKitchen }}">
+              <svg viewBox="0 0 128 80" style="width:158px;height:99px;opacity:.95">
+                <circle cx="28" cy="46" r="21" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></circle>
+                <circle cx="28" cy="46" r="5.5" style="fill:#C99A3E"></circle>
+                <circle cx="28" cy="35" r="5" style="fill:#7C3B33"></circle>
+                <circle cx="37" cy="41" r="5" style="fill:#C99A3E"></circle>
+                <circle cx="37" cy="52" r="5" style="fill:#6B8A5A"></circle>
+                <circle cx="28" cy="57" r="5" style="fill:#A94E2B"></circle>
+                <circle cx="19" cy="52" r="5" style="fill:#C99A3E"></circle>
+                <circle cx="19" cy="41" r="5" style="fill:#7C3B33"></circle>
+                <path d="M60 46 A15 15 0 0 0 90 46 Z" style="fill:#DCE3E6;stroke:#5B7C8D;stroke-width:2;stroke-linejoin:round"></path>
+                <line x1="58" y1="46" x2="92" y2="46" style="stroke:#5B7C8D;stroke-width:2;stroke-linecap:round"></line>
+                <g style="animation:kSteam 3s ease-out infinite"><path d="M107 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path></g>
+                <g style="animation:kSteam 3s ease-out infinite .5s"><path d="M112 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path></g>
+                <g style="animation:kSteam 3s ease-out infinite 1s"><path d="M117 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path></g>
+                <path d="M102 52 L104 70 L120 70 L122 52 Z" style="fill:#E4B7A6;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></path>
+                <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.3"></line>
+              </svg>
+              </sc-if>
+              <sc-if value="{{ cueWork }}">
+              <svg viewBox="0 0 128 80" style="width:158px;height:99px;opacity:.95">
+                <rect x="8" y="40" width="42" height="30" rx="4" style="fill:#D08A63;stroke:#A94E2B;stroke-width:2"></rect>
+                <path d="M22 40 v-6 a7 7 0 0 1 14 0 v6" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+                <line x1="8" y1="52" x2="50" y2="52" style="stroke:#A94E2B;stroke-width:2"></line>
+                <rect x="60" y="46" width="34" height="24" rx="2" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></rect>
+                <path d="M60 46 L77 60 L94 46" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></path>
+                <circle cx="112" cy="52" r="12" style="fill:#DCE3E6;stroke:#5B7C8D;stroke-width:2"></circle>
+                <path d="M112 46 v6 h5" fill="none" style="stroke:#5B7C8D;stroke-width:2;stroke-linecap:round"></path>
+                <line x1="106" y1="63" x2="118" y2="63" style="stroke:#5B7C8D;stroke-width:3;stroke-linecap:round"></line>
+                <line x1="106" y1="41" x2="118" y2="41" style="stroke:#5B7C8D;stroke-width:3;stroke-linecap:round"></line>
+                <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.3"></line>
+              </svg>
+              </sc-if>
+              <sc-if value="{{ cueLove }}">
+              <svg viewBox="0 0 128 80" style="width:158px;height:99px;opacity:.95">
+                <rect x="10" y="34" width="46" height="36" rx="3" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></rect>
+                <rect x="17" y="41" width="32" height="22" rx="2" style="fill:#E4B7A6;stroke:#A94E2B;stroke-width:1.5"></rect>
+                <circle cx="27" cy="50" r="4" style="fill:#EFE4D3"></circle>
+                <circle cx="38" cy="50" r="4" style="fill:#EFE4D3"></circle>
+                <g style="transform-origin:78px 70px;animation:kSway 9s ease-in-out infinite">
+                  <line x1="78" y1="70" x2="78" y2="46" style="stroke:#6B8A5A;stroke-width:2;stroke-linecap:round"></line>
+                  <circle cx="78" cy="41" r="8" style="fill:#C99A3E"></circle>
+                  <circle cx="78" cy="41" r="3" style="fill:#A94E2B"></circle>
+                </g>
+                <g style="transform-origin:98px 70px;animation:kSway 9s ease-in-out infinite 1.2s">
+                  <line x1="98" y1="70" x2="98" y2="52" style="stroke:#6B8A5A;stroke-width:2;stroke-linecap:round"></line>
+                  <circle cx="98" cy="47" r="7" style="fill:#E4B7A6"></circle>
+                  <circle cx="98" cy="47" r="2.5" style="fill:#A94E2B"></circle>
+                </g>
+                <g style="transform-origin:114px 70px;animation:kSway 9s ease-in-out infinite .6s">
+                  <line x1="114" y1="70" x2="114" y2="56" style="stroke:#6B8A5A;stroke-width:2;stroke-linecap:round"></line>
+                  <circle cx="114" cy="51" r="6" style="fill:#C99A3E"></circle>
+                </g>
+                <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.3"></line>
+              </svg>
+              </sc-if>
+              <sc-if value="{{ cueTraditions }}">
+              <svg viewBox="0 0 128 80" style="width:158px;height:99px;opacity:.95">
+                <path d="M14 62 q14 10 28 0 z" style="fill:#D08A63;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></path>
+                <path d="M28 58 q6 -8 0 -14 q-6 6 0 14" style="fill:#C99A3E;stroke:none;animation:kBreathe 2.6s ease-in-out infinite"></path>
+                <line x1="10" y1="70" x2="46" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></line>
+                <line x1="76" y1="14" x2="76" y2="26" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></line>
+                <g style="transform-origin:76px 20px;animation:kSway 7s ease-in-out infinite">
+                  <path d="M64 30 h24 l-4 24 h-16 z" style="fill:#E4B7A6;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></path>
+                  <line x1="64" y1="30" x2="88" y2="30" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></line>
+                  <circle cx="76" cy="60" r="3" style="fill:#C99A3E"></circle>
+                </g>
+                <circle cx="104" cy="52" r="7" style="fill:#C99A3E"></circle>
+                <circle cx="116" cy="58" r="6" style="fill:#E4B7A6"></circle>
+                <circle cx="110" cy="66" r="5" style="fill:#C99A3E"></circle>
+                <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.3"></line>
+              </svg>
+              </sc-if>
+              <sc-if value="{{ cueAdvice }}">
+              <svg viewBox="0 0 128 80" style="width:158px;height:99px;opacity:.95">
+                <circle cx="24" cy="50" r="11" style="fill:none;stroke:#A94E2B;stroke-width:2"></circle>
+                <circle cx="50" cy="50" r="11" style="fill:none;stroke:#A94E2B;stroke-width:2"></circle>
+                <line x1="35" y1="50" x2="39" y2="50" style="stroke:#A94E2B;stroke-width:2"></line>
+                <line x1="13" y1="46" x2="6" y2="40" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></line>
+                <line x1="61" y1="46" x2="68" y2="40" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></line>
+                <rect x="72" y="44" width="30" height="26" rx="2" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></rect>
+                <line x1="78" y1="52" x2="96" y2="52" style="stroke:#A94E2B;stroke-width:1.5;stroke-linecap:round"></line>
+                <line x1="78" y1="58" x2="92" y2="58" style="stroke:#A94E2B;stroke-width:1.5;stroke-linecap:round"></line>
+                <g style="animation:kSteam 3s ease-out infinite"><path d="M114 42 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path></g>
+                <g style="animation:kSteam 3s ease-out infinite .6s"><path d="M120 42 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path></g>
+                <path d="M108 46 L110 70 L126 70 L128 46 Z" style="fill:#E4B7A6;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></path>
+                <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.3"></line>
+              </svg>
+              </sc-if>
+              <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:35px;line-height:1.45;color:#241C17;text-wrap:pretty">{{ t.question }}</div>
+              <sc-if value="{{ eHasVoice }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ eSay }}" style="{{ eSayBtn }}">
+                <span style="font-family:'Material Symbols Rounded';font-size:30px;flex:none;font-variation-settings:'FILL' 1">{{ eSayIcon }}</span>
+                <span>{{ eSayLabel }}</span>
+              </button>
+              </sc-if>
+              <sc-if value="{{ eSpoken }}">
+              <div style="display:flex;align-items:center;gap:4px;height:34px;color:#A94E2B;animation:kFade .3s ease both">
+                <div style="width:4px;height:14px;border-radius:3px;background:currentColor;animation:kBar .7s ease-in-out infinite alternate"></div>
+                <div style="width:4px;height:28px;border-radius:3px;background:currentColor;animation:kBar .9s ease-in-out .12s infinite alternate"></div>
+                <div style="width:4px;height:20px;border-radius:3px;background:currentColor;animation:kBar .6s ease-in-out .24s infinite alternate"></div>
+                <div style="width:4px;height:32px;border-radius:3px;background:currentColor;animation:kBar 1s ease-in-out .3s infinite alternate"></div>
+                <div style="width:4px;height:18px;border-radius:3px;background:currentColor;animation:kBar .8s ease-in-out .42s infinite alternate"></div>
+              </div>
+              </sc-if>
+            </div>
+            </div>
+            <button onClick="{{ eStartRec }}" style="display:flex;align-items:center;justify-content:center;gap:14px;height:92px;flex:none;border-radius:22px;background:#A94E2B;color:#FFF8F1;font-size:24px;font-weight:600;box-shadow:0 2px 3px rgba(36,28,23,.16),0 20px 34px -18px rgba(169,78,43,.7)" style-hover="background:#96421F" style-active="transform:translateY(2px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:36px;font-variation-settings:'FILL' 1">mic</span>
+              <span>{{ t.tapTell }}</span>
+            </button>
+            <div style="flex:none;text-align:center;font-size:18px;color:#5C4E44;padding:14px 0 4px">{{ t.takeTime }}</div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ eAtRec }}">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 22px 8px;animation:kFadeIn .4s ease both">
+            <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:19px;line-height:1.5;color:#7A6858;text-wrap:pretty">{{ t.question }}</div>
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;padding:14px 0">
+              <div style="position:relative;width:146px;height:146px;display:flex;align-items:center;justify-content:center">
+                <div style="position:absolute;inset:0;border-radius:999px;border:1px solid #DCB9A3;animation:kRing 3s ease-out infinite"></div>
+                <div style="position:absolute;inset:0;border-radius:999px;border:1px solid #DCB9A3;animation:kRing 3s ease-out infinite 1.5s"></div>
+                <div style="width:112px;height:112px;border-radius:999px;background:#A94E2B;color:#FFF3EA;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 38px -22px rgba(169,78,43,.85)">
+                  <span style="font-family:'Material Symbols Rounded';font-size:46px;font-variation-settings:'FILL' 1">mic</span>
+                </div>
+              </div>
+              <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:26px;line-height:1.4;color:#241C17;text-align:center">{{ t.listening }}</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:4px;height:88px;width:100%;color:#C99A7C">
+                <sc-for list="{{ waveElder }}" as="b" hint-placeholder-count="28">
+                  <div style="width:5px;height:{{ b.h }}px;border-radius:4px;background:currentColor;transform-origin:center;animation:kBar {{ b.dur }}s ease-in-out {{ b.d }}s infinite alternate"></div>
+                </sc-for>
+              </div>
+              <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:40px;letter-spacing:.04em;color:#241C17;font-variant-numeric:tabular-nums">{{ elapsedLabel }}</div>
+            </div>
+            <button onClick="{{ eFinish }}" style="display:flex;align-items:center;justify-content:center;gap:14px;height:92px;flex:none;border-radius:22px;background:#241C17;color:#F7F2E9;font-size:24px;font-weight:600" style-hover="background:#3D3129" style-active="transform:translateY(2px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:36px;font-variation-settings:'FILL' 1">stop_circle</span>
+              <span>{{ t.finished }}</span>
+            </button>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ eAtSafe }}">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 22px 8px;animation:kFade .5s ease both">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;text-align:center">
+              <svg viewBox="0 0 200 130" style="width:212px;height:138px;animation:kFade .6s ease both">
+                <rect x="50" y="20" width="100" height="72" rx="10" style="fill:#FFFDF8;stroke:#A94E2B;stroke-width:2"></rect>
+                <rect x="62" y="38" width="60" height="3" rx="1.5" style="fill:#241C17;opacity:.45"></rect>
+                <rect x="62" y="50" width="76" height="3" rx="1.5" style="fill:#241C17;opacity:.45"></rect>
+                <rect x="62" y="62" width="48" height="3" rx="1.5" style="fill:#241C17;opacity:.45"></rect>
+                <path d="M62 78 q5 -6 10 0 t10 0 t10 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+                <circle cx="150" cy="92" r="21" style="fill:#F3E1D5;stroke:#E7CDBB;stroke-width:1"></circle>
+                <path d="M150 101 c-9 -6 -13 -12 -13 -17 a6.5 6.5 0 0 1 13 -3 a6.5 6.5 0 0 1 13 3 c0 5 -4 11 -13 17 z" style="fill:#A94E2B;animation:kBreathe 4.5s ease-in-out infinite;transform-origin:150px 92px"></path>
+              </svg>
+              <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:38px;line-height:1.35;color:#241C17">{{ t.doneTitle }}</div>
+              <div style="font-size:21px;line-height:1.55;color:#3D3129;text-wrap:pretty">{{ t.reached }}</div>
+              <div style="font-size:18px;line-height:1.55;color:#7A6858">{{ t.closedTitle }}</div>
+            </div>
+            <button onClick="{{ eGoInvite }}" style="height:60px;flex:none;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:18px;font-weight:600;color:#7A6858" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px">refresh</span>
+              <span>{{ t.recAgain }}</span>
+            </button>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ eAtConfirm }}">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 22px 8px;animation:kFade .35s ease both">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;text-align:center">
+              <div style="width:108px;height:108px;border-radius:999px;background:#F3E1D5;border:1px solid #E7CDBB;display:flex;align-items:center;justify-content:center;color:#A94E2B">
+                <span style="font-family:'Material Symbols Rounded';font-size:48px">pause_circle</span>
+              </div>
+              <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:31px;line-height:1.45;color:#241C17">{{ t.confirmTitle }}</div>
+              <div style="font-size:20px;line-height:1.6;color:#5C4E44;text-wrap:pretty">{{ t.confirmBody }}</div>
+              <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:26px;color:#7A6858;font-variant-numeric:tabular-nums">{{ elapsedLabel }}</div>
+            </div>
+            <button onClick="{{ eKeepGoing }}" style="display:flex;align-items:center;justify-content:center;gap:14px;height:92px;flex:none;border-radius:22px;background:#A94E2B;color:#FFF8F1;font-size:24px;font-weight:600;box-shadow:0 2px 3px rgba(36,28,23,.16),0 20px 34px -18px rgba(169,78,43,.7)" style-hover="background:#96421F" style-active="transform:translateY(2px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:36px;font-variation-settings:'FILL' 1">mic</span>
+              <span>{{ t.keepGoing }}</span>
+            </button>
+            <button onClick="{{ eDone }}" style="display:flex;align-items:center;justify-content:center;gap:12px;height:72px;flex:none;border-radius:20px;border:1.5px solid #DCCDB8;background:#FFFDF8;color:#241C17;font-size:21px;font-weight:600;margin-top:12px" style-hover="background:#F7F1E6">
+              <span style="font-family:'Material Symbols Rounded';font-size:28px">check</span>
+              <span>{{ t.imDone }}</span>
+            </button>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ eAtSaving }}">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:20px 30px;text-align:center;animation:kFadeIn .4s ease both">
+            <div style="display:flex;align-items:center;justify-content:center">
+              <svg viewBox="0 0 200 120" style="width:230px;height:138px">
+                <g style="transform-origin:100px 60px;animation:kSettleBars 4.2s ease-in-out infinite">
+                  <rect x="58" y="46" width="5" height="28" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="70" y="36" width="5" height="48" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="82" y="50" width="5" height="20" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="94" y="30" width="5" height="60" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="106" y="44" width="5" height="32" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="118" y="38" width="5" height="44" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="130" y="52" width="5" height="16" rx="2.5" style="fill:#A94E2B"></rect>
+                </g>
+                <g style="transform-origin:100px 60px;animation:kSettleCard 4.2s ease-in-out infinite">
+                  <rect x="50" y="24" width="100" height="72" rx="10" style="fill:#FFFDF8;stroke:#A94E2B;stroke-width:2"></rect>
+                  <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite"><rect x="62" y="42" width="60" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect></g>
+                  <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite .12s"><rect x="62" y="54" width="76" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect></g>
+                  <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite .24s"><rect x="62" y="66" width="48" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect></g>
+                  <path d="M62 80 q5 -6 10 0 t10 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+                </g>
+              </svg>
+            </div>
+            <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:29px;line-height:1.45;color:#241C17;text-wrap:pretty">{{ t.savingTitle }}</div>
+            <div style="font-size:19.5px;line-height:1.6;color:#5C4E44;text-wrap:pretty">{{ t.savingBody }}</div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ eAtDenied }}">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 22px 8px;animation:kFade .45s ease both">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;text-align:center">
+              <div style="width:116px;height:116px;border-radius:999px;background:#F6E4DF;border:1px solid #EDCFC7;display:flex;align-items:center;justify-content:center;color:#93362A">
+                <span style="font-family:'Material Symbols Rounded';font-size:52px">mic_off</span>
+              </div>
+              <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:31px;line-height:1.4;color:#241C17">{{ t.micOff }}</div>
+              <div style="font-size:19.5px;line-height:1.6;color:#5C4E44;text-wrap:pretty">{{ t.micOffBody }}</div>
+            </div>
+            <button onClick="{{ eStartRec }}" style="display:flex;align-items:center;justify-content:center;gap:14px;height:92px;flex:none;border-radius:22px;background:#A94E2B;color:#FFF8F1;font-size:24px;font-weight:600;box-shadow:0 2px 3px rgba(36,28,23,.16),0 20px 34px -18px rgba(169,78,43,.7)" style-hover="background:#96421F" style-active="transform:translateY(2px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:36px;font-variation-settings:'FILL' 0">refresh</span>
+              <span>{{ t.tryAgain }}</span>
+            </button>
+            <button style="height:64px;flex:none;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:19px;font-weight:600;color:#3D3129;border:1.5px solid #DCCDB8;background:#FFFDF8;margin-top:12px" style-hover="background:#F7F1E6">
+              <span style="font-family:'Material Symbols Rounded';font-size:24px">call</span>
+              <span>{{ t.askHelp }}</span>
+            </button>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ eAtFailed }}">
+          <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 22px 8px;animation:kFade .45s ease both">
+            <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;text-align:center">
+              <div style="width:116px;height:116px;border-radius:999px;background:#F3E1D5;border:1px solid #E7CDBB;display:flex;align-items:center;justify-content:center;color:#A94E2B">
+                <span style="font-family:'Material Symbols Rounded';font-size:50px">cloud_off</span>
+              </div>
+              <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada','Noto Sans Devanagari','Noto Sans Kannada',Georgia,serif;font-size:28px;line-height:1.45;color:#241C17;text-wrap:pretty">{{ t.failTitle }}</div>
+              <div style="font-size:19.5px;line-height:1.6;color:#5C4E44;text-wrap:pretty">{{ t.failBody }}</div>
+            </div>
+            <button onClick="{{ eDone }}" style="display:flex;align-items:center;justify-content:center;gap:14px;height:92px;flex:none;border-radius:22px;background:#A94E2B;color:#FFF8F1;font-size:24px;font-weight:600;box-shadow:0 2px 3px rgba(36,28,23,.16),0 20px 34px -18px rgba(169,78,43,.7)" style-hover="background:#96421F" style-active="transform:translateY(2px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:36px;font-variation-settings:'FILL' 0">refresh</span>
+              <span>{{ t.tryAgain }}</span>
+            </button>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atSpace }}" hint-placeholder-val="{{ true }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 0 6px;animation:kFade .45s ease both">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0 22px 16px">
+            <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:27px;line-height:1.2;letter-spacing:-.01em;color:#241C17">The Rao family</div>
+            <div style="width:38px;height:38px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+          </div>
+
+          <div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding:0 22px 8px">
+            <sc-if value="{{ answered }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ goMemory }}" style="display:flex;flex-direction:column;gap:13px;padding:16px;background:#FFFDF8;border:1.5px solid #DCB9A3;border-radius:20px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 16px 28px -22px rgba(36,28,23,.4);animation:kFade .5s ease both" style-hover="transform:translateY(-1px)">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="font-family:'Material Symbols Rounded';font-size:19px;color:#A94E2B;font-variation-settings:'FILL' 1">favorite</span>
+                <span style="font-size:13.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#A94E2B">Ajji answered</span>
+                <span style="font-size:12.5px;color:#7A6858">· 20 minutes ago</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:13px;width:100%">
+                <div style="width:50px;height:50px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+                  <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:20px;line-height:1.25;color:#241C17;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Summer evenings in Mysuru</div>
+                  <div style="font-size:13px;color:#7A6858">ಕನ್ನಡ · 2m 14s · not heard yet</div>
+                </div>
+                <div style="width:48px;height:48px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px -10px rgba(169,78,43,.7)">
+                  <span style="font-family:'Material Symbols Rounded';font-size:26px;font-variation-settings:'FILL' 1">play_arrow</span>
+                </div>
+              </div>
+            </button>
+            </sc-if>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <sc-for list="{{ people }}" as="p" hint-placeholder-count="4">
+                <button onClick="{{ p.on }}" style="{{ p.style }}">
+                  <span style="{{ p.avStyle }}"></span>
+                  <span style="display:flex;flex-direction:column;gap:2px;align-items:center">
+                    <span style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:22px;line-height:1.2;color:#241C17">{{ p.name }}</span>
+                    <span style="font-size:12.5px;color:#7A6858">{{ p.meta }}</span>
+                  </span>
+                  <sc-if value="{{ p.waiting }}">
+                  <span style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8A3F21">
+                    <span style="width:6px;height:6px;border-radius:999px;background:#C0603A"></span>
+                    <span>waiting</span>
+                  </span>
+                  </sc-if>
+                </button>
+              </sc-for>
+            </div>
+
+            <sc-if value="{{ notAnswered }}">
+            <div style="display:flex;flex-direction:column;gap:11px;padding:16px;background:#F1E9DA;border-radius:18px">
+              <div style="font-size:13.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7A6858">Waiting for Ajji</div>
+              <div style="font-family:'Tiro Kannada','Noto Sans Kannada',Georgia,serif;font-size:17.5px;line-height:1.6;color:#241C17;text-wrap:pretty">{{ pendingText }}</div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:13px;color:#7A6858">Sent today</span>
+                <span style="flex:1"></span>
+                <button onClick="{{ goShare }}" style="display:flex;align-items:center;gap:7px;height:42px;padding:0 14px;border-radius:999px;border:1.5px solid #DCCDB8;background:#FFFDF8;font-size:14px;font-weight:600;color:#241C17" style-hover="background:#F7F1E6">
+                  <span style="font-family:'Material Symbols Rounded';font-size:18px">send</span>
+                  <span>Send again</span>
+                </button>
+              </div>
+            </div>
+            </sc-if>
+
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Lately</div>
+              <button onClick="{{ goMemory }}" style="display:flex;align-items:center;gap:12px;padding:10px 6px;border-radius:14px" style-hover="background:#F1E9DA">
+                <div style="width:36px;height:36px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:17px;color:#241C17">My first salary</div>
+                  <div style="font-size:12.5px;color:#7A6858">Papa · हिन्दी · 3m 08s</div>
+                </div>
+                <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#A94E2B;flex:none;font-variation-settings:'FILL' 1">play_arrow</span>
+              </button>
+              <button onClick="{{ goMemory }}" style="display:flex;align-items:center;gap:12px;padding:10px 6px;border-radius:14px" style-hover="background:#F1E9DA">
+                <div style="width:36px;height:36px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:17px;color:#241C17">How we met</div>
+                  <div style="font-size:12.5px;color:#7A6858">Nani · हिन्दी · 5m 21s</div>
+                </div>
+                <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#A94E2B;flex:none;font-variation-settings:'FILL' 1">play_arrow</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:9px;padding:10px 22px 0">
+            <button onClick="{{ goAsk }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;box-shadow:0 1px 2px rgba(36,28,23,.14),0 14px 26px -16px rgba(169,78,43,.6)" style-hover="background:#96421F" style-active="transform:translateY(1px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:25px;font-variation-settings:'FILL' 1">add_comment</span>
+              <span>Ask someone something</span>
+            </button>
+            <button onClick="{{ goRecording }}" style="height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:600;color:#5C4E44" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:21px">group</span>
+              <span>Record together</span>
+            </button>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atPerson }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 0 6px;animation:kFade .45s ease both">
+          <div style="padding:0 16px 0 10px"><button onClick="{{ goSpace }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border-radius:999px;color:#5C4E44;font-size:14px;font-weight:600" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px">arrow_back</span>
+              <span>Family</span>
+            </button></div>
+          <div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding:8px 22px">
+            <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+              <div style="width:76px;height:76px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:34px;line-height:1.15;letter-spacing:-.01em;color:#241C17">Ajji</div>
+                <div style="font-size:14.5px;color:#7A6858">Grandmother · Lakshmipuram, Mysuru</div>
+              </div>
+            </div>
+
+            <button onClick="{{ cycleLang }}" style="display:flex;align-items:center;gap:11px;padding:13px 15px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px;width:100%" style-hover="border-color:#DCB9A3">
+              <span style="font-family:'Material Symbols Rounded';font-size:21px;color:#7A6858;flex:none">translate</span>
+              <span style="flex:1;display:flex;flex-direction:column;gap:2px;text-align:left">
+                <span style="font-size:12.5px;color:#7A6858">She hears Kahaani in</span>
+                <span style="font-size:17.5px;font-weight:600;color:#241C17">{{ tellerLangLabel }}</span>
+              </span>
+              <span style="font-size:13.5px;font-weight:600;color:#A94E2B;flex:none">Change</span>
+            </button>
+
+            <sc-if value="{{ notAnswered }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:11px;padding:16px;background:#F1E9DA;border-radius:18px">
+              <div style="font-size:13.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7A6858">You asked · sent today</div>
+              <div style="font-family:'Tiro Kannada','Noto Sans Kannada',Georgia,serif;font-size:17.5px;line-height:1.6;color:#241C17;text-wrap:pretty">{{ pendingText }}</div>
+              <button onClick="{{ goShare }}" style="display:flex;align-items:center;gap:7px;height:42px;padding:0 14px;border-radius:999px;border:1.5px solid #DCCDB8;background:#FFFDF8;font-size:14px;font-weight:600;color:#241C17;align-self:flex-start" style-hover="background:#F7F1E6">
+                <span style="font-family:'Material Symbols Rounded';font-size:18px">send</span>
+                <span>Send again</span>
+              </button>
+            </div>
+            </sc-if>
+
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:22px;color:#241C17">Her stories</div>
+              <sc-for list="{{ stories }}" as="m" hint-placeholder-count="3">
+                <button onClick="{{ m.on }}" style="display:flex;align-items:center;gap:14px;padding:14px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;width:100%" style-hover="border-color:#DCB9A3;transform:translateY(-1px)">
+                  <span style="width:46px;height:46px;flex:none;border-radius:999px;background:#F3E1D5;color:#A94E2B;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:25px;font-variation-settings:'FILL' 1">play_arrow</span></span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;text-align:left">
+                    <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:18.5px;line-height:1.3;color:#241C17;text-wrap:pretty">{{ m.title }}</span>
+                    <span style="display:flex;align-items:center;gap:9px">
+                      <span style="display:flex;align-items:flex-end;gap:2px;height:14px;color:#DCCDB8">
+                        <sc-for list="{{ m.wave }}" as="b" hint-placeholder-count="14">
+                          <span style="width:2px;border-radius:2px;background:currentColor;height:{{ b.h }}px"></span>
+                        </sc-for>
+                      </span>
+                      <span style="font-size:12.5px;color:#7A6858">{{ m.meta }}</span>
+                    </span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:10px 22px 0">
+            <button onClick="{{ goAsk }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;box-shadow:0 1px 2px rgba(36,28,23,.14),0 14px 26px -16px rgba(169,78,43,.6)" style-hover="background:#96421F" style-active="transform:translateY(1px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:25px;font-variation-settings:'FILL' 1">add_comment</span>
+              <span>Ask Ajji something</span>
+            </button>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atAsk }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 0 6px;animation:kFade .45s ease both">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px 0 10px">
+            <button onClick="{{ goPerson }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border-radius:999px;color:#5C4E44;font-size:14px;font-weight:600" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px">arrow_back</span>
+              <span>Ajji</span>
+            </button>
+            <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7A6858">Step 1 of 2</div>
+          </div>
+
+          <div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:18px;padding:10px 0 8px">
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:27px;line-height:1.25;color:#241C17;padding:0 22px;text-wrap:pretty">What do you want to ask Ajji?</div>
+
+            <div style="display:flex;align-items:center;gap:8px;height:48px;flex:none;overflow-x:auto;overflow-y:hidden;padding:0 22px">
+              <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7">
+                <button onClick="{{ c.on }}" style="{{ c.style }}">{{ c.label }}</button>
+              </sc-for>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:9px;padding:0 22px">
+              <sc-for list="{{ askOptions }}" as="q" hint-placeholder-count="3">
+                <button onClick="{{ q.on }}" style="{{ q.style }}">
+                  <span style="{{ q.tickStyle }}">{{ q.tick }}</span>
+                  <span style="flex:1;display:flex;flex-direction:column;gap:5px;min-width:0">
+                    <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:17.5px;line-height:1.4;color:#241C17;text-wrap:pretty">{{ q.en }}</span>
+                    <span style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:16px;line-height:1.6;color:#7A6858;text-wrap:pretty">{{ q.native }}</span>
+                  </span>
+                </button>
+              </sc-for>
+              <button onClick="{{ pickCustom }}" style="{{ customStyle }}">
+                <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#A94E2B;flex:none">edit</span>
+                <span style="font-size:16.5px;font-weight:600;color:#241C17">Write my own question</span>
+              </button>
+              <sc-if value="{{ isCustom }}">
+              <textarea onInput="{{ setCustom }}" placeholder="Ask her in your own words…" style="width:100%;min-height:88px;padding:14px;border-radius:16px;border:1.5px solid #DCB9A3;background:#FFFDF8;font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:17px;line-height:1.5;color:#241C17;resize:none;outline:none;animation:kFade .3s ease both"></textarea>
+              </sc-if>
+              <div style="display:flex;align-items:center;gap:11px;padding:13px 15px;border:1px dashed #DFE7EA;border-radius:16px;background:#F5F8F9">
+                <span style="font-family:'Material Symbols Rounded';font-size:21px;color:#4F6874;flex:none">add_photo_alternate</span>
+                <span style="flex:1;font-size:14px;line-height:1.5;color:#4F6874">Ask about a photograph</span>
+                <span style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.08em;color:#4F6874;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px;flex:none">P1</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:8px 22px 0">
+            <button onClick="{{ goVoice }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;box-shadow:0 1px 2px rgba(36,28,23,.14),0 14px 26px -16px rgba(169,78,43,.6)" style-hover="background:#96421F" style-active="transform:translateY(1px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:25px;font-variation-settings:'FILL' 1">arrow_forward</span>
+              <span>Next · how she hears it</span>
+            </button>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atVoice }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 0 6px;animation:kFade .45s ease both">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px 0 10px">
+            <button onClick="{{ goAsk }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border-radius:999px;color:#5C4E44;font-size:14px;font-weight:600" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px">arrow_back</span>
+              <span>Question</span>
+            </button>
+            <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7A6858">Step 2 of 2</div>
+          </div>
+
+          <div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:20px;padding:10px 22px 8px">
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:27px;line-height:1.25;color:#241C17;text-wrap:pretty">How should Ajji hear your question?</div>
+
+            <div style="padding:14px 16px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:7px">
+              <div style="font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7A6858">You're asking</div>
+              <div style="font-family:'Tiro Kannada','Tiro Devanagari Hindi','Noto Sans Kannada',Georgia,serif;font-size:17.5px;line-height:1.6;color:#241C17;text-wrap:pretty">{{ sharePreview }}</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="font-size:13px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#A94E2B">Say it myself</span>
+                <span style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px">P0</span>
+              </div>
+              <div style="font-size:15px;line-height:1.55;color:#5C4E44">Record it in your own voice. She'll hear you ask before she answers — that's what makes this feel like family.</div>
+
+              <sc-if value="{{ qIdle }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ qStart }}" style="display:flex;align-items:center;gap:14px;padding:16px;background:#FFFDF8;border:1.5px solid #DCCDB8;border-radius:18px" style-hover="border-color:#DCB9A3;background:#FFF9F2">
+                <span style="width:54px;height:54px;flex:none;border-radius:999px;background:#F3E1D5;color:#A94E2B;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:28px;font-variation-settings:'FILL' 1">mic</span></span>
+                <span style="display:flex;flex-direction:column;gap:2px;text-align:left">
+                  <span style="font-size:17px;font-weight:600;color:#241C17">Record your question</span>
+                  <span style="font-size:13.5px;color:#7A6858">About ten seconds is plenty</span>
+                </span>
+              </button>
+              </sc-if>
+              <sc-if value="{{ qRecording }}">
+              <div style="display:flex;align-items:center;gap:14px;padding:16px;background:#F3E1D5;border:1.5px solid #DCB9A3;border-radius:18px">
+                <button onClick="{{ qStop }}" style="width:54px;height:54px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center" style-hover="background:#96421F"><span style="font-family:'Material Symbols Rounded';font-size:28px;font-variation-settings:'FILL' 1">stop</span></button>
+                <div style="flex:1;display:flex;align-items:center;gap:3px;height:36px;color:#C0603A">
+                  <sc-for list="{{ waveHost }}" as="b" hint-placeholder-count="18">
+                    <div style="flex:1;height:{{ b.h }}px;border-radius:3px;background:currentColor;transform-origin:center;animation:kBar {{ b.dur }}s ease-in-out {{ b.d }}s infinite alternate"></div>
+                  </sc-for>
+                </div>
+                <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:17px;color:#8A3F21;flex:none;font-variant-numeric:tabular-nums">{{ qLabel }}</div>
+              </div>
+              </sc-if>
+              <sc-if value="{{ qDone }}">
+              <div style="display:flex;flex-direction:column;gap:12px;padding:16px;background:#FFFDF8;border:1.5px solid #DCB9A3;border-radius:18px;animation:kFade .3s ease both">
+                <div style="display:flex;align-items:center;gap:14px">
+                  <button onClick="{{ qPlay }}" style="width:54px;height:54px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center" style-hover="background:#96421F"><span style="font-family:'Material Symbols Rounded';font-size:28px;font-variation-settings:'FILL' 1">{{ qPlayIcon }}</span></button>
+                  <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+                    <div style="display:flex;align-items:center;gap:2.5px;height:26px;color:#DCB9A3">
+                      <sc-for list="{{ waveHost }}" as="b" hint-placeholder-count="18">
+                        <div style="flex:1;height:{{ b.h }}px;border-radius:3px;background:currentColor"></div>
+                      </sc-for>
+                    </div>
+                    <div style="font-size:13px;color:#7A6858">Your voice · {{ qLabel }}</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;padding-top:12px;border-top:1px solid #F0E7D7">
+                  <span style="font-family:'Material Symbols Rounded';font-size:18px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span>
+                  <span style="flex:1;font-size:14px;color:#5C4E44">She'll hear this first</span>
+                  <button onClick="{{ qReset }}" style="height:44px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:600;color:#5C4E44" style-hover="background:#F1E9DA">Record again</button>
+                </div>
+              </div>
+              </sc-if>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:9px;padding:15px;border:1px dashed #DFE7EA;border-radius:18px;background:#F5F8F9">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4F6874">campaign</span>
+                <span style="font-size:15.5px;font-weight:600;color:#2A4553">Create a spoken version</span>
+                <span style="flex:1"></span>
+                <span style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.08em;color:#4F6874;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px">P1</span>
+              </div>
+              <div style="font-size:14px;line-height:1.55;color:#4F6874">Read the question aloud for you, in her language. Later — your own voice is better.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:9px;padding:8px 22px 0">
+            <button onClick="{{ goShare }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;box-shadow:0 1px 2px rgba(36,28,23,.14),0 14px 26px -16px rgba(169,78,43,.6)" style-hover="background:#96421F" style-active="transform:translateY(1px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:25px;font-variation-settings:'FILL' 1">link</span>
+              <span>Create her private link</span>
+            </button>
+            <button onClick="{{ goRecording }}" style="height:50px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15.5px;font-weight:600;color:#7A6858" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:20px">group</span>
+              <span>She's here with me — record together</span>
+            </button>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atShare }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 0 6px;animation:kFade .45s ease both">
+          <div style="padding:0 16px 0 10px"><button onClick="{{ goVoice }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border-radius:999px;color:#5C4E44;font-size:14px;font-weight:600" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px">arrow_back</span>
+              <span>Your voice</span>
+            </button></div>
+          <div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:18px;padding:10px 22px 8px">
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px;line-height:1.2;letter-spacing:-.01em;color:#241C17">{{ shareTitle }}</div>
+
+            <div style="padding:18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 16px 28px -24px rgba(36,28,23,.4)">
+              <div style="display:flex;align-items:center;gap:11px">
+                <div style="width:40px;height:40px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+                <div style="font-size:14.5px;color:#5C4E44">{{ askedYouPreview }}</div>
+              </div>
+              <div style="font-family:'Tiro Kannada','Tiro Devanagari Hindi','Noto Sans Kannada','Noto Sans Devanagari',Georgia,serif;font-size:21px;line-height:1.6;color:#241C17;text-wrap:pretty">{{ sharePreview }}</div>
+              <sc-if value="{{ qDone }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 13px;background:#F3E1D5;border-radius:14px">
+                <span style="width:36px;height:36px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:20px;font-variation-settings:'FILL' 1">play_arrow</span></span>
+                <div style="flex:1;display:flex;align-items:center;gap:2px;height:18px;color:#DCB9A3">
+                  <sc-for list="{{ waveHost }}" as="b" hint-placeholder-count="18">
+                    <div style="flex:1;height:{{ b.h }}px;border-radius:2px;background:currentColor"></div>
+                  </sc-for>
+                </div>
+                <span style="font-size:13px;color:#8A3F21;flex:none;font-weight:600">{{ qLabel }}</span>
+              </div>
+              </sc-if>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:10px;padding:13px 15px;background:#F1E9DA;border-radius:16px">
+              <span style="font-family:'Material Symbols Rounded';font-size:20px;color:#7A6858;flex:none">lock</span>
+              <span style="flex:1;min-width:0;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;color:#3D3129;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">kahaani.app/story/k7f2m9</span>
+              <button onClick="{{ doCopy }}" style="height:44px;padding:0 15px;border-radius:999px;background:#FFFDF8;border:1px solid #DCCDB8;font-size:14px;font-weight:600;color:#241C17;flex:none" style-hover="background:#F7F1E6">{{ copyLabel }}</button>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:9px;padding:8px 22px 0">
+            <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ doShare }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;box-shadow:0 1px 2px rgba(36,28,23,.14),0 14px 26px -16px rgba(169,78,43,.6)" style-hover="background:#96421F" style-active="transform:translateY(1px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:24px">send</span>
+              <span>Send on WhatsApp</span>
+            </button>
+            <button onClick="{{ doCopy }}" style="height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:600;color:#3D3129;border:1.5px solid #DCCDB8;background:#FFFDF8" style-hover="background:#F7F1E6">
+              <span style="font-family:'Material Symbols Rounded';font-size:20px">content_copy</span>
+              <span>Copy private link</span>
+            </button>
+            <div style="text-align:center;font-size:14px;color:#7A6858;padding:2px 0 4px">No app or account needed</div>
+            </sc-if>
+            <sc-if value="{{ sent }}">
+            <div style="display:flex;flex-direction:column;gap:10px;animation:kFade .35s ease both">
+              <div style="display:flex;align-items:center;gap:11px;padding:14px 16px;background:#F1E9DA;border-radius:16px">
+                <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#4E6B4A;font-variation-settings:'FILL' 1;flex:none">check_circle</span>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:15px;font-weight:600;color:#241C17">Sent to Ajji</div>
+                  <div style="font-size:13.5px;color:#5C4E44">We'll tell you the moment she answers.</div>
+                </div>
+              </div>
+              <button onClick="{{ viewElder }}" style="height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:600;color:#A94E2B;border:1.5px solid #DCB9A3;background:#FFFDF8" style-hover="background:#F3E1D5">
+                <span style="font-family:'Material Symbols Rounded';font-size:21px">visibility</span>
+                <span>See what she opens</span>
+              </button>
+              <button onClick="{{ goSpace }}" style="height:50px;border-radius:16px;text-align:center;font-size:15.5px;font-weight:600;color:#7A6858" style-hover="background:#F1E9DA">Back to family</button>
+            </div>
+            </sc-if>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atRecording }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 22px 6px;animation:kFade .45s ease both">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;height:40px">
+            <button onClick="{{ goAsk }}" style="display:flex;align-items:center;gap:6px;height:40px;padding:0 12px 0 6px;border-radius:999px;color:#5C4E44;font-size:14px;font-weight:600" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px">arrow_back</span>
+              <span>Back</span>
+            </button>
+            <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Ajji · ಕನ್ನಡ</div>
+          </div>
+
+          <div style="margin-top:14px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px">
+            <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:19px;line-height:1.4;color:#3D3129;text-wrap:pretty">{{ questionEn }}</div>
+          </div>
+
+          <sc-if value="{{ recPermission }}">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;text-align:center;padding:20px 6px">
+            <div style="width:96px;height:96px;border-radius:999px;background:#F1E9DA;border:1px solid #E6DBCA;display:flex;align-items:center;justify-content:center;color:#7A6858">
+              <span style="font-family:'Material Symbols Rounded';font-size:40px">mic_off</span>
+            </div>
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:25px;line-height:1.3;color:#241C17">Kahaani needs your microphone</div>
+            <div style="font-size:16.5px;line-height:1.5;color:#5C4E44;max-width:280px">So we can keep Ajji's voice exactly as it is. Only your family will hear it.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button onClick="{{ allowMic }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600" style-hover="background:#96421F">
+              <span style="font-family:'Material Symbols Rounded';font-size:24px">check</span>
+              <span>Allow microphone</span>
+            </button>
+            <button onClick="{{ goAsk }}" style="height:52px;border-radius:17px;color:#5C4E44;font-size:16.5px;font-weight:600;text-align:center" style-hover="background:#F1E9DA">Not now</button>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ recReady }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;padding:20px 0">
+            <button onClick="{{ startRec }}" style="width:168px;height:168px;border-radius:999px;background:#F3E1D5;border:1px solid #E7CDBB;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#A94E2B;box-shadow:inset 0 1px 0 #FFF6EE,0 18px 34px -24px rgba(169,78,43,.6)" style-hover="background:#EFD8C8" style-active="transform:scale(.98)">
+              <span style="font-family:'Material Symbols Rounded';font-size:56px;font-variation-settings:'FILL' 1">mic</span>
+            </button>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+              <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:24px;color:#241C17">Tap the circle to begin</div>
+              <div style="font-size:16.5px;color:#5C4E44;max-width:270px;line-height:1.5">Speak in Kannada, just as you would at home.</div>
+            </div>
+          </div>
+          <div style="text-align:center;font-size:15px;color:#7A6858;padding-bottom:10px">Take your time.</div>
+          </sc-if>
+
+          <sc-if value="{{ recRecording }}">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:14px 0">
+            <div style="position:relative;width:172px;height:172px;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;inset:0;border-radius:999px;border:1px solid #DCB9A3;animation:kRing 3s ease-out infinite"></div>
+              <div style="position:absolute;inset:0;border-radius:999px;border:1px solid #DCB9A3;animation:kRing 3s ease-out infinite 1.5s"></div>
+              <div style="width:132px;height:132px;border-radius:999px;background:#A94E2B;color:#FFF3EA;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 38px -22px rgba(169,78,43,.85)">
+                <span style="font-family:'Material Symbols Rounded';font-size:50px;font-variation-settings:'FILL' 1">mic</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase">
+              <span style="width:8px;height:8px;border-radius:999px;background:#C0603A;animation:kDot 1.6s ease-in-out infinite"></span>
+              <span>Recording</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:2.5px;height:76px;width:100%;justify-content:center;color:#C99A7C">
+              <sc-for list="{{ waveRec }}" as="b" hint-placeholder-count="40">
+                <div style="width:3px;height:{{ b.h }}px;border-radius:3px;background:currentColor;transform-origin:center;animation:kBar {{ b.dur }}s ease-in-out {{ b.d }}s infinite alternate"></div>
+              </sc-for>
+            </div>
+            <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:36px;letter-spacing:.04em;color:#241C17;font-variant-numeric:tabular-nums">{{ elapsedLabel }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <button onClick="{{ stopRec }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:66px;border-radius:18px;background:#241C17;color:#F7F2E9;font-size:19px;font-weight:600" style-hover="background:#3D3129" style-active="transform:translateY(1px)">
+              <span style="font-family:'Material Symbols Rounded';font-size:24px;font-variation-settings:'FILL' 1">stop_circle</span>
+              <span>Done · keep this memory</span>
+            </button>
+            <div style="text-align:center;font-size:15px;color:#7A6858;padding-bottom:4px">Take your time. Pauses are welcome.</div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ recStopping }}">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;text-align:center;padding:20px">
+            <div style="width:132px;height:132px;border-radius:999px;background:#F3E1D5;border:1px solid #E7CDBB;animation:kBreathe 2.4s ease-in-out infinite"></div>
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:25px;color:#241C17">Finishing up…</div>
+            <div style="font-size:16.5px;color:#5C4E44">Keeping the last few seconds.</div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ recFailed }}">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;text-align:center;padding:20px 6px">
+            <div style="width:96px;height:96px;border-radius:999px;background:#F6E4DF;border:1px solid #EDCFC7;display:flex;align-items:center;justify-content:center;color:#93362A">
+              <span style="font-family:'Material Symbols Rounded';font-size:40px">volume_off</span>
+            </div>
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:25px;line-height:1.3;color:#241C17">We couldn't hear anything</div>
+            <div style="font-size:16.5px;line-height:1.5;color:#5C4E44;max-width:290px">The microphone didn't pick up any sound. Nothing else was lost — let's try once more, a little closer.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button onClick="{{ recSetReady }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600" style-hover="background:#96421F">
+              <span style="font-family:'Material Symbols Rounded';font-size:23px">refresh</span>
+              <span>Try again</span>
+            </button>
+            <button onClick="{{ goSpace }}" style="height:52px;border-radius:17px;color:#5C4E44;font-size:16.5px;font-weight:600;text-align:center" style-hover="background:#F1E9DA">Ask someone at home for help</button>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atProcessing }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 22px 6px;animation:kFadeIn .5s ease both">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;padding:20px 0">
+            <div style="display:flex;align-items:center;justify-content:center">
+              <svg viewBox="0 0 200 120" style="width:224px;height:134px">
+                <g style="transform-origin:100px 60px;animation:kSettleBars 4.2s ease-in-out infinite">
+                  <rect x="58" y="46" width="5" height="28" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="70" y="36" width="5" height="48" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="82" y="50" width="5" height="20" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="94" y="30" width="5" height="60" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="106" y="44" width="5" height="32" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="118" y="38" width="5" height="44" rx="2.5" style="fill:#A94E2B"></rect>
+                  <rect x="130" y="52" width="5" height="16" rx="2.5" style="fill:#A94E2B"></rect>
+                </g>
+                <g style="transform-origin:100px 60px;animation:kSettleCard 4.2s ease-in-out infinite">
+                  <rect x="50" y="24" width="100" height="72" rx="10" style="fill:#FFFDF8;stroke:#A94E2B;stroke-width:2"></rect>
+                  <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite"><rect x="62" y="42" width="60" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect></g>
+                  <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite .12s"><rect x="62" y="54" width="76" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect></g>
+                  <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite .24s"><rect x="62" y="66" width="48" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect></g>
+                  <path d="M62 80 q5 -6 10 0 t10 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+                </g>
+              </svg>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+              <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:29px;line-height:1.3;color:#241C17">{{ procTitle }}</div>
+              <div style="font-size:16.5px;line-height:1.55;color:#5C4E44;max-width:300px;text-wrap:pretty">{{ procSub }}</div>
+            </div>
+
+            <div style="width:100%;display:flex;flex-direction:column;gap:2px;padding:8px 4px;border-top:1px solid #E6DBCA;border-bottom:1px solid #E6DBCA">
+              <sc-for list="{{ procSteps }}" as="s" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:12px;padding:11px 4px">
+                  <span style="{{ s.iconStyle }}">{{ s.icon }}</span>
+                  <span style="{{ s.labelStyle }}">{{ s.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <sc-if value="{{ procIsDone }}">
+          <div style="display:flex;flex-direction:column;gap:12px;animation:kFade .45s ease both">
+            <button onClick="{{ goMemory }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;box-shadow:0 14px 26px -16px rgba(169,78,43,.6)" style-hover="background:#96421F">
+              <span>Open the memory</span>
+              <span style="font-family:'Material Symbols Rounded';font-size:23px">arrow_forward</span>
+            </button>
+            <div style="text-align:center;font-size:14.5px;color:#7A6858;padding-bottom:4px">हिन्दी audio is still on its way. You don't have to wait.</div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ procIsLonger }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button onClick="{{ goSpace }}" style="height:60px;border-radius:17px;border:1.5px solid #DCCDB8;background:#FFFDF8;color:#241C17;font-size:17.5px;font-weight:600;text-align:center" style-hover="background:#F7F1E6">Leave this for now</button>
+            <div style="text-align:center;font-size:14.5px;color:#7A6858;padding-bottom:4px">We'll let your family know when it's ready.</div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ procIsFailed }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button onClick="{{ procSetWorking }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600" style-hover="background:#96421F">
+              <span style="font-family:'Material Symbols Rounded';font-size:23px">refresh</span>
+              <span>Try again</span>
+            </button>
+            <button onClick="{{ goMemory }}" style="height:52px;border-radius:17px;color:#5C4E44;font-size:16.5px;font-weight:600;text-align:center" style-hover="background:#F1E9DA">Keep just the recording for now</button>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ atMemory }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;animation:kFade .45s ease both">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px 0 10px">
+            <button onClick="{{ goSpace }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border-radius:999px;color:#5C4E44;font-size:14px;font-weight:600" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px">arrow_back</span>
+              <span>Family</span>
+            </button>
+            <button style="display:flex;align-items:center;gap:7px;height:44px;padding:0 14px;border-radius:999px;color:#5C4E44;font-size:14px;font-weight:600" style-hover="background:#F1E9DA">
+              <span style="font-family:'Material Symbols Rounded';font-size:20px">ios_share</span>
+              <span>Share</span>
+            </button>
+          </div>
+
+          <div style="flex:1;overflow-y:auto;padding:6px 22px 26px">
+            <div style="display:flex;align-items:center;gap:12px;padding:6px 0 18px">
+              <div style="width:54px;height:54px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <div style="font-size:17px;font-weight:600;letter-spacing:.01em;color:#241C17">Ajji</div>
+                <div style="font-size:13.5px;color:#7A6858;letter-spacing:.02em">Grandmother · Lakshmipuram, Mysuru</div>
+              </div>
+            </div>
+
+            <sc-if value="{{ isKn }}" hint-placeholder-val="{{ true }}">
+            <div style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:31px;line-height:1.35;color:#241C17;text-wrap:pretty">ಮೈಸೂರಿನ ಬೇಸಿಗೆ ಸಂಜೆಗಳು</div>
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:19px;color:#7A6858;padding-top:6px">Summer evenings in Mysuru</div>
+            </sc-if>
+            <sc-if value="{{ isEn }}">
+            <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:33px;line-height:1.25;letter-spacing:-.01em;color:#241C17;text-wrap:pretty">Summer evenings in Mysuru</div>
+            </sc-if>
+            <sc-if value="{{ isHi }}">
+            <div style="font-family:'Tiro Devanagari Hindi','Noto Sans Devanagari',serif;font-size:31px;line-height:1.4;color:#241C17;text-wrap:pretty">मैसूर की गर्मियों की शामें</div>
+            </sc-if>
+
+            <div style="font-size:14px;color:#7A6858;letter-spacing:.02em;padding:12px 0 18px">12 August 2026 · Mysuru · 2m 14s</div>
+
+            <div style="display:flex;gap:6px;padding:5px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:999px;overflow-x:auto">
+              <button onClick="{{ setKn }}" style="{{ langKn }}">ಕನ್ನಡ · Original</button>
+              <button onClick="{{ setEn }}" style="{{ langEn }}">English</button>
+              <button onClick="{{ setHi }}" style="{{ langHi }}">हिन्दी</button>
+            </div>
+
+            <sc-if value="{{ isKn }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-top:26px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-family:'Material Symbols Rounded';font-size:19px;color:#A94E2B">graphic_eq</span>
+                <span style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#A94E2B">Her original voice</span>
+              </div>
+              <div style="padding:18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 18px 30px -26px rgba(36,28,23,.4)">
+                <div style="display:flex;align-items:center;gap:16px">
+                  <button onClick="{{ toggleOriginal }}" style="width:62px;height:62px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 22px -12px rgba(169,78,43,.75)" style-hover="background:#96421F" style-active="transform:scale(.97)">
+                    <span style="font-family:'Material Symbols Rounded';font-size:32px;font-variation-settings:'FILL' 1">{{ origIcon }}</span>
+                  </button>
+                  <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+                    <div onClick="{{ seekOriginal }}" style="position:relative;height:44px;cursor:pointer">
+                      <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#E0D2BC">
+                        <sc-for list="{{ waveMain }}" as="b" hint-placeholder-count="44">
+                          <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                        </sc-for>
+                      </div>
+                      <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#A94E2B;clip-path:inset(0 {{ origRemain }} 0 0)">
+                        <sc-for list="{{ waveMain }}" as="b" hint-placeholder-count="44">
+                          <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858;font-variant-numeric:tabular-nums">
+                      <span>{{ origTime }}</span>
+                      <span>2:14</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;padding-top:14px;margin-top:14px;border-top:1px solid #F0E7D7;font-size:13.5px;color:#7A6858">
+                  <span style="font-family:'Noto Sans Kannada',sans-serif;font-size:13px;color:#3D3129;font-weight:500">ಕನ್ನಡ</span>
+                  <span>·</span>
+                  <span>Recorded 12 Aug 2026, as she spoke it</span>
+                </div>
+              </div>
+
+              <div style="padding-top:20px;display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;align-items:center;gap:12px;padding-top:4px">
+                  <svg viewBox="0 0 200 28" style="width:104px;height:15px;flex:none">
+                    <path d="M2 14 q7 -9 14 0 t14 0" fill="none" style="stroke:#A94E2B;stroke-width:3.4;stroke-linecap:round"></path>
+                    <line x1="34" y1="14" x2="196" y2="14" style="stroke:#241C17;stroke-width:3.4;stroke-linecap:round;opacity:.22"></line>
+                  </svg>
+                  <span style="flex:1;height:1px;background:#EDE3D2"></span>
+                </div>
+                <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">In her words</div>
+                <div style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:20px;line-height:1.85;color:#241C17;display:flex;flex-direction:column;gap:20px;text-wrap:pretty">
+                  <p>ನಮ್ಮ ಮನೆ ಇತ್ತು ಲಕ್ಷ್ಮೀಪುರಂನಲ್ಲಿ. ಚಿಕ್ಕ ಮನೆ. ಮುಂದೆ ಒಂದು ಜಗುಲಿ ಇತ್ತು.</p>
+                  <p>ಸಂಜೆ ಆದ ಮೇಲೆ ಎಲ್ಲರೂ ಆ ಜಗುಲಿ ಮೇಲೆ ಕೂತ್ಕೊಳ್ತಿದ್ವಿ.</p>
+                  <p>ಅಮ್ಮ ನೀರು ಚಿಮುಕಿಸಿ ಅಂಗಳ ಗುಡಿಸ್ತಿದ್ರು. ಆ ಮಣ್ಣಿನ ವಾಸನೆ… ಈಗಲೂ ನೆನಪಿದೆ.</p>
+                  <p>ಪಕ್ಕದ ಮನೆ ಶಾರದಕ್ಕ ಬರ್ತಿದ್ರು. ಎಲ್ಲರೂ ಸೇರಿ ಮಾತಾಡ್ತಾ ಇರ್ತಿದ್ವಿ.</p>
+                  <p>ಆಗ ದಿನಾ ಏಳು ಗಂಟೆಗೆ ಲೈಟ್ ಹೋಗ್ತಿತ್ತು. ನಾವು ಗಾಬರಿ ಆಗ್ತಿರಲಿಲ್ಲ.</p>
+                  <p>ಚಿಮಣಿ ದೀಪ ಹಚ್ಚಿ, ಅಜ್ಜಿ ಕಥೆ ಹೇಳ್ತಿದ್ರು.</p>
+                  <p>ಈಗ ಆ ರಸ್ತೆ ಪೂರ್ತಿ ಬದಲಾಗಿದೆ. ದೊಡ್ಡ ದೊಡ್ಡ ಮನೆಗಳು.</p>
+                  <p>ಜಗುಲಿ ಇಲ್ಲ. ಜನ ಹೊರಗೆ ಕೂರುವುದೂ ಇಲ್ಲ.</p>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ isEn }}">
+            <div style="padding-top:26px;display:flex;flex-direction:column;gap:18px">
+              <button onClick="{{ toggleOriginal }}" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px;width:100%" style-hover="border-color:#DCB9A3">
+                <span style="width:46px;height:46px;flex:none;border-radius:999px;background:#F3E1D5;color:#A94E2B;display:flex;align-items:center;justify-content:center">
+                  <span style="font-family:'Material Symbols Rounded';font-size:26px;font-variation-settings:'FILL' 1">{{ origIcon }}</span>
+                </span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:15px;font-weight:600;color:#241C17">Her original voice</span>
+                  <span style="font-size:13.5px;color:#7A6858"><span style="font-family:'Noto Sans Kannada',sans-serif">ಕನ್ನಡ</span> · {{ origTime }} / 2:14</span>
+                </span>
+                <span style="display:flex;align-items:flex-end;gap:2px;height:22px;color:#DCB9A3;flex:none">
+                  <sc-for list="{{ waveMini }}" as="b" hint-placeholder-count="26">
+                    <div style="width:2px;border-radius:2px;background:currentColor;height:{{ b.h }}px"></div>
+                  </sc-for>
+                </span>
+              </button>
+
+              <div style="height:1px;background:#E6DBCA"></div>
+
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#33566A">From Kannada</span>
+                  <span style="flex:1;height:1px;background:#DFE7EA"></span>
+                </div>
+
+                <sc-if value="{{ enAudio }}" hint-placeholder-val="{{ true }}">
+                <div style="padding:18px;background:#F5F8F9;border:1px solid #DFE7EA;border-radius:20px">
+                  <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#33566A;padding-bottom:14px">Understand in English</div>
+                  <div style="display:flex;align-items:center;gap:16px">
+                    <button onClick="{{ toggleTranslated }}" style="width:56px;height:56px;flex:none;border-radius:999px;background:#33566A;color:#F4F8F9;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 22px -14px rgba(51,86,106,.8)" style-hover="background:#284656" style-active="transform:scale(.97)">
+                      <span style="font-family:'Material Symbols Rounded';font-size:30px;font-variation-settings:'FILL' 1">{{ transIcon }}</span>
+                    </button>
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+                      <div onClick="{{ seekTranslated }}" style="position:relative;height:34px;cursor:pointer">
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#D3DFE4">
+                          <sc-for list="{{ waveAlt }}" as="b" hint-placeholder-count="40">
+                            <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                          </sc-for>
+                        </div>
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#33566A;clip-path:inset(0 {{ transRemain }} 0 0)">
+                          <sc-for list="{{ waveAlt }}" as="b" hint-placeholder-count="40">
+                            <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                          </sc-for>
+                        </div>
+                      </div>
+                      <div style="display:flex;align-items:center;justify-content:space-between;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#4F6874;font-variant-numeric:tabular-nums">
+                        <span>{{ transTime }}</span>
+                        <span>2:08</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:8px;padding-top:14px;margin-top:14px;border-top:1px solid #E4EBEE;font-size:13.5px;line-height:1.5;color:#4F6874">
+                    <span style="font-family:'Material Symbols Rounded';font-size:18px;flex:none">info</span>
+                    <span>A reading voice, not Ajji's. Her own voice is kept above, untouched.</span>
+                  </div>
+                </div>
+                </sc-if>
+
+                <sc-if value="{{ enNoAudio }}">
+                <div style="padding:18px;background:#F5F8F9;border:1px dashed #CFDDE3;border-radius:20px;display:flex;gap:12px;align-items:flex-start">
+                  <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#4F6874;flex:none">hearing</span>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <div style="font-size:15px;font-weight:600;color:#2A4553">English audio isn't ready yet</div>
+                    <div style="font-size:13.5px;line-height:1.5;color:#4F6874">You can read her story below. Her original voice plays any time.</div>
+                  </div>
+                </div>
+                </sc-if>
+
+                <div style="display:flex;align-items:center;gap:12px;padding-top:4px">
+                  <svg viewBox="0 0 200 28" style="width:104px;height:15px;flex:none">
+                    <path d="M2 14 q7 -9 14 0 t14 0" fill="none" style="stroke:#A94E2B;stroke-width:3.4;stroke-linecap:round"></path>
+                    <line x1="34" y1="14" x2="196" y2="14" style="stroke:#241C17;stroke-width:3.4;stroke-linecap:round;opacity:.22"></line>
+                  </svg>
+                  <span style="flex:1;height:1px;background:#EDE3D2"></span>
+                </div>
+                <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:20px;line-height:1.8;color:#241C17;display:flex;flex-direction:column;gap:20px;padding-top:6px;text-wrap:pretty">
+                  <p>Our house was in Lakshmipuram. A small house. In front there was a <em style="font-style:italic">jaguli</em> — a raised porch.</p>
+                  <p>In the evenings, all of us would sit out on that porch.</p>
+                  <p>Amma would sprinkle water and sweep the yard. That smell of wet earth… I still remember it.</p>
+                  <p>Sharada-akka from next door would come over. We would all sit together and just talk.</p>
+                  <p>Back then the power went off every day at seven. We were never worried about it.</p>
+                  <p>We would light the chimney lamp, and my grandmother would tell us stories.</p>
+                  <p>Now that whole road has changed. Big, big houses.</p>
+                  <p>No jaguli. Nobody sits outside anymore.</p>
+                </div>
+              </div>
+
+              <div style="padding:18px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:16px">
+                <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Words from her story</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+                    <span style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:20px;color:#241C17">ಜಗುಲಿ</span>
+                    <span style="font-size:14px;color:#7A6858;font-style:italic">jaguli</span>
+                  </div>
+                  <div style="font-size:15.5px;line-height:1.55;color:#3D3129">The raised porch at the front of the house — where the street and the family met.</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+                    <span style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:20px;color:#241C17">ಚಿಮಣಿ ದೀಪ</span>
+                    <span style="font-size:14px;color:#7A6858;font-style:italic">chimani deepa</span>
+                  </div>
+                  <div style="font-size:15.5px;line-height:1.55;color:#3D3129">The small kerosene lamp lit when the power went — and the stories began.</div>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ isHi }}">
+            <div style="padding-top:26px;display:flex;flex-direction:column;gap:18px">
+              <button onClick="{{ toggleOriginal }}" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px;width:100%" style-hover="border-color:#DCB9A3">
+                <span style="width:46px;height:46px;flex:none;border-radius:999px;background:#F3E1D5;color:#A94E2B;display:flex;align-items:center;justify-content:center">
+                  <span style="font-family:'Material Symbols Rounded';font-size:26px;font-variation-settings:'FILL' 1">{{ origIcon }}</span>
+                </span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:15px;font-weight:600;color:#241C17">Her original voice</span>
+                  <span style="font-size:13.5px;color:#7A6858"><span style="font-family:'Noto Sans Kannada',sans-serif">ಕನ್ನಡ</span> · {{ origTime }} / 2:14</span>
+                </span>
+                <span style="display:flex;align-items:flex-end;gap:2px;height:22px;color:#DCB9A3;flex:none">
+                  <sc-for list="{{ waveMini }}" as="b" hint-placeholder-count="26">
+                    <div style="width:2px;border-radius:2px;background:currentColor;height:{{ b.h }}px"></div>
+                  </sc-for>
+                </span>
+              </button>
+
+              <div style="height:1px;background:#E6DBCA"></div>
+
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#33566A">कन्नड़ से</span>
+                  <span style="flex:1;height:1px;background:#DFE7EA"></span>
+                </div>
+
+                <div style="padding:18px;background:#F5F8F9;border:1px dashed #CFDDE3;border-radius:20px;display:flex;gap:12px;align-items:flex-start">
+                  <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#4F6874;flex:none">hearing</span>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <div style="font-family:'Tiro Devanagari Hindi','Noto Sans Devanagari',serif;font-size:17px;font-weight:600;color:#2A4553">हिन्दी आवाज़ अभी तैयार नहीं है</div>
+                    <div style="font-family:'Tiro Devanagari Hindi','Noto Sans Devanagari',serif;font-size:15px;line-height:1.6;color:#4F6874">आप कहानी नीचे पढ़ सकते हैं। अज्जी की असली आवाज़ ऊपर हमेशा मौजूद है।</div>
+                  </div>
+                </div>
+
+                <div style="font-family:'Tiro Devanagari Hindi','Noto Sans Devanagari',serif;font-size:20px;line-height:1.95;color:#241C17;display:flex;flex-direction:column;gap:20px;padding-top:6px;text-wrap:pretty">
+                  <p>हमारा घर लक्ष्मीपुरम में था। छोटा सा घर। आगे एक जगुली थी — बैठने वाला ओटला।</p>
+                  <p>शाम को हम सब उसी ओटले पर बैठ जाते थे।</p>
+                  <p>अम्मा पानी छिड़ककर आँगन बुहारती थीं। वो गीली मिट्टी की महक… आज भी याद है।</p>
+                  <p>पड़ोस की शारदा-अक्का आ जाती थीं। सब मिलकर बातें करते रहते थे।</p>
+                  <p>उस ज़माने में रोज़ सात बजे बिजली चली जाती थी। हमें कोई घबराहट नहीं होती थी।</p>
+                  <p>चिमनी जलाकर अज्जी कहानी सुनाती थीं।</p>
+                  <p>अब वो पूरी सड़क बदल गई है। बड़े-बड़े मकान।</p>
+                  <p>जगुली नहीं है। कोई बाहर बैठता भी नहीं।</p>
+                </div>
+              </div>
+
+              <div style="padding:18px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:16px">
+                <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">उनकी कहानी के शब्द</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+                    <span style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:20px;color:#241C17">ಜಗುಲಿ</span>
+                    <span style="font-size:14px;color:#7A6858;font-style:italic">jaguli</span>
+                  </div>
+                  <div style="font-family:'Tiro Devanagari Hindi','Noto Sans Devanagari',serif;font-size:16px;line-height:1.7;color:#3D3129">घर के आगे का ओटला — जहाँ गली और घर मिलते थे।</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+                    <span style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:20px;color:#241C17">ಚಿಮಣಿ ದೀಪ</span>
+                    <span style="font-size:14px;color:#7A6858;font-style:italic">chimani deepa</span>
+                  </div>
+                  <div style="font-family:'Tiro Devanagari Hindi','Noto Sans Devanagari',serif;font-size:16px;line-height:1.7;color:#3D3129">बिजली जाने पर जलाया जाने वाला चिमनी दीपक — और कहानियाँ शुरू।</div>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+            <div style="display:flex;flex-direction:column;gap:10px;padding-top:26px">
+              <button style="display:flex;align-items:center;justify-content:center;gap:10px;height:58px;border-radius:17px;border:1.5px solid #DCCDB8;background:#FFFDF8;color:#241C17;font-size:17px;font-weight:600" style-hover="background:#F7F1E6">
+                <span style="font-family:'Material Symbols Rounded';font-size:22px">ios_share</span>
+                <span>Share with family</span>
+              </button>
+              <button onClick="{{ goAsk }}" style="display:flex;align-items:center;justify-content:center;gap:10px;height:56px;border-radius:17px;color:#A94E2B;font-size:17px;font-weight:600" style-hover="background:#F3E1D5">
+                <span style="font-family:'Material Symbols Rounded';font-size:22px">add</span>
+                <span>Ask Ajji another question</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+      </div>
+    </x-import>
+
+    <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+    <div style="width:296px;display:flex;flex-direction:column;gap:22px;padding-top:6px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">{{ flowTitle }}</div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <sc-for list="{{ flowSteps }}" as="f" hint-placeholder-count="5">
+            <button onClick="{{ f.on }}" style="{{ f.style }}"><span style="opacity:.55;font-variant-numeric:tabular-nums">{{ f.n }}</span><span>{{ f.label }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="height:1px;background:#DCCDB8"></div>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">{{ stateTitle }}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{ stateChips }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.on }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="height:1px;background:#DCCDB8"></div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;line-height:1.7;color:#7A6858">
+        <div style="font-size:12px;letter-spacing:.13em;text-transform:uppercase">Prototype notes</div>
+        <div>ಕನ್ನಡ and हिन्दी strings are sample placeholder copy — have a native speaker replace them before user testing.</div>
+        <div>No real audio: players simulate playback in real time. Tap a waveform to seek.</div>
+        <div>Two experiences, one system. The host curates the memory — people, question, her language, their own recorded voice, the private link. The storyteller only tells it: three states, no configuration, nothing to choose.</div>
+        <div>P0 is the whole spine: Family → person → question → your voice → link → her answer → memory. Anything marked P1 in the UI is deliberately inert.</div>
+        <div>The link carries storyteller, host, question, language and prompt audio — which is why her page has no switcher. Change the language chips here to see the same link in another script.</div>
+        <div>Type: Tiro Devanagari Hindi / Tiro Kannada for story text, Hanken Grotesk + Noto Sans for UI.</div>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isDesktop }}">
+  <div style="max-width:1240px;margin:0 auto;background:#F7F2E9;border:1px solid #E0D2BC;border-radius:22px;overflow:hidden;box-shadow:0 1px 2px rgba(36,28,23,.06),0 40px 70px -50px rgba(36,28,23,.55);animation:kFadeIn .4s ease both">
+    <div style="display:flex;align-items:center;gap:8px;padding:12px 18px;background:#F1E9DA;border-bottom:1px solid #E6DBCA">
+      <span style="width:10px;height:10px;border-radius:999px;background:#DCCDB8"></span>
+      <span style="width:10px;height:10px;border-radius:999px;background:#DCCDB8"></span>
+      <span style="width:10px;height:10px;border-radius:999px;background:#DCCDB8"></span>
+      <span style="flex:1;text-align:center;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;color:#8B7A6C">kahaani.family/rao/summer-evenings-in-mysuru</span>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 44px;border-bottom:1px solid #EDE3D2">
+      <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:22px">Kahaani</div>
+      <div style="display:flex;align-items:center;gap:22px">
+        <span style="font-size:14px;color:#5C4E44">The Rao family</span>
+        <span style="width:32px;height:32px;border-radius:999px;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:400px 1fr;gap:72px;padding:56px 44px 64px">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:64px;height:64px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-size:19px;font-weight:600;color:#241C17">Ajji</div>
+            <div style="font-size:14px;color:#7A6858">Grandmother · Lakshmipuram, Mysuru</div>
+          </div>
+        </div>
+        <div style="font-family:'Tiro Kannada','Tiro Devanagari Hindi',Georgia,serif;font-size:40px;line-height:1.25;letter-spacing:-.01em;color:#241C17;text-wrap:pretty">{{ deskTitle }}</div>
+        <div style="font-size:14.5px;color:#7A6858">12 August 2026 · Mysuru · 2m 14s</div>
+
+        <div style="display:flex;gap:6px;padding:5px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:999px;width:fit-content;max-width:100%;overflow-x:auto">
+          <button onClick="{{ setKn }}" style="{{ langKn }}">ಕನ್ನಡ · Original</button>
+          <button onClick="{{ setEn }}" style="{{ langEn }}">English</button>
+          <button onClick="{{ setHi }}" style="{{ langHi }}">हिन्दी</button>
+        </div>
+
+        <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 20px 34px -30px rgba(36,28,23,.45)">
+          <div style="display:flex;align-items:center;gap:8px;padding-bottom:16px">
+            <span style="font-family:'Material Symbols Rounded';font-size:19px;color:#A94E2B">graphic_eq</span>
+            <span style="font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#A94E2B">Her original voice</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px">
+            <button onClick="{{ toggleOriginal }}" style="width:62px;height:62px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 22px -12px rgba(169,78,43,.75)" style-hover="background:#96421F">
+              <span style="font-family:'Material Symbols Rounded';font-size:32px;font-variation-settings:'FILL' 1">{{ origIcon }}</span>
+            </button>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+              <div onClick="{{ seekOriginal }}" style="position:relative;height:46px;cursor:pointer">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#E0D2BC">
+                  <sc-for list="{{ waveMain }}" as="b" hint-placeholder-count="44">
+                    <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#A94E2B;clip-path:inset(0 {{ origRemain }} 0 0)">
+                  <sc-for list="{{ waveMain }}" as="b" hint-placeholder-count="44">
+                    <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858;font-variant-numeric:tabular-nums">
+                <span>{{ origTime }}</span>
+                <span>2:14</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ showDeskTrans }}">
+        <div style="padding:20px;background:#F5F8F9;border:1px solid #DFE7EA;border-radius:20px">
+          <div style="font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#33566A;padding-bottom:16px">{{ deskTransLabel }}</div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <button onClick="{{ toggleTranslated }}" style="width:54px;height:54px;flex:none;border-radius:999px;background:#33566A;color:#F4F8F9;display:flex;align-items:center;justify-content:center" style-hover="background:#284656">
+              <span style="font-family:'Material Symbols Rounded';font-size:28px;font-variation-settings:'FILL' 1">{{ transIcon }}</span>
+            </button>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+              <div onClick="{{ seekTranslated }}" style="position:relative;height:32px;cursor:pointer">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#D3DFE4">
+                  <sc-for list="{{ waveAlt }}" as="b" hint-placeholder-count="40">
+                    <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;inset:0;display:flex;align-items:center;gap:2.5px;color:#33566A;clip-path:inset(0 {{ transRemain }} 0 0)">
+                  <sc-for list="{{ waveAlt }}" as="b" hint-placeholder-count="40">
+                    <div style="flex:1;border-radius:3px;background:currentColor;height:{{ b.h }}px"></div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="font-size:13px;color:#4F6874">A reading voice, not Ajji's.</div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:620px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:{{ deskEyebrowColor }}">{{ deskEyebrow }}</span>
+          <span style="flex:1;height:1px;background:#E6DBCA"></span>
+        </div>
+        <div style="font-family:'Tiro Kannada','Tiro Devanagari Hindi',Georgia,serif;font-size:22px;line-height:1.9;color:#241C17;display:flex;flex-direction:column;gap:22px;text-wrap:pretty">
+          <sc-for list="{{ deskParas }}" as="p" hint-placeholder-count="8">
+            <p>{{ p.t }}</p>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:16px auto 0;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:11px;line-height:1.7;color:#7A6858">Desktop reflows into two columns: identity + listening controls stay on the left (sticky in build), the story reads in a 620px measure on the right. Same tokens, same components — no stretched mobile layout.</div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;family&quot;,&quot;storyteller&quot;,&quot;desktop&quot;],&quot;default&quot;:&quot;family&quot;,&quot;tsType&quot;:&quot;'family'|'storyteller'|'desktop'&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;space&quot;,&quot;person&quot;,&quot;ask&quot;,&quot;voice&quot;,&quot;share&quot;,&quot;recording&quot;,&quot;processing&quot;,&quot;memory&quot;],&quot;default&quot;:&quot;space&quot;,&quot;tsType&quot;:&quot;'space'|'person'|'ask'|'voice'|'share'|'recording'|'processing'|'memory'&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;showRail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;englishAudio&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content states&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = {
+      view: p.startMode === 'storyteller' ? 'elder' : p.startMode === 'desktop' ? 'desktop' : 'mobile',
+      screen: p.startScreen || 'space',
+      rec: 'ready',
+      procStep: 0,
+      proc: 'working',
+      lang: 'kn',
+      playing: null,
+      pos: { original: 0, translated: 0 },
+      elapsed: 0,
+      cat: 'Places',
+      hostQ: 2,
+      custom: '',
+      isCustom: false,
+      qRec: 'done',
+      qSec: 9,
+      qPlaying: false,
+      sent: false,
+      copied: false,
+      eScreen: 'invite',
+      eLang: 'kn',
+      eSpoken: false,
+      answered: true,
+    };
+    this.LIB = [
+      { cat: 'Childhood', en: 'What was the home you grew up in like?',
+        hi: 'आप जिस घर में बड़ी हुईं, वो घर कैसा था?',
+        kn: 'ನೀವು ಬೆಳೆದ ಮನೆ ಹೇಗಿತ್ತು?' },
+      { cat: 'Childhood', en: 'What is something from your childhood that no longer exists?',
+        hi: 'आपके बचपन की कौन सी चीज़ अब नहीं रही?',
+        kn: 'ನಿಮ್ಮ ಬಾಲ್ಯದ ಯಾವ ವಿಷಯ ಈಗ ಉಳಿದಿಲ್ಲ?' },
+      { cat: 'Places', en: 'What was your neighbourhood like when you were young?',
+        hi: 'जब आप छोटी थीं, आपकी गली कैसी थी?',
+        kn: 'ನೀವು ಚಿಕ್ಕವರಾಗಿದ್ದಾಗ ನಿಮ್ಮ ಬಡಾವಣೆ ಹೇಗಿತ್ತು?' },
+      { cat: 'Places', en: 'What was Mysuru like when you first came here?',
+        hi: 'जब आप पहली बार यहाँ आईं, शहर कैसा था?',
+        kn: 'ನೀವು ಮೊದಲು ಮೈಸೂರಿಗೆ ಬಂದಾಗ ಅದು ಹೇಗಿತ್ತು?' },
+      { cat: 'Food', en: 'Which family recipe should we never forget?',
+        hi: 'हमारे परिवार की कौन सी रसोई हमें कभी नहीं भूलनी चाहिए?',
+        kn: 'ನಮ್ಮ ಮನೆಯ ಯಾವ ಅಡುಗೆಯನ್ನು ನಾವು ಎಂದಿಗೂ ಮರೆಯಬಾರದು?' },
+      { cat: 'Food', en: 'Who taught you to cook, and what did they say?',
+        hi: 'आपको खाना बनाना किसने सिखाया, और क्या कहा था?',
+        kn: 'ನಿಮಗೆ ಅಡುಗೆ ಕಲಿಸಿದವರು ಯಾರು, ಅವರು ಏನು ಹೇಳಿದರು?' },
+      { cat: 'Work', en: 'Tell me about your first day at work.',
+        hi: 'काम पर आपका पहला दिन कैसा था?',
+        kn: 'ನೀವು ಕೆಲಸಕ್ಕೆ ಸೇರಿದ ಮೊದಲ ದಿನ ಹೇಗಿತ್ತು?' },
+      { cat: 'Work', en: 'What did you buy with your first salary?',
+        hi: 'पहली तनख्वाह से आपने क्या खरीदा था?',
+        kn: 'ಮೊದಲ ಸಂಬಳದಲ್ಲಿ ನೀವು ಏನು ಕೊಂಡಿರಿ?' },
+      { cat: 'Love', en: 'How did you meet Ajja?',
+        hi: 'आप दादाजी से पहली बार कैसे मिलीं?',
+        kn: 'ನೀವು ಅಜ್ಜನನ್ನು ಮೊದಲು ಹೇಗೆ ಭೇಟಿಯಾದಿರಿ?' },
+      { cat: 'Traditions', en: 'How did your family celebrate festivals when you were young?',
+        hi: 'आपके बचपन में घर में त्योहार कैसे मनाए जाते थे?',
+        kn: 'ನೀವು ಚಿಕ್ಕವರಿದ್ದಾಗ ಮನೆಯಲ್ಲಿ ಹಬ್ಬಗಳನ್ನು ಹೇಗೆ ಆಚರಿಸುತ್ತಿದ್ದಿರಿ?' },
+      { cat: 'Advice', en: 'What did your parents teach you?',
+        hi: 'आपके माँ-बाप ने आपको क्या सिखाया?',
+        kn: 'ನಿಮ್ಮ ಅಪ್ಪ ಅಮ್ಮ ನಿಮಗೆ ಕಲಿಸಿದ ಪಾಠ ಯಾವುದು?' },
+      { cat: 'Advice', en: 'Which word from your language do younger people no longer use?',
+        hi: 'आपकी भाषा का कौन सा शब्द अब कोई नहीं बोलता?',
+        kn: 'ನಿಮ್ಮ ಭಾಷೆಯ ಯಾವ ಪದವನ್ನು ಈಗಿನ ಮಕ್ಕಳು ಬಳಸುವುದೇ ಇಲ್ಲ?' },
+    ];
+    this.CATS = ['Childhood', 'Places', 'Food', 'Work', 'Love', 'Traditions', 'Advice'];
+    this.DUR = { original: 134, translated: 128 };
+    this.EL = {
+      en: {
+        askedYou: 'Suyash asked you ❤️',
+        hearQ: "Hear Suyash's voice", hearing: 'Playing…',
+        tapTell: 'Tap and tell me',
+        takeTime: 'Take your time. There is no hurry.',
+        listening: 'We are listening.',
+        finished: 'Story finished',
+        confirmTitle: 'Finished already?',
+        confirmBody: 'You spoke for only a few seconds. There is no hurry.',
+        keepGoing: 'Keep recording', imDone: 'Yes, I am done',
+        savingTitle: 'Keeping your story…',
+        savingBody: 'Your own voice is kept, exactly as you spoke it.',
+        doneTitle: 'Done ❤️',
+        reached: 'Your story reached your family.',
+        closedTitle: 'You can close this page now.',
+        recAgain: 'Record again',
+        micOff: "The microphone isn't on.",
+        micOffBody: 'Nothing was lost. Let us try once more.',
+        tryAgain: 'Try again', askHelp: 'Call someone to help',
+        failTitle: 'Your story is safe on this phone',
+        failBody: 'Something on our side is slow right now. Nothing was lost — we will keep trying.',
+      },
+      hi: {
+        askedYou: 'सुयश ने आपसे पूछा है ❤️',
+        hearQ: 'सुयश की आवाज़ में सुनें', hearing: 'सुनाया जा रहा है…',
+        tapTell: 'दबाइए और बताइए',
+        takeTime: 'आराम से बताइए। कोई जल्दी नहीं।',
+        listening: 'हम सुन रहे हैं।',
+        finished: 'कहानी पूरी हुई',
+        confirmTitle: 'इतनी जल्दी पूरी?',
+        confirmBody: 'आपने बस कुछ ही पल बोला है। कोई जल्दी नहीं है।',
+        keepGoing: 'और बताइए', imDone: 'हाँ, पूरी हुई',
+        savingTitle: 'आपकी कहानी रखी जा रही है…',
+        savingBody: 'आपकी असली आवाज़ वैसी ही रहेगी, जैसी आपने कही।',
+        doneTitle: 'हो गया ❤️',
+        reached: 'आपकी कहानी परिवार तक पहुँच गई।',
+        closedTitle: 'अब आप यह पेज बंद कर सकती हैं।',
+        recAgain: 'फिर से रिकॉर्ड कीजिए',
+        micOff: 'माइक चालू नहीं हुआ',
+        micOffBody: 'कुछ खोया नहीं। एक बार फिर कोशिश कीजिए।',
+        tryAgain: 'फिर कोशिश करें', askHelp: 'किसी को बुलाएँ',
+        failTitle: 'आपकी कहानी इस फ़ोन में सुरक्षित है',
+        failBody: 'हमारी तरफ़ कुछ धीमा चल रहा है। कुछ खोया नहीं — हम कोशिश करते रहेंगे।',
+      },
+      kn: {
+        askedYou: 'ಸುಯಶ್ ನಿಮ್ಮನ್ನು ಕೇಳಿದ್ದಾನೆ ❤️',
+        hearQ: 'ಸುಯಶ್ ಅವರ ಧ್ವನಿಯಲ್ಲಿ ಕೇಳಿ', hearing: 'ಕೇಳುತ್ತಿದೆ…',
+        tapTell: 'ಒತ್ತಿ, ಹೇಳಿ',
+        takeTime: 'ನಿಧಾನವಾಗಿ ಹೇಳಿ. ಯಾವ ಆತುರವೂ ಇಲ್ಲ.',
+        listening: 'ನಾವು ಕೇಳುತ್ತಿದ್ದೇವೆ.',
+        finished: 'ಕಥೆ ಮುಗಿಯಿತು',
+        confirmTitle: 'ಇಷ್ಟು ಬೇಗ ಮುಗಿಯಿತಾ?',
+        confirmBody: 'ನೀವು ಕೆಲವೇ ಕ್ಷಣ ಮಾತಾಡಿದ್ದೀರಿ. ಯಾವ ಆತುರವೂ ಇಲ್ಲ.',
+        keepGoing: 'ಇನ್ನೂ ಹೇಳಿ', imDone: 'ಹೌದು, ಮುಗಿಯಿತು',
+        savingTitle: 'ನಿಮ್ಮ ಕಥೆ ಇಟ್ಟುಕೊಳ್ಳುತ್ತಿದ್ದೇವೆ…',
+        savingBody: 'ನಿಮ್ಮ ನಿಜವಾದ ಧ್ವನಿ ಹಾಗೆಯೇ ಉಳಿಯುತ್ತದೆ.',
+        doneTitle: 'ಆಯ್ತು ❤️',
+        reached: 'ನಿಮ್ಮ ಕಥೆ ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ತಲುಪಿದೆ.',
+        closedTitle: 'ಈಗ ಈ ಪುಟ ಮುಚ್ಚಬಹುದು.',
+        recAgain: 'ಇನ್ನೊಮ್ಮೆ ರೆಕಾರ್ಡ್ ಮಾಡಿ',
+        micOff: 'ಮೈಕ್ ಚಾಲೂ ಆಗಿಲ್ಲ',
+        micOffBody: 'ಏನೂ ಕಳೆದುಹೋಗಿಲ್ಲ. ಇನ್ನೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸೋಣ.',
+        tryAgain: 'ಇನ್ನೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ', askHelp: 'ಯಾರಾದರೂ ಸಹಾಯ ಕೇಳಿ',
+        failTitle: 'ನಿಮ್ಮ ಕಥೆ ಈ ಫೋನಿನಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿದೆ',
+        failBody: 'ನಮ್ಮ ಕಡೆ ಸ್ವಲ್ಪ ನಿಧಾನವಾಗಿದೆ. ಏನೂ ಕಳೆದುಹೋಗಿಲ್ಲ — ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದೇವೆ.',
+      },
+    };
+  }
+
+  componentWillUnmount() { this.clearAll(); }
+  clearAll() {
+    clearInterval(this.recT); clearTimeout(this.stopT);
+    clearInterval(this.procT); clearInterval(this.playT); clearTimeout(this.speakT); clearTimeout(this.saveT); clearInterval(this.qT);
+  }
+
+  fmt(s) {
+    s = Math.max(0, Math.floor(s));
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  bars(n, seed, min, max) {
+    const out = []; let s = seed;
+    for (let i = 0; i < n; i++) {
+      s = (s * 9301 + 49297) % 233280;
+      const r = s / 233280;
+      const env = 0.45 + 0.55 * Math.sin((i / (n - 1)) * Math.PI);
+      out.push({ h: Math.round((min + (max - min) * (0.3 + 0.7 * r)) * env), dur: 0.5 + r * 0.7, d: (i % 7) * 0.09 });
+    }
+    return out;
+  }
+
+  go(screen) {
+    this.clearAll();
+    const next = { screen, playing: null };
+    if (screen === 'recording') { next.rec = 'ready'; next.elapsed = 0; }
+    if (screen === 'processing') { next.proc = 'working'; next.procStep = 0; this.runProc(); }
+    if (screen === 'memory') { next.pos = { original: 0, translated: 0 }; }
+    if (screen === 'share') { next.sent = false; next.copied = false; }
+    this.setState(next);
+  }
+
+  runProc() {
+    clearInterval(this.procT);
+    this.procT = setInterval(() => {
+      this.setState(s => {
+        if (s.proc !== 'working') { clearInterval(this.procT); return null; }
+        if (s.procStep >= 2) { clearInterval(this.procT); return { proc: 'done', procStep: 3 }; }
+        return { procStep: s.procStep + 1 };
+      });
+    }, 1500);
+  }
+
+  startRec() {
+    clearInterval(this.recT);
+    this.setState({ rec: 'recording', elapsed: 0 });
+    this.recT = setInterval(() => this.setState(s => ({ elapsed: Math.min(s.elapsed + 1, 599) })), 1000);
+  }
+
+  stopRec() {
+    clearInterval(this.recT);
+    this.setState({ rec: 'stopping' });
+    this.stopT = setTimeout(() => this.go('processing'), 1300);
+  }
+
+  toggle(kind) {
+    clearInterval(this.playT);
+    if (this.state.playing === kind) { this.setState({ playing: null }); return; }
+    this.setState(s => ({ playing: kind, pos: Object.assign({}, s.pos, s.pos[kind] >= this.DUR[kind] ? { [kind]: 0 } : {}) }));
+    this.playT = setInterval(() => {
+      this.setState(s => {
+        const v = s.pos[kind] + 0.25;
+        if (v >= this.DUR[kind]) { clearInterval(this.playT); return { playing: null, pos: Object.assign({}, s.pos, { [kind]: this.DUR[kind] }) }; }
+        return { pos: Object.assign({}, s.pos, { [kind]: v }) };
+      });
+    }, 250);
+  }
+
+  seek(kind, e) {
+    const r = e.currentTarget.getBoundingClientRect();
+    const f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    this.setState(s => ({ pos: Object.assign({}, s.pos, { [kind]: f * this.DUR[kind] }) }));
+  }
+
+  eTick() {
+    clearInterval(this.recT);
+    this.recT = setInterval(() => this.setState(st => ({ elapsed: Math.min(st.elapsed + 1, 599) })), 1000);
+  }
+  eStartRec() { clearTimeout(this.speakT); this.setState({ eScreen: 'rec', elapsed: 0, eSpoken: false }); this.eTick(); }
+  qTick() {
+    clearInterval(this.qT);
+    this.qT = setInterval(() => this.setState(st => ({ qSec: Math.min(st.qSec + 1, 120) })), 1000);
+  }
+  eKeepGoing() { this.setState({ eScreen: 'rec' }); this.eTick(); }
+  eFinish() {
+    clearInterval(this.recT);
+    if (this.state.elapsed < 10) { this.setState({ eScreen: 'confirm' }); return; }
+    this.eSave();
+  }
+  eSave() {
+    this.clearAll();
+    this.setState({ eScreen: 'saving' });
+    this.saveT = setTimeout(() => this.setState({ eScreen: 'safe', pos: { original: 0, translated: 0 }, playing: null }), 2400);
+  }
+  eSpeak() {
+    clearTimeout(this.speakT);
+    this.setState({ eSpoken: true });
+    this.speakT = setTimeout(() => this.setState({ eSpoken: false }), 5000);
+  }
+  renderVals() {
+    const s = this.state;
+    const enAudio = this.props.englishAudio !== false;
+    const fam = s.view === 'mobile';
+    const chosen = this.LIB[s.hostQ] || this.LIB[0];
+    const cueCat = s.isCustom && s.custom.trim() ? 'Advice' : chosen.cat;
+    const promptText = s.isCustom && s.custom.trim() ? s.custom.trim() : chosen[s.eLang];
+    const t = Object.assign({}, this.EL[s.eLang], { question: promptText });
+    const tab = k => ({ height: 38, padding: '0 18px', borderRadius: 999, fontSize: 14, fontWeight: 600, whiteSpace: 'nowrap', background: s.view === k ? '#241C17' : 'transparent', color: s.view === k ? '#F7F2E9' : '#7A6858' });
+    const lang = k => s.lang === k
+      ? { height: 44, padding: '0 18px', borderRadius: 999, background: '#241C17', color: '#F7F2E9', fontSize: 15, fontWeight: 600, whiteSpace: 'nowrap', flex: 'none', boxShadow: '0 6px 14px -8px rgba(36,28,23,.7)', transition: 'background .2s ease' }
+      : { height: 44, padding: '0 18px', borderRadius: 999, background: 'transparent', color: '#5C4E44', fontSize: 15, fontWeight: 500, whiteSpace: 'nowrap', flex: 'none', transition: 'background .2s ease' };
+    const step = k => ({
+      display: 'flex', alignItems: 'center', gap: 10, height: 40, padding: '0 12px', borderRadius: 10,
+      fontSize: 14, fontWeight: s.screen === k ? 600 : 500,
+      background: s.screen === k ? '#FFFDF8' : 'transparent',
+      color: s.screen === k ? '#241C17' : '#7A6858',
+      border: '1px solid ' + (s.screen === k ? '#E0D2BC' : 'transparent'),
+    });
+    const step2 = active => ({
+      display: 'flex', alignItems: 'center', gap: 10, height: 40, padding: '0 12px', borderRadius: 10,
+      fontSize: 14, fontWeight: active ? 600 : 500,
+      background: active ? '#FFFDF8' : 'transparent',
+      color: active ? '#241C17' : '#7A6858',
+      border: '1px solid ' + (active ? '#E0D2BC' : 'transparent'),
+    });
+    const railChip = (label, active, on) => ({
+      label, on,
+      style: {
+        height: 32, padding: '0 12px', borderRadius: 999, fontSize: 12.5, fontWeight: 600, whiteSpace: 'nowrap',
+        fontFamily: 'ui-monospace, SF Mono, Menlo, monospace', letterSpacing: '.03em',
+        background: active ? '#241C17' : 'transparent', color: active ? '#F7F2E9' : '#7A6858',
+        border: '1px solid ' + (active ? '#241C17' : '#DCCDB8'),
+      },
+    });
+
+    let stateTitle = 'States', chips = [];
+    if (s.view === 'elder') {
+      stateTitle = 'Link language · set by the host';
+      chips = [
+        railChip('English', s.eLang === 'en', () => this.setState({ eLang: 'en' })),
+        railChip('\u0939\u093F\u0928\u094D\u0926\u0940', s.eLang === 'hi', () => this.setState({ eLang: 'hi' })),
+        railChip('\u0C95\u0CA8\u0CCD\u0CA8\u0CA1', s.eLang === 'kn', () => this.setState({ eLang: 'kn' })),
+        railChip('mic blocked', s.eScreen === 'denied', () => { this.clearAll(); this.setState({ eScreen: 'denied' }); }),
+        railChip('finished too soon', s.eScreen === 'confirm', () => { this.clearAll(); this.setState({ eScreen: 'confirm', elapsed: 4 }); }),
+        railChip('sending', s.eScreen === 'saving', () => { this.clearAll(); this.setState({ eScreen: 'saving' }); }),
+        railChip("couldn't send", s.eScreen === 'failed', () => { this.clearAll(); this.setState({ eScreen: 'failed' }); }),
+        railChip(s.qRec === 'done' ? 'host voice attached' : 'no host voice', s.qRec === 'done', () => this.setState({ qRec: s.qRec === 'done' ? 'idle' : 'done', qSec: 9 })),
+        railChip('cue: ' + cueCat.toLowerCase(), true, () => {
+          const next = this.CATS[(this.CATS.indexOf(cueCat) + 1) % this.CATS.length];
+          const first = this.LIB.findIndex(q => q.cat === next);
+          this.setState({ cat: next, isCustom: false, hostQ: first < 0 ? 0 : first });
+        }),
+      ];
+    } else if (s.screen === 'ask') {
+      stateTitle = 'Prompt library';
+      chips = [
+        railChip('curated', !s.isCustom, () => this.setState({ isCustom: false })),
+        railChip('my own words', s.isCustom, () => this.setState({ isCustom: true })),
+        railChip('photo prompt · P1', false, () => {}),
+      ];
+    } else if (s.screen === 'voice') {
+      stateTitle = 'Host voice states';
+      chips = [
+        railChip('not recorded', s.qRec === 'idle', () => { clearInterval(this.qT); this.setState({ qRec: 'idle', qSec: 0 }); }),
+        railChip('recording', s.qRec === 'rec', () => { this.setState({ qRec: 'rec', qSec: 0 }); this.qTick(); }),
+        railChip('ready to send', s.qRec === 'done', () => { clearInterval(this.qT); this.setState({ qRec: 'done', qSec: 9 }); }),
+        railChip('spoken version · P1', false, () => {}),
+      ];
+    } else if (s.screen === 'share') {
+      stateTitle = 'Share states';
+      chips = [
+        railChip('ready to send', !s.sent, () => this.setState({ sent: false, copied: false })),
+        railChip('sent \u00b7 waiting', s.sent, () => this.setState({ sent: true })),
+        railChip('link copied', s.copied, () => this.setState({ copied: !s.copied })),
+      ];
+    } else if (s.screen === 'space' || s.screen === 'person') {
+      stateTitle = 'Family space';
+      chips = [
+        railChip('waiting for Ajji', !s.answered, () => this.setState({ answered: false })),
+        railChip('she answered ❤', s.answered, () => this.setState({ answered: true })),
+        railChip('her language: ' + (s.eLang === 'kn' ? 'ಕನ್ನಡ' : s.eLang === 'hi' ? 'हिन्दी' : 'English'), true, () => this.setState({ eLang: s.eLang === 'kn' ? 'hi' : s.eLang === 'hi' ? 'en' : 'kn' })),
+      ];
+    } else if (s.screen === 'recording') {
+      stateTitle = 'Recording states';
+      chips = [
+        railChip('permission', s.rec === 'permission', () => this.setState({ rec: 'permission' })),
+        railChip('ready', s.rec === 'ready', () => { this.clearAll(); this.setState({ rec: 'ready', elapsed: 0 }); }),
+        railChip('recording', s.rec === 'recording', () => this.startRec()),
+        railChip('stopping', s.rec === 'stopping', () => { this.clearAll(); this.setState({ rec: 'stopping' }); }),
+        railChip('failed', s.rec === 'failed', () => { this.clearAll(); this.setState({ rec: 'failed' }); }),
+      ];
+    } else if (s.screen === 'processing') {
+      stateTitle = 'Keeping states';
+      chips = [
+        railChip('normal', s.proc === 'working', () => { this.setState({ proc: 'working', procStep: 0 }); this.runProc(); }),
+        railChip('ready to open', s.proc === 'done', () => { this.clearAll(); this.setState({ proc: 'done', procStep: 3 }); }),
+        railChip('longer wait', s.proc === 'longer', () => { this.clearAll(); this.setState({ proc: 'longer', procStep: 2 }); }),
+        railChip('failed', s.proc === 'failed', () => { this.clearAll(); this.setState({ proc: 'failed', procStep: 1 }); }),
+      ];
+    } else if (s.screen === 'memory') {
+      stateTitle = 'Memory states';
+      chips = [
+        railChip('ಕನ್ನಡ original', s.lang === 'kn', () => this.setState({ lang: 'kn' })),
+        railChip('English', s.lang === 'en', () => this.setState({ lang: 'en' })),
+        railChip('हिन्दी · no audio yet', s.lang === 'hi', () => this.setState({ lang: 'hi' })),
+        railChip(s.playing ? 'playing' : 'paused', !!s.playing, () => this.toggle('original')),
+      ];
+    }
+
+    const qEn = s.isCustom && s.custom.trim() ? s.custom.trim() : chosen.en;
+
+    const stepRow = (label, state) => ({
+      label,
+      icon: state === 'done' ? 'check_circle' : state === 'active' ? 'progress_activity' : 'radio_button_unchecked',
+      iconStyle: {
+        fontFamily: 'Material Symbols Rounded', fontSize: 21,
+        color: state === 'done' ? '#4E6B4A' : state === 'active' ? '#A94E2B' : '#C7B7A3',
+        fontVariationSettings: state === 'done' ? "'FILL' 1" : "'FILL' 0",
+        animation: state === 'active' ? 'kSpin 1.6s linear infinite' : 'none',
+      },
+      labelStyle: { fontSize: 16, color: state === 'pending' ? '#8B7A6C' : '#3D3129', fontWeight: state === 'active' ? 600 : 400 },
+    });
+    const stName = i => s.proc === 'failed' && i === 1 ? 'active' : s.procStep > i ? 'done' : s.procStep === i ? 'active' : 'pending';
+    const procSteps = [
+      stepRow('Her voice is saved', s.proc === 'failed' ? 'done' : stName(0)),
+      stepRow('Writing down her words', s.proc === 'failed' ? 'pending' : stName(1)),
+      stepRow('Getting English and हिन्दी ready', s.proc === 'failed' ? 'pending' : stName(2)),
+    ];
+
+    const procCopy = {
+      working: ['Keeping this memory…', 'Your original recording is always kept, exactly as she spoke it.'],
+      done: ['Ready when you are', 'Her voice is safe. English is ready to read and hear.'],
+      longer: ['Still keeping this memory…', "This one is taking a little longer than usual. You can close this — we'll keep going."],
+      failed: ['We couldn\u2019t finish keeping this memory', 'Her recording is safe on this phone. Nothing was lost.'],
+    }[s.proc];
+
+    const paras = {
+      kn: ['ನಮ್ಮ ಮನೆ ಇತ್ತು ಲಕ್ಷ್ಮೀಪುರಂನಲ್ಲಿ. ಚಿಕ್ಕ ಮನೆ. ಮುಂದೆ ಒಂದು ಜಗುಲಿ ಇತ್ತು.', 'ಸಂಜೆ ಆದ ಮೇಲೆ ಎಲ್ಲರೂ ಆ ಜಗುಲಿ ಮೇಲೆ ಕೂತ್ಕೊಳ್ತಿದ್ವಿ.', 'ಅಮ್ಮ ನೀರು ಚಿಮುಕಿಸಿ ಅಂಗಳ ಗುಡಿಸ್ತಿದ್ರು. ಆ ಮಣ್ಣಿನ ವಾಸನೆ… ಈಗಲೂ ನೆನಪಿದೆ.', 'ಪಕ್ಕದ ಮನೆ ಶಾರದಕ್ಕ ಬರ್ತಿದ್ರು. ಎಲ್ಲರೂ ಸೇರಿ ಮಾತಾಡ್ತಾ ಇರ್ತಿದ್ವಿ.', 'ಆಗ ದಿನಾ ಏಳು ಗಂಟೆಗೆ ಲೈಟ್ ಹೋಗ್ತಿತ್ತು. ನಾವು ಗಾಬರಿ ಆಗ್ತಿರಲಿಲ್ಲ.', 'ಚಿಮಣಿ ದೀಪ ಹಚ್ಚಿ, ಅಜ್ಜಿ ಕಥೆ ಹೇಳ್ತಿದ್ರು.', 'ಈಗ ಆ ರಸ್ತೆ ಪೂರ್ತಿ ಬದಲಾಗಿದೆ. ದೊಡ್ಡ ದೊಡ್ಡ ಮನೆಗಳು.', 'ಜಗುಲಿ ಇಲ್ಲ. ಜನ ಹೊರಗೆ ಕೂರುವುದೂ ಇಲ್ಲ.'],
+      en: ['Our house was in Lakshmipuram. A small house. In front there was a jaguli — a raised porch.', 'In the evenings, all of us would sit out on that porch.', 'Amma would sprinkle water and sweep the yard. That smell of wet earth… I still remember it.', 'Sharada-akka from next door would come over. We would all sit together and just talk.', 'Back then the power went off every day at seven. We were never worried about it.', 'We would light the chimney lamp, and my grandmother would tell us stories.', 'Now that whole road has changed. Big, big houses.', 'No jaguli. Nobody sits outside anymore.'],
+      hi: ['हमारा घर लक्ष्मीपुरम में था। छोटा सा घर। आगे एक जगुली थी — बैठने वाला ओटला।', 'शाम को हम सब उसी ओटले पर बैठ जाते थे।', 'अम्मा पानी छिड़ककर आँगन बुहारती थीं। वो गीली मिट्टी की महक… आज भी याद है।', 'पड़ोस की शारदा-अक्का आ जाती थीं। सब मिलकर बातें करते रहते थे।', 'उस ज़माने में रोज़ सात बजे बिजली चली जाती थी। हमें कोई घबराहट नहीं होती थी।', 'चिमनी जलाकर अज्जी कहानी सुनाती थीं।', 'अब वो पूरी सड़क बदल गई है। बड़े-बड़े मकान।', 'जगुली नहीं है। कोई बाहर बैठता भी नहीं।'],
+    }[s.lang];
+
+    return {
+      phoneW: 390, phoneH: 844,
+      showRail: this.props.showRail !== false,
+      isPhone: s.view !== 'desktop', isElder: s.view === 'elder', isMobile: s.view === 'mobile', isDesktop: s.view === 'desktop',
+      viewElder: () => this.setState({ view: 'elder' }),
+      viewMobile: () => this.setState({ view: 'mobile' }), viewDesktop: () => this.setState({ view: 'desktop', lang: s.lang === 'kn' ? 'kn' : s.lang }),
+      tabElder: tab('elder'), tabMobile: tab('mobile'), tabDesktop: tab('desktop'),
+
+      atSpace: fam && s.screen === 'space', atPerson: fam && s.screen === 'person',
+      atAsk: fam && s.screen === 'ask', atVoice: fam && s.screen === 'voice', atShare: fam && s.screen === 'share',
+      atRecording: fam && s.screen === 'recording',
+      atProcessing: fam && s.screen === 'processing', atMemory: fam && s.screen === 'memory',
+      goSpace: () => this.go('space'), goPerson: () => this.go('person'), goAsk: () => this.go('ask'),
+      goVoice: () => this.go('voice'), goShare: () => this.go('share'), goRecording: () => this.go('recording'),
+      goProcessing: () => this.go('processing'), goMemory: () => this.go('memory'),
+      stateTitle, stateChips: chips,
+
+      people: [
+        { name: 'Ajji', meta: '4 stories', waiting: !s.answered },
+        { name: 'Papa', meta: '6 stories', waiting: false },
+        { name: 'Maa', meta: '4 stories', waiting: false },
+        { name: 'Nani', meta: '3 stories', waiting: false },
+      ].map(p => ({
+        name: p.name, meta: p.meta, waiting: p.waiting, on: () => this.go('person'),
+        style: {
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '20px 12px',
+          borderRadius: 20, background: '#FFFDF8',
+          border: '1px solid ' + (p.name === 'Ajji' ? '#DCB9A3' : '#E6DBCA'),
+        },
+        avStyle: {
+          width: 72, height: 72, borderRadius: 999,
+          background: 'repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px)',
+          border: '1px solid #E0D2BC',
+        },
+      })),
+      answered: s.answered, notAnswered: !s.answered,
+      pendingText: this.LIB[4][s.eLang],
+      stories: [
+        { title: 'Summer evenings in Mysuru', meta: 'ಕನ್ನಡ · 2m 14s', seed: 4919 },
+        { title: 'The house in Lakshmipuram', meta: 'ಕನ್ನಡ · 1m 46s', seed: 771 },
+        { title: 'The day the rains came early', meta: 'ಕನ್ನಡ · 4m 02s', seed: 2277 },
+      ].map(m => ({ title: m.title, meta: m.meta, wave: this.bars(14, m.seed, 4, 14), on: () => this.go('memory') })),
+      tellerLangLabel: s.eLang === 'kn' ? 'ಕನ್ನಡ · Kannada' : s.eLang === 'hi' ? 'हिन्दी · Hindi' : 'English',
+      cycleLang: () => this.setState({ eLang: s.eLang === 'kn' ? 'hi' : s.eLang === 'hi' ? 'en' : 'kn' }),
+      cats: this.CATS.map(c => ({
+        label: c,
+        on: () => {
+          const first = this.LIB.findIndex(q => q.cat === c);
+          this.setState({ cat: c, isCustom: false, hostQ: first < 0 ? 0 : first });
+        },
+        style: {
+          height: 44, padding: '0 16px', borderRadius: 999, fontSize: 14.5, fontWeight: 600,
+          whiteSpace: 'nowrap', flex: 'none', display: 'flex', alignItems: 'center',
+          background: s.cat === c ? '#241C17' : 'transparent',
+          color: s.cat === c ? '#F7F2E9' : '#5C4E44',
+          border: '1.5px solid ' + (s.cat === c ? '#241C17' : '#E6DBCA'),
+        },
+      })),
+      askOptions: this.LIB.map((p, idx) => ({ p, idx })).filter(x => x.p.cat === s.cat).map(({ p, idx }) => ({
+        en: p.en, native: p[s.eLang === 'en' ? 'kn' : s.eLang],
+        on: () => this.setState({ hostQ: idx, isCustom: false }),
+        tick: !s.isCustom && s.hostQ === idx ? 'radio_button_checked' : 'radio_button_unchecked',
+        tickStyle: {
+          fontFamily: 'Material Symbols Rounded', fontSize: 22, flex: 'none',
+          color: !s.isCustom && s.hostQ === idx ? '#A94E2B' : '#C7B7A3',
+        },
+        style: {
+          display: 'flex', alignItems: 'flex-start', gap: 12, padding: '14px 15px', borderRadius: 16, width: '100%',
+          background: !s.isCustom && s.hostQ === idx ? '#FFFDF8' : 'transparent',
+          border: '1.5px solid ' + (!s.isCustom && s.hostQ === idx ? '#DCB9A3' : '#E6DBCA'),
+          transition: 'background .2s ease',
+        },
+      })),
+      isCustom: s.isCustom,
+      pickCustom: () => this.setState({ isCustom: true }),
+      setCustom: e => this.setState({ custom: e.target.value }),
+      customStyle: {
+        display: 'flex', alignItems: 'center', gap: 12, padding: '14px 15px', borderRadius: 16, width: '100%',
+        background: s.isCustom ? '#FFFDF8' : 'transparent',
+        border: '1.5px ' + (s.isCustom ? 'solid #DCB9A3' : 'dashed #DCCDB8'),
+      },
+      qIdle: s.qRec === 'idle', qRecording: s.qRec === 'rec', qDone: s.qRec === 'done',
+      qStart: () => { this.setState({ qRec: 'rec', qSec: 0 }); this.qTick(); },
+      qStop: () => { clearInterval(this.qT); this.setState(st => ({ qRec: 'done', qSec: Math.max(st.qSec, 3) })); },
+      qPlay: () => this.setState(st => ({ qPlaying: !st.qPlaying })),
+      qReset: () => { clearInterval(this.qT); this.setState({ qRec: 'idle', qSec: 0, qPlaying: false }); },
+      qPlayIcon: s.qPlaying ? 'pause' : 'play_arrow',
+      qLabel: this.fmt(s.qSec),
+      waveHost: this.bars(18, 5501, 8, 30),
+
+      shareTitle: s.sent ? 'Waiting for Ajji' : 'Ready for Ajji',
+      sharePreview: promptText,
+      askedYouPreview: t.askedYou,
+      sent: s.sent, notSent: !s.sent,
+      doShare: () => this.setState({ sent: true }),
+      doCopy: () => { this.setState({ copied: true }); clearTimeout(this.copyT); this.copyT = setTimeout(() => this.setState({ copied: false }), 1800); },
+      copyLabel: s.copied ? 'Copied' : 'Copy',
+
+      questionEn: qEn,
+
+      recPermission: s.rec === 'permission', recReady: s.rec === 'ready', recRecording: s.rec === 'recording',
+      recStopping: s.rec === 'stopping', recFailed: s.rec === 'failed',
+      allowMic: () => this.setState({ rec: 'ready' }), recSetReady: () => this.setState({ rec: 'ready', elapsed: 0 }),
+      startRec: () => this.startRec(), stopRec: () => this.stopRec(),
+      elapsedLabel: this.fmt(s.elapsed),
+      waveRec: this.bars(40, 771, 8, 66), waveProc: this.bars(7, 313, 12, 42),
+      waveMain: this.bars(44, 4919, 5, 42), waveAlt: this.bars(40, 8123, 4, 30), waveMini: this.bars(26, 2277, 4, 18),
+
+      procTitle: procCopy[0], procSub: procCopy[1], procSteps,
+      procIsDone: s.proc === 'done', procIsLonger: s.proc === 'longer', procIsFailed: s.proc === 'failed',
+      procSetWorking: () => { this.setState({ proc: 'working', procStep: 0 }); this.runProc(); },
+
+      isKn: s.lang === 'kn', isEn: s.lang === 'en', isHi: s.lang === 'hi',
+      setKn: () => this.setState({ lang: 'kn' }), setEn: () => this.setState({ lang: 'en' }), setHi: () => this.setState({ lang: 'hi' }),
+      langKn: lang('kn'), langEn: lang('en'), langHi: lang('hi'),
+      enAudio: enAudio, enNoAudio: !enAudio,
+
+      origIcon: s.playing === 'original' ? 'pause' : 'play_arrow',
+      transIcon: s.playing === 'translated' ? 'pause' : 'play_arrow',
+      origTime: this.fmt(s.pos.original), transTime: this.fmt(s.pos.translated),
+      origRemain: (100 - (s.pos.original / this.DUR.original) * 100).toFixed(2) + '%',
+      transRemain: (100 - (s.pos.translated / this.DUR.translated) * 100).toFixed(2) + '%',
+      toggleOriginal: () => this.toggle('original'), toggleTranslated: () => this.toggle('translated'),
+      seekOriginal: e => this.seek('original', e), seekTranslated: e => this.seek('translated', e),
+
+      deskTitle: s.lang === 'kn' ? 'ಮೈಸೂರಿನ ಬೇಸಿಗೆ ಸಂಜೆಗಳು' : s.lang === 'hi' ? 'मैसूर की गर्मियों की शामें' : 'Summer evenings in Mysuru',
+      deskEyebrow: s.lang === 'kn' ? 'In her words · ಕನ್ನಡ' : s.lang === 'hi' ? 'कन्नड़ से · हिन्दी' : 'From Kannada · English',
+      deskEyebrowColor: s.lang === 'kn' ? '#7A6858' : '#33566A',
+      deskParas: paras.map(t => ({ t })),
+      showDeskTrans: s.lang === 'en' && enAudio,
+      deskTransLabel: 'Understand in English',
+
+      t,
+      eAtInvite: s.view === 'elder' && s.eScreen === 'invite',
+      eAtDenied: s.view === 'elder' && s.eScreen === 'denied',
+      eAtRec: s.view === 'elder' && s.eScreen === 'rec',
+      eAtConfirm: s.view === 'elder' && s.eScreen === 'confirm',
+      eAtSaving: s.view === 'elder' && s.eScreen === 'saving',
+      eAtSafe: s.view === 'elder' && s.eScreen === 'safe',
+      eAtFailed: s.view === 'elder' && s.eScreen === 'failed',
+      eHasVoice: s.qRec === 'done',
+      cueHome: cueCat === 'Childhood' || cueCat === 'Places',
+      cueKitchen: cueCat === 'Food',
+      cueWork: cueCat === 'Work',
+      cueLove: cueCat === 'Love',
+      cueTraditions: cueCat === 'Traditions',
+      cueAdvice: cueCat === 'Advice',
+      eSay: () => this.eSpeak(), eSpoken: s.eSpoken,
+      eSayIcon: s.eSpoken ? 'graphic_eq' : 'play_arrow',
+      eSayLabel: s.eSpoken ? t.hearing : t.hearQ,
+      eSayBtn: {
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, height: 64, borderRadius: 20,
+        border: '1.5px solid ' + (s.eSpoken ? '#DCB9A3' : '#DCCDB8'),
+        background: s.eSpoken ? '#F3E1D5' : '#FFFDF8', color: s.eSpoken ? '#8A3F21' : '#241C17',
+        fontSize: 20, fontWeight: 600, transition: 'background .2s ease',
+      },
+      eStartRec: () => this.eStartRec(),
+      eFinish: () => this.eFinish(),
+      eKeepGoing: () => this.eKeepGoing(),
+      eDone: () => this.eSave(),
+      eGoInvite: () => { this.clearAll(); this.setState({ eScreen: 'invite', elapsed: 0, playing: null, pos: { original: 0, translated: 0 } }); },
+      waveElder: this.bars(28, 771, 14, 96),
+      flowTitle: s.view === 'elder' ? 'Storyteller · three states' : 'Host · family app',
+      flowSteps: s.view === 'elder'
+        ? [
+            { n: '01', label: 'The question', on: () => { this.clearAll(); this.setState({ eScreen: 'invite' }); }, style: step2(s.eScreen === 'invite' || s.eScreen === 'denied') },
+            { n: '02', label: 'Recording', on: () => this.eStartRec(), style: step2(s.eScreen === 'rec' || s.eScreen === 'confirm') },
+            { n: '03', label: 'Done', on: () => { this.clearAll(); this.setState({ eScreen: 'safe' }); }, style: step2(['saving', 'safe', 'failed'].indexOf(s.eScreen) >= 0) },
+          ]
+        : [
+            { n: '01', label: 'Family', on: () => this.go('space'), style: step('space') },
+            { n: '02', label: 'Ajji', on: () => this.go('person'), style: step('person') },
+            { n: '03', label: 'The question', on: () => this.go('ask'), style: step('ask') },
+            { n: '04', label: 'Your voice', on: () => this.go('voice'), style: step('voice') },
+            { n: '05', label: 'Share her link', on: () => this.go('share'), style: step('share') },
+            { n: '06', label: 'Memory page', on: () => this.go('memory'), style: step('memory') },
+          ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

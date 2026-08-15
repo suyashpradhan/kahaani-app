@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Kannada&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500&family=Noto+Sans+Kannada:wght@400;500&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F7F2E9;color:#241C17;font-family:'Hanken Grotesk',ui-sans-serif,system-ui,'Noto Sans Devanagari','Noto Sans Kannada',sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,p,pre{margin:0}
+button{font:inherit;color:inherit;border:0;background:none;text-align:left}
+a{color:#A94E2B;text-decoration:none}
+a:hover{color:#8A3F21}
+@keyframes kBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes kBlinkA{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes kBlinkB{0%,88%,100%{transform:scaleY(1)}91%{transform:scaleY(.08)}}
+@keyframes kSteam{0%{transform:translateY(3px);opacity:0}25%{opacity:.8}60%{opacity:.55}100%{transform:translateY(-18px);opacity:0}}
+@keyframes kSway{0%,100%{transform:rotate(-2.2deg)}50%{transform:rotate(2.2deg)}}
+@keyframes kWave{0%{transform:scale(.72);opacity:.5}70%{opacity:0}100%{transform:scale(1.5);opacity:0}}
+@keyframes kSettleBars{0%,40%{opacity:1;transform:scaleY(1)}70%,100%{opacity:0;transform:scaleY(.12)}}
+@keyframes kSettleCard{0%,45%{opacity:0;transform:scale(.94)}75%,100%{opacity:1;transform:scale(1)}}
+@keyframes kSettleLine{0%,55%{transform:scaleX(0)}85%,100%{transform:scaleX(1)}}
+@keyframes kTravel{0%{transform:translateX(0);opacity:0}12%{opacity:1}88%{opacity:1}100%{transform:translateX(178px);opacity:0}}
+@keyframes kFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important}}
+</style>
+</helmet>
+
+<div style="padding:56px 40px 96px;background:radial-gradient(120% 60% at 50% 0%,#FBF7EF 0%,#F1E9DB 100%)">
+<div style="max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:76px">
+
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Kahaani · illustration &amp; motion system · v1 hackathon</div>
+    <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:46px;line-height:1.1;letter-spacing:-.02em;max-width:820px;text-wrap:pretty">Objects a family would recognise, drawn quietly, moving almost imperceptibly.</div>
+    <div style="font-size:18px;line-height:1.65;color:#5C4E44;max-width:700px;text-wrap:pretty">Six MVP assets, six motion patterns, one motif. The geometry, palette, layer structure and animation rig are built here and ready to paste. Faces are the one thing not drawn in code — those ship as portrait slots with a commission spec, because hand-built vector faces are how a warm product starts looking machine-made.</div>
+    <div style="display:flex;align-items:center;gap:20px;padding:26px 28px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;flex-wrap:wrap">
+      <svg viewBox="0 0 200 28" style="width:200px;height:28px;flex:none">
+        <path d="M2 14 q7 -9 14 0 t14 0 t14 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+        <path d="M44 14 q6 -5 12 0 t12 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+        <path d="M70 14 q5 -2 10 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+        <line x1="82" y1="14" x2="196" y2="14" style="stroke:#241C17;stroke-width:2;stroke-linecap:round;opacity:.32"></line>
+        <circle cx="4" cy="14" r="3" style="fill:#A94E2B;animation:kTravel 5.5s cubic-bezier(.4,0,.5,1) infinite"></circle>
+      </svg>
+      <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">The motif · one story travelling</div>
+        <div style="font-size:16px;line-height:1.6;color:#3D3129">A spoken line straightening into a written one. It is the only decorative mark in the product: a divider between hearing and reading on the memory page, the spine of the processing animation, and the wordmark's companion. Never a spool, never a logo lockup.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">01</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Illustration palette</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:16.5px;line-height:1.6;color:#5C4E44;max-width:720px">The UI palette plus five earth tints. Hard rule: <strong style="font-weight:600">no asset uses more than three hues</strong> beyond cream, sand and ink. Never saffron beside green.</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px">
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#A94E2B"></div><div style="font-size:14.5px;font-weight:600">clay</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#A94E2B · lines, roofs</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#D08A63"></div><div style="font-size:14.5px;font-weight:600">clay light</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#D08A63 · warm fills</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#7C3B33"></div><div style="font-size:14.5px;font-weight:600">maroon</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#7C3B33 · deep accents</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#E4B7A6"></div><div style="font-size:14.5px;font-weight:600">dusty rose</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#E4B7A6 · cloth, skin wash</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#C99A3E"></div><div style="font-size:14.5px;font-weight:600">mustard</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#C99A3E · spice, brass, lamp</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#6B8A5A"></div><div style="font-size:14.5px;font-weight:600">leaf</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#6B8A5A · plants only</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#5B7C8D"></div><div style="font-size:14.5px;font-weight:600">muted blue</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#5B7C8D · steel, sky, rail</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px"><div style="height:64px;border-radius:12px;background:#EFE4D3;border:1px solid #E0D2BC"></div><div style="font-size:14.5px;font-weight:600">sand / cream / ink</div><div style="font-family:ui-monospace,monospace;font-size:12px;color:#7A6858">#EFE4D3 · #F7F2E9 · #241C17</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">02</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Construction rules</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;font-size:15.5px;line-height:1.75">
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px"><strong style="font-weight:600">Geometry.</strong> Everything sits on a 4px grid built from circles, rounded rectangles, triangles and single-curve paths. If a shape needs more than two curves to read, simplify the idea instead of the path.</div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px"><strong style="font-weight:600">Stroke.</strong> One weight per artboard: 2px at 128px wide, 1.5px below 80px, round caps and joins, colour clay or ink — never black. Objects are outlined and flat-filled; no gradients except a single 8% warm wash behind hero scenes.</div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px"><strong style="font-weight:600">Budget.</strong> Object ≤ 12 paths, cluster ≤ 40, character ≤ 60, hero ≤ 120. No masks unless an image is being framed, no filters, no embedded raster.</div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px"><strong style="font-weight:600">Layer contract.</strong> Every animatable part is its own <span style="font-family:ui-monospace,monospace;font-size:13.5px">&lt;g id="…"&gt;</span> with its transform-origin authored in, so CSS can move it without touching geometry. Ids are kebab-case and stable: <span style="font-family:ui-monospace,monospace;font-size:13.5px">torso, eyelid-l, steam-1, canopy, ring-2</span>.</div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px"><strong style="font-weight:600">Colour handles.</strong> Accent shapes use <span style="font-family:ui-monospace,monospace;font-size:13.5px">currentColor</span> so a cluster inherits the surrounding UI tone. Skin, cloth and spice tints are literal fills, grouped as <span style="font-family:ui-monospace,monospace;font-size:13.5px">#skin</span>, <span style="font-family:ui-monospace,monospace;font-size:13.5px">#cloth</span> for swap-ability.</div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px"><strong style="font-weight:600">Export.</strong> Inline SVG in the component, viewBox only — no width/height attributes, no baked transforms, no ids from the drawing tool. One file per asset, 2–6 KB each.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">03</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">The six MVP assets</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:22px">
+
+      <div style="padding:26px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:22px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">Asset 1</span>
+          <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:24px">Ajji · the storyteller portrait</span>
+        </div>
+        <div style="display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+            <div style="position:relative;width:152px;height:152px;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;inset:0;border-radius:999px;border:1px solid #DCB9A3;animation:kWave 3.6s ease-out infinite"></div>
+              <div style="position:absolute;inset:8px;border-radius:999px;border:1px solid #DCB9A3;animation:kWave 3.6s ease-out infinite 1.8s"></div>
+              <div style="width:120px;height:120px;border-radius:999px;overflow:hidden;border:1px solid #E0D2BC;background:#EFE4D3;animation:kBreath 6s ease-in-out infinite">
+                <image-slot id="kahaani-ajji-portrait" shape="circle" style="width:120px;height:120px" placeholder="Ajji portrait · 1:1"></image-slot>
+              </div>
+              <div style="position:absolute;right:2px;bottom:6px;width:40px;height:40px;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px -10px rgba(169,78,43,.8)">
+                <span style="font-family:'Material Symbols Rounded';font-size:22px;font-variation-settings:'FILL' 1">mic</span>
+              </div>
+            </div>
+            <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">commission slot · drop art here</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+            <div style="position:relative;width:152px;height:152px;display:flex;align-items:center;justify-content:center">
+              <div style="width:120px;height:120px;border-radius:999px;border:1px solid #E0D2BC;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);animation:kBreath 6s ease-in-out infinite .8s"></div>
+              <div style="position:absolute;right:2px;bottom:6px;width:40px;height:40px;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center">
+                <span style="font-family:'Material Symbols Rounded';font-size:22px;font-variation-settings:'FILL' 1">mic</span>
+              </div>
+            </div>
+            <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">ships today · same rig</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6">
+          <div><strong style="font-weight:600">Purpose</strong> — the one human face in the product; it says a person, not an account.</div>
+          <div><strong style="font-weight:600">Composition</strong> — head and shoulders inside a circle, three-quarter turn, eyes to camera, warm closed-mouth smile, silver hair, spectacles optional, saree pallu crossing one shoulder and breaking the circle's edge. Upright, not stooped; no walking stick, no cupped hands.</div>
+          <div><strong style="font-weight:600">Artboard</strong> — 480×480, subject inside a 400px safe circle; delivered also at 240 and 120.</div>
+          <div><strong style="font-weight:600">Palette</strong> — sand ground, dusty-rose cloth, maroon border, ink line. Three hues, no more.</div>
+          <div><strong style="font-weight:600">Groups</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#ground #torso (#cloth #pallu) #head (#skin #hair #glasses #eye-l #eye-r #mouth)</span>.</div>
+          <div><strong style="font-weight:600">Static</strong> — ground, hair, glasses, mouth. <strong style="font-weight:600">Animated</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#torso</span> breathe 6s, <span style="font-family:ui-monospace,monospace;font-size:13.5px">#eye-*</span> blink on two unequal cycles, <span style="font-family:ui-monospace,monospace;font-size:13.5px">#pallu</span> sway 7s. Rings pulse only while her audio plays.</div>
+          <div><strong style="font-weight:600">Responsive</strong> — 120px in the memory header and elder invite, 46px in list rows (drop rings, keep breathe), 240px in the hero.</div>
+          <div><strong style="font-weight:600">Appears in</strong> — memory page identity, elder invite card, family opening "recently kept".</div>
+        </div>
+      </div>
+
+      <div style="padding:26px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:22px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">Asset 2</span>
+          <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:24px">Opening hero · two people, one story</span>
+        </div>
+        <div style="position:relative;height:270px;border-radius:18px;background:linear-gradient(180deg,#F7EFE3 0%,#F1E4D3 100%);border:1px solid #E6DBCA;overflow:hidden">
+          <div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:#DCC7AC"></div>
+          <div style="position:absolute;left:24px;bottom:22px;width:214px;height:186px;border-radius:16px 16px 0 0;overflow:hidden;border:1px dashed #CDB79A">
+            <image-slot id="kahaani-hero-pair" shape="rect" style="width:214px;height:186px" placeholder="Elder telling · listener beside her"></image-slot>
+          </div>
+          <svg viewBox="0 0 128 80" style="position:absolute;right:26px;top:26px;width:118px;height:74px;animation:kBreath 8s ease-in-out infinite">
+            <g style="opacity:.9">
+              <polygon points="6,36 30,16 54,36" style="fill:#D08A63;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></polygon>
+              <rect x="10" y="36" width="40" height="34" rx="2" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></rect>
+              <rect x="25" y="52" width="12" height="18" rx="1.5" style="fill:none;stroke:#A94E2B;stroke-width:2"></rect>
+              <rect x="15" y="42" width="9" height="8" style="fill:none;stroke:#A94E2B;stroke-width:1.5"></rect>
+            </g>
+            <g style="transform-origin:88px 70px;animation:kSway 9s ease-in-out infinite">
+              <rect x="86" y="50" width="5" height="20" style="fill:#7C3B33"></rect>
+              <circle cx="82" cy="44" r="12" style="fill:#6B8A5A;opacity:.92"></circle>
+              <circle cx="94" cy="40" r="10" style="fill:#6B8A5A;opacity:.92"></circle>
+              <circle cx="99" cy="48" r="9" style="fill:#6B8A5A;opacity:.92"></circle>
+            </g>
+            <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.3"></line>
+          </svg>
+          <svg viewBox="0 0 60 40" style="position:absolute;right:40px;bottom:64px;width:66px;height:44px">
+            <rect x="6" y="10" width="42" height="18" rx="5" style="fill:#EFE4D3;stroke:#5B7C8D;stroke-width:2"></rect>
+            <rect x="12" y="15" width="8" height="7" style="fill:#5B7C8D"></rect>
+            <rect x="24" y="15" width="8" height="7" style="fill:#5B7C8D"></rect>
+            <rect x="36" y="15" width="8" height="7" style="fill:#5B7C8D"></rect>
+            <circle cx="16" cy="31" r="4" style="fill:none;stroke:#5B7C8D;stroke-width:2"></circle>
+            <circle cx="40" cy="31" r="4" style="fill:none;stroke:#5B7C8D;stroke-width:2"></circle>
+          </svg>
+          <svg viewBox="0 0 200 28" style="position:absolute;left:250px;bottom:22px;width:150px;height:22px">
+            <path d="M2 14 q7 -9 14 0 t14 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+            <line x1="34" y1="14" x2="196" y2="14" style="stroke:#241C17;stroke-width:2;stroke-linecap:round;opacity:.28"></line>
+          </svg>
+          <div style="position:absolute;right:22px;top:112px;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7A6858">negative space → wordmark + buttons</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6">
+          <div><strong style="font-weight:600">Purpose</strong> — the opening screen's single emotional statement: someone is telling, someone is listening, and the memories are surfacing around them.</div>
+          <div><strong style="font-weight:600">Composition</strong> — figures anchored bottom-left, grounded on one horizon line; three memory objects (home, tree, bus/train) float upper-right at 40–60% scale, unconnected to the ground; the motif line runs beneath. Top 40% stays empty for the wordmark and tagline; bottom 180px on mobile stays empty for the two buttons.</div>
+          <div><strong style="font-weight:600">Artboard</strong> — 390×300 mobile master, 1200×420 desktop crop with the same figures re-anchored left. Never scale the mobile art up.</div>
+          <div><strong style="font-weight:600">Palette</strong> — sand-to-cream wash, clay lines, one leaf accent, one muted-blue object. Objects sit at 90% opacity so they read as thoughts, not furniture.</div>
+          <div><strong style="font-weight:600">Groups</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#wash #horizon #figures (#elder #listener) #memory-objects (#home #tree #vehicle) #motif</span>.</div>
+          <div><strong style="font-weight:600">Static</strong> — wash, horizon, figures. <strong style="font-weight:600">Animated</strong> — objects drift 8s breathe at staggered delays, <span style="font-family:ui-monospace,monospace;font-size:13.5px">#tree</span> sway 9s, motif dot travels 5.5s once on load. Figures never move; stillness is the point.</div>
+          <div><strong style="font-weight:600">Appears in</strong> — family opening screen (mobile), marketing/desktop landing if one is ever built.</div>
+        </div>
+      </div>
+
+      <div style="padding:26px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:22px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">Asset 3</span>
+          <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:24px">Childhood home cluster</span>
+        </div>
+        <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;padding:18px 20px;background:#F7F2E9;border-radius:16px">
+          <svg viewBox="0 0 128 80" style="width:160px;height:100px">
+            <g>
+              <polygon points="6,36 30,16 54,36" style="fill:#D08A63;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></polygon>
+              <rect x="10" y="36" width="40" height="34" rx="2" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></rect>
+              <rect x="25" y="52" width="12" height="18" rx="1.5" style="fill:none;stroke:#A94E2B;stroke-width:2"></rect>
+              <rect x="15" y="42" width="9" height="8" style="fill:none;stroke:#A94E2B;stroke-width:1.5"></rect>
+            </g>
+            <g>
+              <path d="M60 70 L62 56 Q70 51 78 56 L80 70 Z" style="fill:#DCE3E6;stroke:#5B7C8D;stroke-width:2;stroke-linejoin:round"></path>
+              <ellipse cx="70" cy="55" rx="9" ry="3" style="fill:none;stroke:#5B7C8D;stroke-width:2"></ellipse>
+            </g>
+            <g style="transform-origin:92px 70px;animation:kSway 8s ease-in-out infinite">
+              <rect x="90" y="50" width="5" height="20" style="fill:#7C3B33"></rect>
+              <circle cx="86" cy="44" r="12" style="fill:#6B8A5A;opacity:.92"></circle>
+              <circle cx="98" cy="40" r="10" style="fill:#6B8A5A;opacity:.92"></circle>
+              <circle cx="103" cy="48" r="9" style="fill:#6B8A5A;opacity:.92"></circle>
+            </g>
+            <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.32"></line>
+          </svg>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">city variant · swap #house for #balcony</div>
+            <svg viewBox="0 0 128 80" style="width:150px;height:94px">
+              <rect x="10" y="14" width="46" height="56" rx="3" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></rect>
+              <rect x="18" y="22" width="12" height="12" style="fill:none;stroke:#A94E2B;stroke-width:1.5"></rect>
+              <rect x="36" y="22" width="12" height="12" style="fill:none;stroke:#A94E2B;stroke-width:1.5"></rect>
+              <rect x="14" y="44" width="38" height="18" rx="2" style="fill:#D08A63;stroke:#A94E2B;stroke-width:2"></rect>
+              <line x1="22" y1="44" x2="22" y2="62" style="stroke:#A94E2B;stroke-width:1.5"></line>
+              <line x1="33" y1="44" x2="33" y2="62" style="stroke:#A94E2B;stroke-width:1.5"></line>
+              <line x1="44" y1="44" x2="44" y2="62" style="stroke:#A94E2B;stroke-width:1.5"></line>
+              <g style="transform-origin:70px 70px;animation:kSway 9s ease-in-out infinite 1s">
+                <rect x="64" y="54" width="12" height="16" rx="2" style="fill:#D08A63;stroke:#A94E2B;stroke-width:2"></rect>
+                <circle cx="66" cy="48" r="7" style="fill:#6B8A5A"></circle>
+                <circle cx="75" cy="46" r="6" style="fill:#6B8A5A"></circle>
+              </g>
+              <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.32"></line>
+            </svg>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6">
+          <div><strong style="font-weight:600">Purpose</strong> — marks the Childhood and Places prompts and heads memories about home, in two variants so the product never implies every Indian memory is rural.</div>
+          <div><strong style="font-weight:600">Composition</strong> — three objects on one ground line: house (or balcony façade), steel water vessel, potted tree. Town version gets the pitched roof; city version gets the railing and a plant on the parapet.</div>
+          <div><strong style="font-weight:600">Artboard</strong> — 128×80, used at 96–160 wide. Under 96px drop the vessel.</div>
+          <div><strong style="font-weight:600">Palette</strong> — clay line, clay-light roof, muted-blue steel, leaf plant, sand fill. 11 paths.</div>
+          <div><strong style="font-weight:600">Groups</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#house | #balcony, #vessel, #tree, #ground</span>. <strong style="font-weight:600">Animated</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#tree</span> only, sway 8s ±2.2°, origin at the trunk base. Everything else still.</div>
+          <div><strong style="font-weight:600">Appears in</strong> — prompt screen above the question, memory header for "places" memories, empty family space.</div>
+        </div>
+      </div>
+
+      <div style="padding:26px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:22px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">Asset 4</span>
+          <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:24px">Kitchen &amp; recipe cluster</span>
+        </div>
+        <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;padding:18px 20px;background:#F7F2E9;border-radius:16px">
+          <svg viewBox="0 0 128 80" style="width:170px;height:106px">
+            <g>
+              <circle cx="28" cy="46" r="22" style="fill:#EFE4D3;stroke:#A94E2B;stroke-width:2"></circle>
+              <circle cx="28" cy="46" r="6" style="fill:#C99A3E"></circle>
+              <circle cx="28" cy="34" r="5.5" style="fill:#7C3B33"></circle>
+              <circle cx="38" cy="40" r="5.5" style="fill:#C99A3E"></circle>
+              <circle cx="38" cy="52" r="5.5" style="fill:#6B8A5A"></circle>
+              <circle cx="28" cy="58" r="5.5" style="fill:#A94E2B"></circle>
+              <circle cx="18" cy="52" r="5.5" style="fill:#C99A3E"></circle>
+              <circle cx="18" cy="40" r="5.5" style="fill:#7C3B33"></circle>
+            </g>
+            <g>
+              <path d="M60 44 A16 16 0 0 0 92 44 Z" style="fill:#DCE3E6;stroke:#5B7C8D;stroke-width:2;stroke-linejoin:round"></path>
+              <line x1="58" y1="44" x2="94" y2="44" style="stroke:#5B7C8D;stroke-width:2;stroke-linecap:round"></line>
+              <circle cx="56" cy="44" r="4" style="fill:none;stroke:#5B7C8D;stroke-width:2"></circle>
+              <circle cx="96" cy="44" r="4" style="fill:none;stroke:#5B7C8D;stroke-width:2"></circle>
+            </g>
+            <g>
+              <g style="animation:kSteam 3s ease-out infinite">
+                <path d="M107 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+              </g>
+              <g style="animation:kSteam 3s ease-out infinite 0.5s">
+                <path d="M112 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+              </g>
+              <g style="animation:kSteam 3s ease-out infinite 1s">
+                <path d="M117 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+              </g>
+              <path d="M102 52 L104 70 L120 70 L122 52 Z" style="fill:#E4B7A6;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></path>
+            </g>
+            <line x1="4" y1="70" x2="124" y2="70" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round;opacity:.32"></line>
+          </svg>
+          <div style="font-size:14.5px;line-height:1.65;color:#5C4E44;max-width:200px">Recipe variant swaps the chai glass for a ruled paper rotated −4°, three ink lines drawn in with <span style="font-family:ui-monospace,monospace;font-size:13px">kSettleLine</span>.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6">
+          <div><strong style="font-weight:600">Purpose</strong> — the Recipes prompt and every food memory; the most-requested category in Indian families and the one that must feel lived-in rather than branded.</div>
+          <div><strong style="font-weight:600">Composition</strong> — masala dabba face-on (seven katoris, spice tints), kadai in profile with two ring handles, chai glass with steam. Nothing garnished, no restaurant plating.</div>
+          <div><strong style="font-weight:600">Artboard</strong> — 128×80. Dabba alone works as a 32px category icon.</div>
+          <div><strong style="font-weight:600">Palette</strong> — mustard, maroon, clay spices; muted-blue steel; dusty-rose glass. 17 paths.</div>
+          <div><strong style="font-weight:600">Groups</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#dabba (#katori-1…7) #kadai #chai (#steam-1 #steam-2 #steam-3) #ground</span>.</div>
+          <div><strong style="font-weight:600">Static</strong> — dabba, kadai, glass. <strong style="font-weight:600">Animated</strong> — three steam paths only: 3s rise-and-fade, 0.5s stagger, never synchronised.</div>
+          <div><strong style="font-weight:600">Appears in</strong> — prompt screen (Recipes), recipe memory headers, "Words from her story" when the word is a dish.</div>
+        </div>
+      </div>
+
+      <div style="padding:26px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:22px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">Asset 5</span>
+          <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:24px">Listening visual</span>
+        </div>
+        <div style="display:flex;gap:30px;align-items:center;flex-wrap:wrap;padding:22px;background:#F7F2E9;border-radius:16px">
+          <svg viewBox="-80 -80 160 160" style="width:170px;height:170px;flex:none">
+            <circle cx="0" cy="0" r="52" style="fill:none;stroke:#DCB9A3;stroke-width:1.5;animation:kWave 3s ease-out infinite"></circle>
+            <circle cx="0" cy="0" r="52" style="fill:none;stroke:#DCB9A3;stroke-width:1.5;animation:kWave 3s ease-out infinite 1.5s"></circle>
+            <circle cx="0" cy="0" r="40" style="fill:#A94E2B"></circle>
+            <g style="stroke:#FFF3EA;stroke-width:3;stroke-linecap:round;fill:none">
+              <rect x="-5.5" y="-19" width="11" height="22" rx="5.5" style="fill:#FFF3EA;stroke:none"></rect>
+              <path d="M-11 -2 A11 11 0 0 0 11 -2"></path>
+              <line x1="0" y1="9" x2="0" y2="17"></line>
+              <line x1="-7" y1="17" x2="7" y2="17"></line>
+            </g>
+          </svg>
+          <div style="display:flex;align-items:center;gap:3px;height:96px;color:#C99A7C;flex:1;min-width:180px">
+            <div style="width:5px;height:26px;border-radius:4px;background:currentColor;animation:kBreath .7s ease-in-out infinite alternate"></div>
+            <div style="width:5px;height:58px;border-radius:4px;background:currentColor;animation:kBreath .9s ease-in-out .1s infinite alternate"></div>
+            <div style="width:5px;height:38px;border-radius:4px;background:currentColor;animation:kBreath .6s ease-in-out .2s infinite alternate"></div>
+            <div style="width:5px;height:80px;border-radius:4px;background:currentColor;animation:kBreath 1s ease-in-out .3s infinite alternate"></div>
+            <div style="width:5px;height:44px;border-radius:4px;background:currentColor;animation:kBreath .8s ease-in-out .4s infinite alternate"></div>
+            <div style="width:5px;height:66px;border-radius:4px;background:currentColor;animation:kBreath .75s ease-in-out .5s infinite alternate"></div>
+            <div style="width:5px;height:30px;border-radius:4px;background:currentColor;animation:kBreath .95s ease-in-out .15s infinite alternate"></div>
+            <div style="width:5px;height:52px;border-radius:4px;background:currentColor;animation:kBreath .68s ease-in-out .25s infinite alternate"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6">
+          <div><strong style="font-weight:600">Purpose</strong> — says "Kahaani is listening", never "a device is recording". No bouncing equaliser, no red.</div>
+          <div><strong style="font-weight:600">Composition</strong> — filled clay disc, four-path microphone in cream, two rings expanding outward and fading. Waveform sits below as a separate row of 28–40 bars so it can be driven by real levels later.</div>
+          <div><strong style="font-weight:600">Artboard</strong> — 160×160 centred viewBox (−80 −80 160 160), rendered 116–172px. Bars are DOM divs, not SVG, so amplitude can bind to state.</div>
+          <div><strong style="font-weight:600">Palette</strong> — clay disc, cream mic, clay-light rings, clay-tinted bars. One hue.</div>
+          <div><strong style="font-weight:600">Static</strong> — disc and mic. <strong style="font-weight:600">Animated</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#ring-1/2</span> 3s ease-out, 1.5s offset; bars 0.6–1s alternate with 0.09s stagger. Idle state: rings off, bars flat at 12%.</div>
+          <div><strong style="font-weight:600">Appears in</strong> — elder recording screen (116px), family recording screen (132px), and the same rings at 8px around a playing avatar.</div>
+        </div>
+      </div>
+
+      <div style="padding:26px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:22px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">Asset 6</span>
+          <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:24px">A memory appears</span>
+        </div>
+        <div style="display:flex;justify-content:center;padding:22px;background:#F7F2E9;border-radius:16px">
+          <svg viewBox="0 0 200 120" style="width:260px;height:156px">
+            <g style="transform-origin:100px 60px;animation:kSettleBars 4.2s ease-in-out infinite">
+              <rect x="58" y="46" width="5" height="28" rx="2.5" style="fill:#A94E2B"></rect>
+              <rect x="70" y="36" width="5" height="48" rx="2.5" style="fill:#A94E2B"></rect>
+              <rect x="82" y="50" width="5" height="20" rx="2.5" style="fill:#A94E2B"></rect>
+              <rect x="94" y="30" width="5" height="60" rx="2.5" style="fill:#A94E2B"></rect>
+              <rect x="106" y="44" width="5" height="32" rx="2.5" style="fill:#A94E2B"></rect>
+              <rect x="118" y="38" width="5" height="44" rx="2.5" style="fill:#A94E2B"></rect>
+              <rect x="130" y="52" width="5" height="16" rx="2.5" style="fill:#A94E2B"></rect>
+            </g>
+            <g style="transform-origin:100px 60px;animation:kSettleCard 4.2s ease-in-out infinite">
+              <rect x="50" y="24" width="100" height="72" rx="10" style="fill:#FFFDF8;stroke:#A94E2B;stroke-width:2"></rect>
+              <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite">
+                <rect x="62" y="42" width="60" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect>
+              </g>
+              <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite .12s">
+                <rect x="62" y="54" width="76" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect>
+              </g>
+              <g style="transform-origin:62px 0;animation:kSettleLine 4.2s ease-in-out infinite .24s">
+                <rect x="62" y="66" width="48" height="3" rx="1.5" style="fill:#241C17;opacity:.5"></rect>
+              </g>
+              <path d="M62 80 q5 -6 10 0 t10 0" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+            </g>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6">
+          <div><strong style="font-weight:600">Purpose</strong> — the "Keeping this memory…" state. Her voice becoming something the family can hold. Replaces every spinner in the product.</div>
+          <div><strong style="font-weight:600">Composition</strong> — seven waveform bars collapse toward the centre as a card rises behind them; three ruled lines draw left-to-right; the motif's small wave stays at the card's foot, so the finished memory still shows a voice inside it.</div>
+          <div><strong style="font-weight:600">Artboard</strong> — 200×120, rendered 200–260 wide.</div>
+          <div><strong style="font-weight:600">Palette</strong> — clay bars and outline, ink ruled lines at 50%, cream card. One hue.</div>
+          <div><strong style="font-weight:600">Groups</strong> — <span style="font-family:ui-monospace,monospace;font-size:13.5px">#bars #card (#rule-1..3 #wave)</span>. Timing: 4.2s cycle — bars hold to 40%, collapse by 70%; card fades 45→75%; rules draw 55→85% at 0.12s stagger.</div>
+          <div><strong style="font-weight:600">Production</strong> — plays once and holds on the card when the memory is ready; loops only while still working. On failure the card outline turns dashed and the bars stay — nothing was lost.</div>
+          <div><strong style="font-weight:600">Appears in</strong> — family "Keeping the memory" screen, elder "Keeping your story…" screen.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">04</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Motion lab — six patterns, all of them shy</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="height:96px;display:flex;align-items:flex-end;justify-content:center">
+          <div style="width:64px;height:80px;border-radius:32px 32px 8px 8px;background:#E4B7A6;border:2px solid #A94E2B;animation:kBreath 6s ease-in-out infinite"></div>
+        </div>
+        <div style="font-size:15.5px;font-weight:600">1 · Breathing</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#5C4E44"><span style="font-family:ui-monospace,monospace;font-size:13px">translateY 0 → −3px, 6s ease-in-out infinite</span>. Applied to <span style="font-family:ui-monospace,monospace;font-size:13px">#torso</span> and to floating memory objects at 8s. If you can see it happening, it is too much.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="height:96px;display:flex;align-items:center;justify-content:center">
+          <div style="width:96px;height:64px;border-radius:999px;background:#EFE4D3;border:1px solid #E0D2BC;display:flex;align-items:center;justify-content:center;gap:16px">
+            <div style="width:16px;height:7px;border-radius:999px;background:#241C17;animation:kBlinkA 6.2s ease-in-out infinite"></div>
+            <div style="width:16px;height:7px;border-radius:999px;background:#241C17;animation:kBlinkB 7.9s ease-in-out infinite"></div>
+          </div>
+        </div>
+        <div style="font-size:15.5px;font-weight:600">2 · Blink</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#5C4E44"><span style="font-family:ui-monospace,monospace;font-size:13px">scaleY 1 → .08</span> for ~90ms at 95% of a 6.2s / 7.9s cycle. Coprime durations per character so two people never blink together.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="height:96px;display:flex;align-items:flex-end;justify-content:center">
+          <svg viewBox="0 0 60 80" style="width:60px;height:80px">
+            <g style="animation:kSteam 3s ease-out infinite">
+              <path d="M24 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+            </g>
+            <g style="animation:kSteam 3s ease-out infinite 0.5s">
+              <path d="M30 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+            </g>
+            <g style="animation:kSteam 3s ease-out infinite 1s">
+              <path d="M36 48 c4 -5 -4 -9 0 -14 c3 -4 -2 -6 0 -8" fill="none" style="stroke:#A94E2B;stroke-width:2;stroke-linecap:round"></path>
+            </g>
+            <path d="M18 52 L21 74 L39 74 L42 52 Z" style="fill:#E4B7A6;stroke:#A94E2B;stroke-width:2;stroke-linejoin:round"></path>
+          </svg>
+        </div>
+        <div style="font-size:15.5px;font-weight:600">3 · Chai steam</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#5C4E44">Three S-curved paths, <span style="font-family:ui-monospace,monospace;font-size:13px">translateY −18px + opacity 0→.8→0, 3s</span>, staggered 0.5s so two wisps overlap. Only in kitchen and family scenes; never more than three paths.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="height:96px;display:flex;align-items:flex-end;justify-content:center">
+          <svg viewBox="0 0 60 80" style="width:60px;height:80px">
+            <g style="transform-origin:30px 74px;animation:kSway 8s ease-in-out infinite">
+              <rect x="27" y="46" width="5" height="28" style="fill:#7C3B33"></rect>
+              <circle cx="24" cy="40" r="12" style="fill:#6B8A5A"></circle>
+              <circle cx="36" cy="36" r="9" style="fill:#6B8A5A"></circle>
+            </g>
+          </svg>
+        </div>
+        <div style="font-size:15.5px;font-weight:600">4 · Leaves</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#5C4E44"><span style="font-family:ui-monospace,monospace;font-size:13px">rotate ±2.2°, 8s, transform-origin at the trunk base</span>. One plant per scene, and never in the same scene as steam.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="height:96px;display:flex;align-items:center;justify-content:center">
+          <div style="position:relative;width:80px;height:80px;display:flex;align-items:center;justify-content:center">
+            <div style="position:absolute;inset:8px;border-radius:999px;border:1.5px solid #DCB9A3;animation:kWave 2.8s ease-out infinite"></div>
+            <div style="position:absolute;inset:8px;border-radius:999px;border:1.5px solid #DCB9A3;animation:kWave 2.8s ease-out infinite 1.4s"></div>
+            <div style="width:44px;height:44px;border-radius:999px;background:#A94E2B;color:#FFF3EA;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:22px;font-variation-settings:'FILL' 1">graphic_eq</span></div>
+          </div>
+        </div>
+        <div style="font-size:15.5px;font-weight:600">5 · Memory waves</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#5C4E44"><span style="font-family:ui-monospace,monospace;font-size:13px">scale .72→1.5, opacity .5→0, 2.8s ease-out</span>, two rings 1.4s apart. Runs <em style="font-style:italic">only</em> while a voice is playing or recording — it is the product's heartbeat, so it must mean something.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="height:96px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 120 80" style="width:120px;height:80px">
+            <g style="transform-origin:60px 40px;animation:kSettleBars 4.2s ease-in-out infinite">
+              <rect x="40" y="30" width="4" height="24" rx="2" style="fill:#A94E2B"></rect>
+              <rect x="50" y="22" width="4" height="40" rx="2" style="fill:#A94E2B"></rect>
+              <rect x="60" y="34" width="4" height="16" rx="2" style="fill:#A94E2B"></rect>
+              <rect x="70" y="26" width="4" height="32" rx="2" style="fill:#A94E2B"></rect>
+            </g>
+            <g style="transform-origin:60px 40px;animation:kSettleCard 4.2s ease-in-out infinite">
+              <rect x="34" y="18" width="52" height="44" rx="7" style="fill:#FFFDF8;stroke:#A94E2B;stroke-width:2"></rect>
+              <g style="transform-origin:42px 0;animation:kSettleLine 4.2s ease-in-out infinite"><rect x="42" y="30" width="30" height="2.5" rx="1.2" style="fill:#241C17;opacity:.5"></rect></g>
+              <g style="transform-origin:42px 0;animation:kSettleLine 4.2s ease-in-out infinite .12s"><rect x="42" y="39" width="36" height="2.5" rx="1.2" style="fill:#241C17;opacity:.5"></rect></g>
+              <g style="transform-origin:42px 0;animation:kSettleLine 4.2s ease-in-out infinite .24s"><rect x="42" y="48" width="22" height="2.5" rx="1.2" style="fill:#241C17;opacity:.5"></rect></g>
+            </g>
+          </svg>
+        </div>
+        <div style="font-size:15.5px;font-weight:600">6 · A memory appears</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#5C4E44">The only narrative animation in the system, and the only one allowed to run longer than 4s. Plays once per saved memory; loops solely while work is still happening.</div>
+      </div>
+    </div>
+    <div style="padding:20px 22px;background:#F1E9DA;border-radius:16px;font-size:15.5px;line-height:1.7;color:#3D3129">Global rules: transforms and opacity only — never width, top or filters. One looping animation per screen region, maximum two on screen. Everything stops under <span style="font-family:ui-monospace,monospace;font-size:13.5px">prefers-reduced-motion</span> (this page included) and the assets must read perfectly frozen, because that is how they will be seen in a screenshot, a PDF and on a throttled phone.</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">05</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Character family — spec, not stereotype</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:16.5px;line-height:1.65;color:#5C4E44;max-width:760px">One rig, eight people, no interchangeable grandmothers. Each character is defined by two differentiators an illustrator cannot ignore — a silhouette cue and a posture cue — so they stay distinct at 46px. Nobody is drawn frail, nobody is drawn comic. Only Ajji is commissioned for the hackathon; the rest are written down.</div>
+    <div style="border:1px solid #E6DBCA;border-radius:18px;overflow:hidden;background:#FFFDF8">
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:14px 22px;background:#F1E9DA;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858"><div>Character</div><div>Silhouette cue</div><div>Posture / expression</div><div>Prop</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Ajji / Dadi</div><div>Cotton saree, pallu over the left shoulder, bun low at the neck</div><div>Squarely upright, hands settled in the lap, closed-mouth smile</div><div>Spectacles</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Nani</div><div>Silk-bordered saree, pallu pleated at the front, short wavy hair</div><div>Leaning slightly in, mid-sentence, one hand raised</div><div>Bangles</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Dadaji</div><div>Kurta over pyjama, waistcoat in winter, full silver hair</div><div>Broad-shouldered, chin level, warm authority</div><div>Folded newspaper</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Nanaji</div><div>Half-sleeve shirt tucked into trousers, thinner face, moustache</div><div>Seated sideways, elbow on the armrest, amused</div><div>Wristwatch, radio</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Amma / Maa</div><div>Salwar kameez or saree, dupatta over one shoulder, plait</div><div>Mid-movement, half-turned as if called from the kitchen</div><div>Steel tumbler</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Papa</div><div>Short-sleeve shirt, trousers, receding hairline, no beard</div><div>Hands on knees, leaning forward to listen</div><div>Office bag</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Adult child</div><div>Kurta with jeans, or a plain tee; hair tied up</div><div>Cross-legged on the floor beside the elder, phone face-down</div><div>Phone, recording</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.3fr 1.2fr .9fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div style="font-weight:600">Grandchild</div><div>Shorts or frock, two small plaits or cropped hair, smallest silhouette</div><div>Chin on the elder's knee, looking up</div><div>None</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Adaptable by design</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span style="width:40px;height:40px;border-radius:999px;background:#F0D5C0;border:1px solid #E0D2BC"></span>
+          <span style="width:40px;height:40px;border-radius:999px;background:#E0B693;border:1px solid #D6BFA6"></span>
+          <span style="width:40px;height:40px;border-radius:999px;background:#C68F63;border:1px solid #B98455"></span>
+          <span style="width:40px;height:40px;border-radius:999px;background:#9E6A42;border:1px solid #8F5E38"></span>
+          <span style="width:40px;height:40px;border-radius:999px;background:#71482C;border:1px solid #623F26"></span>
+        </div>
+        <div style="font-size:15px;line-height:1.65;color:#3D3129">Skin is a five-step ramp on a single <span style="font-family:ui-monospace,monospace;font-size:13px">#skin</span> group, so any character can be re-tinted with one fill change. Drapes ship as three variants (Kannada/Tamil pleating, Bengali, salwar-dupatta); hair as four; body as three widths on the same skeleton. Headscarf, topi, turban and cross are available accessory groups — added when a family's story asks for them, never as default decoration.</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">The rig every character shares</div>
+        <div style="font-size:15px;line-height:1.8;color:#3D3129"><span style="font-family:ui-monospace,monospace;font-size:13.5px">#ground</span> static · <span style="font-family:ui-monospace,monospace;font-size:13.5px">#torso</span> breathe 6s · <span style="font-family:ui-monospace,monospace;font-size:13.5px">#head</span> static · <span style="font-family:ui-monospace,monospace;font-size:13.5px">#eye-l #eye-r</span> blink on unequal cycles · <span style="font-family:ui-monospace,monospace;font-size:13.5px">#pallu | #dupatta | #sleeve</span> sway 7–9s · <span style="font-family:ui-monospace,monospace;font-size:13.5px">#prop</span> static. Mouths never animate — no lip-sync, ever: the voice is real, the drawing should not pretend to speak it.</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">What to hand an illustrator</div>
+        <div style="font-size:15px;line-height:1.7;color:#3D3129">This page, the palette hexes, the two differentiator columns for their character, the 480×480 artboard with the 400px safe circle, the layer-id list, the path budget, and one instruction: <em style="font-style:italic">draw someone's actual grandmother, at rest, with her attention on the person listening.</em> Acceptance: reads at 46px, ≤60 paths, ids intact, no baked transforms, sits happily on #F7F2E9.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">06</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Memory worlds — object inventory</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:16.5px;line-height:1.65;color:#5C4E44;max-width:760px">Worlds are built from clusters of three, never full scenes. Two are drawn (03, 04); the rest are specified here and drawn as the product earns them. Every world carries a town/city split so the product never suggests Indian memory is only rural — and no world leads with a monument.</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;font-size:15px;line-height:1.7">
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">1 · Childhood home <span style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4E6B4A">drawn</span></div><div style="color:#3D3129">verandah · courtyard · wooden window · trunk · charpai · steel vessel · plants · balcony · staircase · terrace · doorway. Town: pitched roof, jaguli. City: railing, parapet plant, grille.</div></div>
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">2 · Street &amp; lane</div><div style="color:#3D3129">bicycle · tree · lane · shop shutter · distant house · school path · birds · evening light as a single warm wash. Three objects maximum; no poster skyline.</div></div>
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">3 · Kitchen &amp; recipes <span style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4E6B4A">drawn</span></div><div style="color:#3D3129">masala dabba · belan &amp; chakla · steel utensils · pressure cooker · chai glass · kadai · serving bowl · handwritten recipe · spice jars.</div></div>
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">4 · School days</div><div style="color:#3D3129">school bag · notebook · fountain pen · slate for the oldest generation · bench · lunch box · bell · bicycle.</div></div>
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">5 · First salary &amp; work</div><div style="color:#3D3129">office bag · pay envelope · ledger · typewriter only when period-true · bus ticket · train pass · desk lamp · wristwatch.</div></div>
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">6 · Travel</div><div style="color:#3D3129">coach silhouette with three windows — generic, no livery or logo · station bench · suitcase · steel tiffin · platform clock · window view. The richest world; build it second.</div></div>
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">7 · Festivals <span style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">modular</span></div><div style="color:#3D3129">diya · rangoli arc · marigold string · lantern · thali · string lights · gift. Assembled per story, never a default festive skin, never one faith's set as "Indian".</div></div>
+      <div style="padding:20px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px"><div style="font-weight:600;padding-bottom:6px">8 · City memories</div><div style="color:#3D3129">double-decker or route bus · balcony · market crate · park bench · old shop board · bicycle · monsoon puddle · low apartment block. Bengaluru, Mysuru, Mumbai, Kolkata, Chennai, Delhi, Lucknow, Pune, Hyderabad get local cues — a tram wire, a hill road — not landmarks.</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,monospace;font-size:12px;color:#A94E2B">07</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Where it lands in the product</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="border:1px solid #E6DBCA;border-radius:18px;overflow:hidden;background:#FFFDF8">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:14px 22px;background:#F1E9DA;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858"><div>Screen</div><div>Asset</div><div>Rule</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div>Family opening</div><div>Hero (2)</div><div style="color:#5C4E44">Behind the wordmark, above the buttons. Never overlaps text.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div>Story prompt</div><div>Cluster (3, 4)</div><div style="color:#5C4E44">One cluster per category, 96–128px, above the question. Swaps with the category.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div>Elder invite</div><div>Portrait (1) + mic badge</div><div style="color:#5C4E44">One warm visual only. No memory objects — nothing to interpret before speaking.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div>Recording (both modes)</div><div>Listening visual (5)</div><div style="color:#5C4E44">Rings only while the mic is live. Idle shows the disc alone.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div>Keeping the memory</div><div>Memory appears (6)</div><div style="color:#5C4E44">Replaces the spinner. Holds on the card when done; dashes on failure.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div>Memory page</div><div>Portrait (1) + motif</div><div style="color:#5C4E44">Portrait at 54px with waves while playing; motif divides hearing from reading. No illustration near the transcript — her words are the image.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;line-height:1.5"><div>Empty family space</div><div>Cluster (3)</div><div style="color:#5C4E44">One cluster, one line of copy, one button. No "nothing here yet" drawing.</div></div>
+    </div>
+    <div style="padding:20px 22px;background:#F1E9DA;border-radius:16px;font-size:15.5px;line-height:1.7;color:#3D3129">Density ceiling: <strong style="font-weight:600">one illustration per screen.</strong> If a cluster and a portrait both want to appear, the portrait wins — a person outranks their objects. Total weight budget for all six assets inline: under 20 KB, no requests.</div>
+  </div>
+
+</div>
+</div>
+
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Kannada:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Kannada:wght@400;500;600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F7F2E9;color:#241C17;font-family:'Hanken Grotesk',ui-sans-serif,system-ui,'Noto Sans Devanagari','Noto Sans Kannada',sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,pre{margin:0}
+button{font:inherit;color:inherit;border:0;background:none;text-align:left}
+a{color:#A94E2B;text-decoration:none}
+a:hover{color:#8A3F21}
+@keyframes kBar{0%{transform:scaleY(.18)}100%{transform:scaleY(1)}}
+@keyframes kRing{0%{transform:scale(.82);opacity:.55}70%{opacity:0}100%{transform:scale(1.5);opacity:0}}
+@keyframes kBreathe{0%,100%{transform:scale(.94);opacity:.75}50%{transform:scale(1.04);opacity:1}}
+@keyframes kSpin{to{transform:rotate(360deg)}}
+@keyframes kDot{0%,100%{opacity:.35}50%{opacity:1}}
+</style>
+</helmet>
+
+<div style="padding:56px 40px 96px;background:radial-gradient(120% 60% at 50% 0%,#FBF7EF 0%,#F3EDE1 100%)">
+<div style="max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:76px">
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Kahaani · design system &amp; handoff · v1 hackathon</div>
+    <div style="font-family:'Tiro Devanagari Hindi','Tiro Kannada',Georgia,serif;font-size:46px;line-height:1.1;letter-spacing:-.02em;max-width:760px;text-wrap:pretty">One warm, quiet system — built so a voice stays the loudest thing on the screen.</div>
+    <div style="font-size:18px;line-height:1.6;color:#5C4E44;max-width:660px;text-wrap:pretty">Everything here is already used in <a href="Kahaani Prototype.dc.html">the interactive prototype</a>. Tokens are literal values, not a theming layer — a hackathon build can copy them into one <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px">tokens.ts</span> and ship.</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">01</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Colour</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:16.5px;line-height:1.6;color:#5C4E44;max-width:720px">Two neutral ranges (warm paper, warm ink) and exactly two hues with meaning: <strong style="font-weight:600;color:#A94E2B">voice</strong> for anything that is the person's own recording or the act of recording, and <strong style="font-weight:600;color:#33566A">translation</strong> for anything a machine produced. A listener should be able to tell the two apart with the sound off.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:22px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#F7F2E9;border:1px solid #E6DBCA"></div>
+        <div style="font-size:15px;font-weight:600">paper</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#F7F2E9</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">App background, every screen</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#FFFDF8;border:1px solid #E6DBCA"></div>
+        <div style="font-size:15px;font-weight:600">surface</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#FFFDF8</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Players, cards, question card</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#F1E9DA;border:1px solid #E6DBCA"></div>
+        <div style="font-size:15px;font-weight:600">surface-sunk</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#F1E9DA</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Switcher track, glossary, hover</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#EAE1D2;border:1px solid #E6DBCA"></div>
+        <div style="font-size:15px;font-weight:600">canvas</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#EAE1D2</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Outside the app frame · desktop desk</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#241C17"></div>
+        <div style="font-size:15px;font-weight:600">ink</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#241C17 · 15:1</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Titles, story text, stop button</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#5C4E44"></div>
+        <div style="font-size:15px;font-weight:600">ink-2</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#5C4E44 · 7.2:1</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Body copy, reassurance lines</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#7A6858"></div>
+        <div style="font-size:15px;font-weight:600">ink-muted</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#7A6858 · 4.8:1</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Meta, eyebrows — smallest text allowed</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#8B7A6C"></div>
+        <div style="font-size:15px;font-weight:600">ink-faint</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#8B7A6C · 3.7:1</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Separators, decorative only — never body text</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#A94E2B"></div>
+        <div style="font-size:15px;font-weight:600">voice</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#A94E2B</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Record, her original voice, primary action</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#F3E1D5;border:1px solid #DCB9A3"></div>
+        <div style="font-size:15px;font-weight:600">voice-wash / edge</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#F3E1D5 · #DCB9A3</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Mic target, recording chip, played waveform bed</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#33566A"></div>
+        <div style="font-size:15px;font-weight:600">translation</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#33566A</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Reading voice, "From Kannada", dubbed audio</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#F5F8F9;border:1px solid #DFE7EA"></div>
+        <div style="font-size:15px;font-weight:600">translation-wash / edge</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#F5F8F9 · #DFE7EA</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Translated blocks, unavailable state (dashed)</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#4E6B4A"></div>
+        <div style="font-size:15px;font-weight:600">success</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#4E6B4A</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">"Her voice is saved" tick only — never a banner</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#93362A"></div>
+        <div style="font-size:15px;font-weight:600">error</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#93362A · wash #F6E4DF</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">Recording failure. Never used for the record button</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:74px;border-radius:14px;background:#E6DBCA"></div>
+        <div style="font-size:15px;font-weight:600">hairline / border</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;color:#7A6858">#E6DBCA · #DCCDB8</div>
+        <div style="font-size:14px;line-height:1.5;color:#5C4E44">1px dividers · 1.5px interactive outlines</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">02</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Typography</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:16.5px;line-height:1.6;color:#5C4E44;max-width:720px">One superfamily does the storytelling in every script, so a Kannada memory and an English translation have the same voice on the page. <strong style="font-weight:600">Tiro</strong> covers Devanagari, Kannada, Bangla, Gurmukhi, Tamil and Telugu; Noto Serif fills Gujarati, Malayalam and Odia. UI text is a neutral grotesk with Noto Sans script siblings.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Story · Tiro Devanagari Hindi</div>
+        <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px;line-height:1.3">Summer evenings in Mysuru</div>
+        <div style="font-family:'Tiro Devanagari Hindi','Noto Sans Devanagari',serif;font-size:24px;line-height:1.6">मैसूर की गर्मियों की शामें</div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Latin + Devanagari from one file. Devanagari needs line-height ≥ 1.6 at body sizes for its matras.</div>
+      </div>
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Story · Tiro Kannada</div>
+        <div style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:30px;line-height:1.45">ಮೈಸೂರಿನ ಬೇಸಿಗೆ ಸಂಜೆಗಳು</div>
+        <div style="font-family:'Tiro Kannada','Noto Sans Kannada',serif;font-size:20px;line-height:1.85">ಸಂಜೆ ಆದ ಮೇಲೆ ಎಲ್ಲರೂ ಜಗುಲಿ ಮೇಲೆ ಕೂತ್ಕೊಳ್ತಿದ್ವಿ.</div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Kannada carries taller ascenders and vowel signs — 1.85 line-height in transcripts, 1.45 in titles.</div>
+      </div>
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">UI · Hanken Grotesk</div>
+        <div style="font-size:26px;font-weight:600">Record a memory</div>
+        <div style="font-size:16.5px;line-height:1.5;color:#5C4E44">Take your time. Nothing is shared until you say so. 0123456789</div>
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:24px;letter-spacing:.04em;font-variant-numeric:tabular-nums">0:14 / 2:14</div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Timers and durations use the system mono at tabular figures so digits never jump.</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #E6DBCA;border-radius:18px;overflow:hidden;background:#FFFDF8">
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:14px 22px;background:#F1E9DA;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">
+        <div>Role</div><div>Size / line</div><div>Family</div><div>Where</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Wordmark</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">52 / 1.0</div><div>Tiro</div><div style="color:#5C4E44">Opening screen only</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Memory title</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">33 / 1.25 · 31 / 1.4 non-Latin</div><div>Tiro</div><div style="color:#5C4E44">Memory page, desktop steps to 40</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Question</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">31 / 1.28</div><div>Tiro</div><div style="color:#5C4E44">Prompt screen; 19 / 1.4 when carried into recording</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Story body</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">20 / 1.8 en · 1.85 kn · 1.95 hi</div><div>Tiro</div><div style="color:#5C4E44">Transcripts, translations</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">UI body</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">16.5 / 1.5</div><div>Grotesk</div><div style="color:#5C4E44">Reassurance copy, error explanations</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Button label</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">18.5 / 1 · 600</div><div>Grotesk</div><div style="color:#5C4E44">Primary; 17.5 secondary; 15 chips</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Eyebrow</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">13 / 1 · 600 · .14em caps</div><div>Grotesk</div><div style="color:#5C4E44">"Her original voice", "From Kannada"</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Meta / caption</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">13.5–14 / 1.5</div><div>Grotesk</div><div style="color:#5C4E44">Date · place · duration, player captions</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Timer</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">36 / 1 · tabular</div><div>Mono</div><div style="color:#5C4E44">Recording elapsed; 12.5 in players</div></div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Structural label</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">12 / 1 · .13em caps</div><div>Mono</div><div style="color:#5C4E44">"The Rao family", "14 memories" — the floor. Nothing smaller ships.</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">03</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Space, shape, depth</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Spacing · base 2 / step 4</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:6px;height:14px;background:#DCB9A3"></span><span style="font-size:14.5px;color:#5C4E44">6 · icon to label</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:10px;height:14px;background:#DCB9A3"></span><span style="font-size:14.5px;color:#5C4E44">10 · stacked buttons</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:14px;height:14px;background:#DCB9A3"></span><span style="font-size:14.5px;color:#5C4E44">14 · inside a player row</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:18px;height:14px;background:#DCB9A3"></span><span style="font-size:14.5px;color:#5C4E44">18 · card padding</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:22px;height:14px;background:#DCB9A3"></span><span style="font-size:14.5px;color:#5C4E44">22 · screen gutter (fixed)</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:26px;height:14px;background:#DCB9A3"></span><span style="font-size:14.5px;color:#5C4E44">26 · section break</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:44px;height:14px;background:#DCB9A3"></span><span style="font-size:14.5px;color:#5C4E44">44 · desktop gutter · 72 column gap</span></div>
+        </div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Safe areas: 56 top (status bar), 30 bottom (home indicator). Layout is flex/grid with <span style="font-family:ui-monospace,monospace;font-size:13px">gap</span> — no margin stacks.</div>
+      </div>
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Radii</div>
+        <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap">
+          <div style="width:56px;height:44px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:10px;display:flex;align-items:flex-end;justify-content:center;font-family:ui-monospace,monospace;font-size:11px;color:#7A6858;padding-bottom:4px">10</div>
+          <div style="width:56px;height:44px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:16px;display:flex;align-items:flex-end;justify-content:center;font-family:ui-monospace,monospace;font-size:11px;color:#7A6858;padding-bottom:4px">16</div>
+          <div style="width:56px;height:44px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:18px;display:flex;align-items:flex-end;justify-content:center;font-family:ui-monospace,monospace;font-size:11px;color:#7A6858;padding-bottom:4px">18</div>
+          <div style="width:56px;height:44px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:20px;display:flex;align-items:flex-end;justify-content:center;font-family:ui-monospace,monospace;font-size:11px;color:#7A6858;padding-bottom:4px">20</div>
+          <div style="width:78px;height:44px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:999px;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:11px;color:#7A6858">999</div>
+        </div>
+        <div style="font-size:14px;line-height:1.6;color:#5C4E44">10 rails · 16 small cards &amp; question card · 17–18 buttons · 20 players and glossary · 22 desktop shell · 999 pills, chips, switcher, every avatar and play button.</div>
+      </div>
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Elevation — three levels, no more</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="padding:14px 16px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px;font-size:14.5px">flat · hairline only<div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858;padding-top:4px">chips, quiet rows</div></div>
+          <div style="padding:14px 16px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 14px 26px -22px rgba(36,28,23,.35);font-size:14.5px">card<div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858;padding-top:4px">0 1px 2px /.05 + 0 14px 26px -22px /.35</div></div>
+          <div style="padding:14px 16px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 18px 30px -26px rgba(36,28,23,.4);font-size:14.5px">player<div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858;padding-top:4px">0 1px 2px /.05 + 0 18px 30px -26px /.4</div></div>
+          <div style="padding:14px 16px;background:#A94E2B;color:#FFF8F1;border-radius:14px;box-shadow:0 14px 26px -16px rgba(169,78,43,.6);font-size:14.5px">accent lift<div style="font-family:ui-monospace,monospace;font-size:11.5px;opacity:.8;padding-top:4px">0 14px 26px -16px rgba(169,78,43,.6)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">04</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Components</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px">
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">PrimaryButton · 62px</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;box-shadow:0 1px 2px rgba(36,28,23,.14),0 14px 26px -16px rgba(169,78,43,.6)"><span style="font-family:'Material Symbols Rounded';font-size:25px;font-variation-settings:'FILL' 1">mic</span><span>Record a memory</span></div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#96421F;color:#FFF8F1;font-size:18.5px;font-weight:600;transform:translateY(1px)"><span>pressed</span></div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#EADDD1;color:#A08C7C;font-size:18.5px;font-weight:600">disabled</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;height:62px;border-radius:17px;background:#A94E2B;color:#FFF8F1;font-size:18.5px;font-weight:600;opacity:.85"><span style="font-family:'Material Symbols Rounded';font-size:24px;animation:kSpin 1.6s linear infinite">progress_activity</span><span>Keeping…</span></div>
+        </div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Always icon + word. One primary per screen, pinned to the bottom of the safe area.</div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">SecondaryButton · AudioButton · chips</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;height:60px;border-radius:17px;border:1.5px solid #DCCDB8;background:#FFFDF8;font-size:17.5px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:23px">graphic_eq</span><span>Hear a memory</span></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #E6DBCA;font-size:15px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:22px">volume_up</span><span>Hear this question</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #DCB9A3;background:#F3E1D5;color:#8A3F21;font-size:15px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:22px">graphic_eq</span><span>Reading aloud…</span></div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="height:36px;padding:0 15px;border-radius:999px;background:#241C17;color:#F7F2E9;font-size:14.5px;font-weight:600;display:flex;align-items:center">Places</div>
+            <div style="height:36px;padding:0 15px;border-radius:999px;border:1.5px solid #E6DBCA;color:#5C4E44;font-size:14.5px;font-weight:600;display:flex;align-items:center">Recipes</div>
+            <div style="height:36px;padding:0 15px;border-radius:999px;border:1.5px solid #E6DBCA;color:#5C4E44;font-size:14.5px;font-weight:600;display:flex;align-items:center">Words</div>
+          </div>
+        </div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Chips are 36px tall but sit in a 48px scroll row — the row, not the chip, is the tap area.</div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">LanguageSwitcher</div>
+        <div style="display:flex;gap:6px;padding:5px;background:#F1E9DA;border:1px solid #E6DBCA;border-radius:999px;width:fit-content;max-width:100%;overflow-x:auto">
+          <div style="height:44px;padding:0 18px;border-radius:999px;background:#241C17;color:#F7F2E9;font-size:15px;font-weight:600;display:flex;align-items:center;white-space:nowrap;box-shadow:0 6px 14px -8px rgba(36,28,23,.7)">ಕನ್ನಡ · Original</div>
+          <div style="height:44px;padding:0 18px;border-radius:999px;color:#5C4E44;font-size:15px;display:flex;align-items:center;white-space:nowrap">English</div>
+          <div style="height:44px;padding:0 18px;border-radius:999px;color:#5C4E44;font-size:15px;display:flex;align-items:center;white-space:nowrap">हिन्दी</div>
+        </div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Each language is written in its own script, never a flag, never a code. The original always carries the word "Original" and always sits first. The track scrolls horizontally, so a tenth language costs nothing.</div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Waveform</div>
+        <div style="display:flex;align-items:center;gap:2.5px;height:44px;color:#E0D2BC">
+          <div style="flex:1;height:14px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:26px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:20px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:34px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:28px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:40px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:22px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:31px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:18px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:36px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:24px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:30px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:16px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:26px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:12px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:22px;border-radius:3px;background:currentColor"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:2.5px;height:44px;color:#C99A7C">
+          <div style="width:3px;height:22px;border-radius:3px;background:currentColor;animation:kBar .7s ease-in-out infinite alternate"></div><div style="width:3px;height:38px;border-radius:3px;background:currentColor;animation:kBar .9s ease-in-out .1s infinite alternate"></div><div style="width:3px;height:28px;border-radius:3px;background:currentColor;animation:kBar .6s ease-in-out .2s infinite alternate"></div><div style="width:3px;height:44px;border-radius:3px;background:currentColor;animation:kBar 1s ease-in-out .3s infinite alternate"></div><div style="width:3px;height:30px;border-radius:3px;background:currentColor;animation:kBar .8s ease-in-out .4s infinite alternate"></div><div style="width:3px;height:36px;border-radius:3px;background:currentColor;animation:kBar .7s ease-in-out .5s infinite alternate"></div><div style="width:3px;height:24px;border-radius:3px;background:currentColor;animation:kBar .9s ease-in-out .15s infinite alternate"></div><div style="width:3px;height:40px;border-radius:3px;background:currentColor;animation:kBar .75s ease-in-out .25s infinite alternate"></div>
+        </div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">Same primitive twice: 44 stored peaks, flex-1 bars, played portion revealed with <span style="font-family:ui-monospace,monospace;font-size:13px">clip-path: inset()</span>. Live recording swaps stored peaks for staggered CSS bars. No canvas anywhere.</div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">AudioPlayer · variant "original"</div>
+        <div style="padding:18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 18px 30px -26px rgba(36,28,23,.4)">
+          <div style="display:flex;align-items:center;gap:8px;padding-bottom:14px"><span style="font-family:'Material Symbols Rounded';font-size:19px;color:#A94E2B">graphic_eq</span><span style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#A94E2B">Her original voice</span></div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:62px;height:62px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 22px -12px rgba(169,78,43,.75)"><span style="font-family:'Material Symbols Rounded';font-size:32px;font-variation-settings:'FILL' 1">pause</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:2.5px;height:34px;color:#E0D2BC"><div style="flex:1;height:16px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:26px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:20px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:30px;border-radius:3px;background:#A94E2B"></div><div style="flex:1;height:22px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:28px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:14px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:24px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:18px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:26px;border-radius:3px;background:currentColor"></div></div>
+              <div style="display:flex;justify-content:space-between;font-family:ui-monospace,monospace;font-size:12.5px;color:#7A6858">0:52<span>2:14</span></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;padding-top:14px;margin-top:14px;border-top:1px solid #F0E7D7;font-size:13.5px;color:#7A6858"><span style="font-family:'Noto Sans Kannada',sans-serif;color:#3D3129;font-weight:500">ಕನ್ನಡ</span>· Recorded 12 Aug 2026, as she spoke it</div>
+        </div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">AudioPlayer · variant "translated" + unavailable</div>
+        <div style="padding:18px;background:#F5F8F9;border:1px solid #DFE7EA;border-radius:20px">
+          <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#33566A;padding-bottom:14px">Understand in English</div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:56px;height:56px;flex:none;border-radius:999px;background:#33566A;color:#F4F8F9;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:30px;font-variation-settings:'FILL' 1">play_arrow</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:2.5px;height:28px;color:#D3DFE4"><div style="flex:1;height:14px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:22px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:18px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:26px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:16px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:24px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:12px;border-radius:3px;background:currentColor"></div><div style="flex:1;height:20px;border-radius:3px;background:currentColor"></div></div>
+              <div style="display:flex;justify-content:space-between;font-family:ui-monospace,monospace;font-size:12.5px;color:#4F6874">0:00<span>2:08</span></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;padding-top:14px;margin-top:14px;border-top:1px solid #E4EBEE;font-size:13.5px;line-height:1.5;color:#4F6874"><span style="font-family:'Material Symbols Rounded';font-size:18px;flex:none">info</span><span>A reading voice, not Ajji's. Her own voice is kept above, untouched.</span></div>
+        </div>
+        <div style="padding:18px;background:#F5F8F9;border:1px dashed #CFDDE3;border-radius:20px;display:flex;gap:12px"><span style="font-family:'Material Symbols Rounded';font-size:22px;color:#4F6874;flex:none">hearing</span><div><div style="font-size:15px;font-weight:600;color:#2A4553">हिन्दी audio isn't ready yet</div><div style="font-size:13.5px;line-height:1.5;color:#4F6874">You can read her story below. Her original voice plays any time.</div></div></div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">RecordingControl</div>
+        <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <div style="width:96px;height:96px;border-radius:999px;background:#F3E1D5;border:1px solid #E7CDBB;display:flex;align-items:center;justify-content:center;color:#A94E2B"><span style="font-family:'Material Symbols Rounded';font-size:40px;font-variation-settings:'FILL' 1">mic</span></div>
+            <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">ready · 168px live</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <div style="position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;inset:0;border-radius:999px;border:1px solid #DCB9A3;animation:kRing 3s ease-out infinite"></div>
+              <div style="width:74px;height:74px;border-radius:999px;background:#A94E2B;color:#FFF3EA;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:30px;font-variation-settings:'FILL' 1">mic</span></div>
+            </div>
+            <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">recording</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <div style="width:96px;height:96px;border-radius:999px;background:#F3E1D5;border:1px solid #E7CDBB;animation:kBreathe 2.4s ease-in-out infinite"></div>
+            <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">stopping</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <div style="width:96px;height:96px;border-radius:999px;background:#F6E4DF;border:1px solid #EDCFC7;display:flex;align-items:center;justify-content:center;color:#93362A"><span style="font-family:'Material Symbols Rounded';font-size:38px">volume_off</span></div>
+            <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#7A6858">failed</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;width:fit-content"><span style="width:8px;height:8px;border-radius:999px;background:#C0603A;animation:kDot 1.6s ease-in-out infinite"></span>Recording</div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">The recording state is warm, never red — red is reserved for a failure the person needs to act on. The stop button is ink, 66px, and says what it does: "Done · keep this memory".</div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">MemoryPreview · PersonIdentity</div>
+        <div style="display:flex;flex-direction:column;gap:12px;padding:14px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;box-shadow:0 1px 2px rgba(36,28,23,.05),0 14px 26px -22px rgba(36,28,23,.35)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:46px;height:46px;border-radius:999px;flex:none;background:repeating-linear-gradient(135deg,#EFE4D3 0 5px,#E7DAC6 5px 10px);border:1px solid #E0D2BC"></div>
+            <div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:600;letter-spacing:.02em">Ajji</div><div style="font-family:'Tiro Devanagari Hindi',serif;font-size:18.5px">Summer evenings in Mysuru</div></div>
+            <div style="width:44px;height:44px;flex:none;border-radius:999px;background:#A94E2B;color:#FFF8F1;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:24px;font-variation-settings:'FILL' 1">play_arrow</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="display:flex;align-items:flex-end;gap:2px;height:18px;flex:1;color:#DCCDB8"><div style="width:2px;height:8px;background:currentColor"></div><div style="width:2px;height:14px;background:currentColor"></div><div style="width:2px;height:10px;background:currentColor"></div><div style="width:2px;height:16px;background:currentColor"></div><div style="width:2px;height:6px;background:currentColor"></div><div style="width:2px;height:12px;background:currentColor"></div><div style="width:2px;height:15px;background:currentColor"></div><div style="width:2px;height:9px;background:currentColor"></div><div style="width:2px;height:13px;background:currentColor"></div><div style="width:2px;height:7px;background:currentColor"></div></div>
+            <div style="font-size:12px;color:#7A6858">ಕನ್ನಡ Kannada · 2m 14s</div>
+          </div>
+        </div>
+        <div style="font-size:14px;line-height:1.55;color:#5C4E44">A person is a name and a face at 46–64px, always circular, with the relationship spelled out ("Grandmother · Lakshmipuram, Mysuru"). Names appear as the family says them — Ajji, Papa — never "User".</div>
+      </div>
+
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">ProcessingState · ErrorState · EmptyState</div>
+        <div style="display:flex;flex-direction:column;gap:2px;border-top:1px solid #E6DBCA;border-bottom:1px solid #E6DBCA;padding:6px 0">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 4px"><span style="font-family:'Material Symbols Rounded';font-size:21px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span style="font-size:16px;color:#3D3129">Her voice is saved</span></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 4px"><span style="font-family:'Material Symbols Rounded';font-size:21px;color:#A94E2B;animation:kSpin 1.6s linear infinite">progress_activity</span><span style="font-size:16px;color:#3D3129;font-weight:600">Writing down her words</span></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 4px"><span style="font-family:'Material Symbols Rounded';font-size:21px;color:#C7B7A3">radio_button_unchecked</span><span style="font-size:16px;color:#A08C7C">Getting English and हिन्दी ready</span></div>
+        </div>
+        <div style="font-size:14px;line-height:1.6;color:#5C4E44">Progress is told in the family's language, never the system's: no "transcribing", no model names, no percentages. Errors always name what is still safe ("Her recording is safe on this phone") before offering "Try again". An empty family space shows one prompt and the record button — never an illustration of nothing.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">05</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">State matrix</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Buttons</div>
+        <div style="font-size:15.5px;line-height:1.7;color:#3D3129">default → hover (−6% lightness) → pressed (translateY 1px) → disabled (#EADDD1 / #A08C7C, no shadow) → loading (spinner replaces icon, label becomes present tense: "Keeping…")</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Audio</div>
+        <div style="font-size:15.5px;line-height:1.7;color:#3D3129">ready (play) → loading (spinner in the circle, waveform at 50% opacity) → playing (pause icon, played bars fill) → paused (position held) → unavailable (dashed border, "isn't ready yet", no button)</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Recording</div>
+        <div style="font-size:15.5px;line-height:1.7;color:#3D3129">permission → ready → recording (rings + live bars + timer) → stopping (breathing circle, ~1.3s) → failed (silence detected: nothing lost, try again)</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Translation</div>
+        <div style="font-size:15.5px;line-height:1.7;color:#3D3129">loading (language chip stays tappable, transcript skeleton at 3 lines) → available → unavailable (read-only translation, or "not ready yet" if neither text nor audio landed). The original is never in a loading state — it exists the moment recording stops.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">06</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Motion</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="border:1px solid #E6DBCA;border-radius:18px;overflow:hidden;background:#FFFDF8">
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:14px 22px;background:#F1E9DA;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858"><div>Moment</div><div>Timing</div><div>Meaning it carries</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px"><div style="font-weight:600">Screen enter</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">450ms ease, fade + 10px up</div><div style="color:#5C4E44">One step forward, never a slide-carousel</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px"><div style="font-weight:600">Live waveform</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">0.5–1.2s alternate, 0–0.54s stagger</div><div style="color:#5C4E44">She is being heard right now</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px"><div style="font-weight:600">Recording rings</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">3s ease-out ×2, offset 1.5s</div><div style="color:#5C4E44">Calm and open-ended — no countdown pressure</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px"><div style="font-weight:600">Keeping / stopping</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">2.4–3.4s breathe</div><div style="color:#5C4E44">Something is being held carefully, not processed</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px"><div style="font-weight:600">Language change</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">200ms background, content swaps instantly</div><div style="color:#5C4E44">A change of language, not a page load</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px"><div style="font-weight:600">Press</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">translateY 1px / scale .97</div><div style="color:#5C4E44">Physical confirmation for hands that miss</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;padding:15px 22px;border-top:1px solid #F0E7D7;font-size:15px"><div style="font-weight:600">prefers-reduced-motion</div><div style="font-family:ui-monospace,monospace;font-size:13.5px">drop all loops</div><div style="color:#5C4E44">Static waveform, static rings, keep the 200ms colour transitions</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">07</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Responsive behaviour</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#A94E2B">390–430 · the product</div>
+        <div style="font-size:15.5px;line-height:1.65;color:#3D3129">Single column, 22px gutters, one primary action pinned above the home indicator, memory page scrolls under a fixed 44px back/share row. Everything must survive a WhatsApp in-app browser.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">≥768 · tablet</div>
+        <div style="font-size:15.5px;line-height:1.65;color:#3D3129">Same single column, centred, max measure 620px. Players go full width of the measure; type unchanged. No new layout to maintain.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">≥1100 · memory page only</div>
+        <div style="font-size:15.5px;line-height:1.65;color:#3D3129">Two columns, 400px / 1fr, 72px gap. Left: person, title, language switcher, both players — sticky at top:56 so listening controls never scroll away. Right: the story at 22/1.9 in a 620px measure. Title steps to 40. Nothing goes full-bleed; the page stays a letter, not a dashboard.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">08</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Assets</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;font-size:15.5px;line-height:1.7">
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Fonts</div>
+        <div style="color:#3D3129">Tiro Devanagari Hindi, Tiro Kannada (ship weight 400 + italic only). Expansion: Tiro Bangla, Tiro Gurmukhi, Tiro Tamil, Tiro Telugu; Noto Serif Gujarati / Malayalam / Odia. UI: Hanken Grotesk 400/500/600 + Noto Sans Devanagari, Noto Sans Kannada. Load per-script, on demand — never all nine at once.</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Icons — 19 glyphs</div>
+        <div style="color:#3D3129;font-family:ui-monospace,monospace;font-size:13.5px;line-height:1.9">mic · mic_off · play_arrow · pause · stop_circle · graphic_eq · volume_up · volume_off · hearing · ios_share · arrow_back · arrow_forward · add · check · check_circle · radio_button_unchecked · progress_activity · refresh · info</div>
+        <div style="color:#5C4E44;font-size:14px">Material Symbols Rounded 300. Subset to these 19, or inline as an SVG sprite if the font is heavy on 3G. No decorative icons, no sparkles.</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Images</div>
+        <div style="color:#3D3129">Only the family's own photographs: one portrait per person, square source ≥256px, always masked to a circle (46 / 54 / 64px). Prototype uses a striped placeholder. No stock photography, no illustration, no decorative motifs.</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Audio</div>
+        <div style="color:#3D3129">Original: whatever MediaRecorder gives (audio/webm;codecs=opus, mono) stored untouched and served as-is. Optional reading track: mp3/m4a. Peaks: 44 normalised floats per track, computed once at upload — the UI never decodes audio to draw.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">09</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">React / TypeScript notes</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:20px">
+      <pre style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.75;white-space:pre-wrap;color:#3D3129;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px;padding:20px;overflow-x:auto">type Screen = 'opening' | 'prompt' | 'recording'
+            | 'processing' | 'memory';
+type RecState = 'permission' | 'ready' | 'recording'
+              | 'stopping' | 'failed';
+type KeepState = 'working' | 'done' | 'longer' | 'failed';
+type Lang = 'kn' | 'en' | 'hi';
+
+interface Track {
+  url: string;
+  durationSec: number;
+  peaks: number[];            // 44 values, 0..1
+  kind: 'original' | 'reading';
+}
+
+interface Memory {
+  id: string;
+  speaker: Person;            // 'Ajji', Grandmother
+  question: Prompt;
+  recordedAt: string;         // ISO
+  place?: string;
+  originalLang: Lang;
+  original: Track;            // never re-encoded, never replaced
+  transcript: Partial&lt;Record&lt;Lang, string[]&gt;&gt;;
+  reading: Partial&lt;Record&lt;Lang, Track&gt;&gt;;  // absent = not ready
+  glossary: Array&lt;{ term: string; roman: string; gloss: string }&gt;;
+}</pre>
+      <pre style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;line-height:1.75;white-space:pre-wrap;color:#3D3129;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:16px;padding:20px;overflow-x:auto">// 11 components carry the whole product
+&lt;PrimaryButton icon="mic" loading: false /&gt;
+&lt;SecondaryButton icon="graphic_eq" /&gt;
+&lt;AudioButton state="idle | speaking" /&gt;
+&lt;Waveform peaks: t.peaks progress: 0..1
+          tone="voice | translation" live={false} /&gt;
+&lt;AudioPlayer variant="original | translated"
+             track={m.original} caption="…"
+             onSeek: (sec) =&gt; void /&gt;
+&lt;LanguageSwitcher value={lang} options={langs}
+                  onChange: setLang /&gt;
+&lt;StoryPrompt prompt={p} onHear onShuffle /&gt;
+&lt;RecordingControl state={rec} elapsedSec: n
+                  onStart onStop onAllow onRetry /&gt;
+&lt;MemoryPreview memory={m} onOpen /&gt;
+&lt;TranscriptBlock lang="kn" paragraphs: p /&gt;
+&lt;ProcessingState state={keep} step={0..3} /&gt;</pre>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;font-size:15.5px;line-height:1.7;color:#3D3129">
+      <div style="padding:20px;background:#F1E9DA;border-radius:16px">One shared <span style="font-family:ui-monospace,monospace;font-size:13.5px">&lt;audio&gt;</span> per page and a single "now playing" id in context — the original and a reading track can never sound at once. Separate positions per track; never carry a playhead across languages. No autoplay, ever.</div>
+      <div style="padding:20px;background:#F1E9DA;border-radius:16px">Render the memory page the moment <span style="font-family:ui-monospace,monospace;font-size:13.5px">original</span> + original transcript exist. Translations fill in by polling every 3s; a missing key renders the "not ready yet" block, never a spinner over the page. Nothing about the original may depend on a translation succeeding.</div>
+      <div style="padding:20px;background:#F1E9DA;border-radius:16px">Language lives in the URL — <span style="font-family:ui-monospace,monospace;font-size:13.5px">/m/:id?lang=en</span> — so a WhatsApp link can open straight into English while <span style="font-family:'Noto Sans Kannada',sans-serif">ಕನ್ನಡ</span> · Original stays one tap away. Share sheet copies the link with the recipient's language pre-set.</div>
+      <div style="padding:20px;background:#F1E9DA;border-radius:16px">Screen state is local <span style="font-family:ui-monospace,monospace;font-size:13.5px">useReducer</span>; only "keeping" is server work. Waveforms are divs, timers are <span style="font-family:ui-monospace,monospace;font-size:13.5px">setInterval</span> + tabular mono. No animation library, no canvas, no audio-analysis on the client — the whole prototype is reproducible in a day.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">10</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Scope</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px">
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #DCB9A3;border-radius:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#A94E2B">Hackathon MVP</div>
+        <div style="font-size:15.5px;line-height:1.85;color:#3D3129">Five screens, one storyteller, one memory · record in Kannada · original audio kept and playable · original transcript · English and Hindi text · optional English reading track · language switcher with three languages · share link that opens in the recipient's language · permission, silence-failure and longer-wait states.</div>
+      </div>
+      <div style="padding:24px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">After the hackathon</div>
+        <div style="font-size:15.5px;line-height:1.85;color:#3D3129">Family space with many speakers · invite by WhatsApp · voice-preserving dubbing (only once it is honest) · prompts chosen by relationship and season · photos attached to a memory · offline record-and-queue on weak networks · elder mode with a larger type ramp · search across memories · glossary built automatically from words a family is losing · a printed book export.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">11</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Visual QA pass</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;font-size:15.5px;line-height:1.65">
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span>Body text ≥ 4.8:1 on paper; ink-faint demoted to dividers only after measuring 3.7:1.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span>Every tap target ≥ 44px; primary actions 60–66px. No icon-only button without a word beside it.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span>Smallest shipped type is 12px mono caps, used only for structural labels; all reading copy ≥ 15px.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span>Two accent hues total across five screens; one background family; no gradient carries meaning.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span>Original voice is present in all three language modes — never behind a disclosure.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span>No screen says AI, model, transcribe, translate-engine or percentage. Checked line by line.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#4E6B4A;font-variation-settings:'FILL' 1">check_circle</span><span>Dubbed audio always labelled "a reading voice, not Ajji's" wherever it can be played.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#93362A">error</span><span><strong style="font-weight:600">Open:</strong> ಕನ್ನಡ and हिन्दी strings are sample placeholder copy — a native speaker must replace them before user testing.</span></div>
+      <div style="display:flex;gap:10px;padding:16px 18px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:14px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#93362A">error</span><span><strong style="font-weight:600">Open:</strong> real audio, silence detection thresholds and the Hindi reading track are stubs in the prototype.</span></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">12</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Two experiences, one product</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:17.5px;line-height:1.6;color:#3D3129;max-width:760px;text-wrap:pretty"><strong style="font-weight:600">The host curates the memory. The storyteller only tells it.</strong> Every product decision below follows from that one sentence — and from its corollary: Kahaani should feel like receiving a question from someone you love, not a task from an app.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:20px">
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#A94E2B">A · Host — the actual application</div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">01</span><span style="font-size:15.5px;font-weight:600">Family space</span></div><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#8B7A6C">arrow_forward</span><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">02</span><span style="font-size:15.5px;font-weight:600">Storyteller</span></div><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#8B7A6C">arrow_forward</span><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">03</span><span style="font-size:15.5px;font-weight:600">Ask</span></div><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#8B7A6C">arrow_forward</span><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">04</span><span style="font-size:15.5px;font-weight:600">Share</span></div><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#8B7A6C">arrow_forward</span><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">05</span><span style="font-size:15.5px;font-weight:600">Memory</span></div></div>
+        <div style="font-size:15.5px;line-height:1.75;color:#3D3129">Son, daughter, grandchild, niece — whoever is comfortable with software. They hold all of the complexity: managing storytellers, choosing or writing the question, setting her language, recording the question in their own voice, minting the private link, sharing it, watching what is still unanswered, and receiving, hearing, translating and keeping what comes back.</div>
+      </div>
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#A94E2B">B · Storyteller — a private link, not an app</div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">01</span><span style="font-size:15.5px;font-weight:600">Question</span></div><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#8B7A6C">arrow_forward</span><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">02</span><span style="font-size:15.5px;font-weight:600">Recording</span></div><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#8B7A6C">arrow_forward</span><div style="display:flex;align-items:center;gap:10px"><span style="width:26px;height:26px;border-radius:999px;background:#F3E1D5;color:#8A3F21;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">03</span><span style="font-size:15.5px;font-weight:600">Done</span></div></div>
+        <div style="font-size:15.5px;line-height:1.75;color:#3D3129">Dadi, Nani, Dadaji, Chachi. They open <span style="font-family:ui-monospace,monospace;font-size:13.5px">kahaani.app/story/{token}</span> from WhatsApp and see one question, in their language, with one thing to press. No navigation, no account, no settings, nothing to type. Permission is requested by the act of starting — never taught in advance.</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #E6DBCA;border-radius:18px;overflow:hidden;background:#FFFDF8">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 22px;background:#F1E9DA;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858"><div>Host decides</div><div>Storyteller never sees</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div>Which storyteller, and their language</div><div style="color:#5C4E44">A language switcher</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div>Which question — chosen or written</div><div style="color:#5C4E44">Categories, suggestions, "another question"</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div>Whether to attach their own recorded voice</div><div style="color:#5C4E44">Any recording settings</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div>When to remind, and how to share</div><div style="color:#5C4E44">Links, tokens, sharing</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div>Title, translation, organisation</div><div style="color:#5C4E44">Transcript, translation, title, editing</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div>Everything after upload succeeds</div><div style="color:#5C4E44">Processing — her job ends when the audio lands</div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">The link is the configuration</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">One <span style="font-family:ui-monospace,monospace;font-size:13.5px">MemoryPrompt</span> per link: id, storyteller, host, promptText, promptAudio, storytellerLanguage, createdAt, status, privateRecordingUrl. Because the token carries all of it, her page has nothing to ask her. Future prompt types — photo + question, video, an object or a place — extend the same record; the hackathon ships question + optional host voice only.</div></div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">The host&rsquo;s voice is the P0 feature</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">&ldquo;Say it in your own voice&rdquo; is not a nice-to-have — it is what turns a form into a family message. States: idle → recording (stop, live bars, timer) → attached (play, redo). Generating a spoken version is documented as later, and marked as later in the UI.</div></div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Elder scale, unchanged</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">Question 35/1.45 · reading copy 18–21 · primary button 92px with a 24px label · mic visual 112–118px · timer 40px tabular mono. One primary action per screen, pinned to the bottom, never moving between states.</div></div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Permission, quietly</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">No tutorial in the happy path. &ldquo;Tap and tell me&rdquo; requests the microphone and goes straight to recording. Only refusal produces a screen: &ldquo;The microphone isn&rsquo;t on.&rdquo; · Try again · Ask Suyash for help — a phone call, two lines, no settings walkthrough.</div></div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Accidental finish</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">Under 10 seconds only: &ldquo;Finished already?&rdquo; with <em style="font-style:italic">Keep recording</em> as the primary. Over 10 seconds it never appears.</div></div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:16px;display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Sharing is WhatsApp-first</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">Send on WhatsApp is primary; Copy link sits on the URL row with a Copied confirmation. SMS and QR are named as future paths. No iMessage-specific patterns, no app install, no sign-in for her.</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">13</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Family Space — the host's product</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:16.5px;line-height:1.65;color:#5C4E44;max-width:760px;text-wrap:pretty">Three objects, no navigation structure: <strong style="font-weight:600">people</strong>, <strong style="font-weight:600">questions</strong>, <strong style="font-weight:600">memories</strong>. The family home leads with faces at 72px and names at 22px in the story serif; counts sit underneath at 12.5px because a person outranks their statistics. There is no sidebar, no tab bar, no filter row, no metric — if a screen starts to look like a tracker, the people have shrunk.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;font-size:15.5px;line-height:1.7">
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Family home</div>
+        <div style="color:#3D3129">Family name in the story serif · a 2×2 grid of people, the one you're waiting on carrying a small warm "waiting" mark · the answered memory arriving at the top as a card, not a notification · two quiet recent listens · <em style="font-style:italic">Ask someone something</em> as the only filled button, with <em style="font-style:italic">Record together</em> beneath it as text.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Person</div>
+        <div style="color:#3D3129">Her name at 34px, relationship and place beneath. One row owns her preferred language — "She hears Kahaani in ಕನ್ನಡ · Change" — because that setting is the host's, never hers. Then <em style="font-style:italic">Her stories</em>: title in serif, a 14-bar waveform, language and duration; tapping opens the Memory page. Listening is the invitation, not a table.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Ask · two steps, never more</div>
+        <div style="color:#3D3129"><strong style="font-weight:600">Step 1 — the question.</strong> Seven categories in a scrolling row; each shows only two or three curated prompts, each in English and in her script, so the host can see what she'll actually read. "Write my own question" opens one textarea. <strong style="font-weight:600">Step 2 — how she hears it.</strong> "Say it myself" is the marked P0 path: record, play back, record again. Nothing is required.</div>
+      </div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Share</div>
+        <div style="color:#3D3129">"Ready for Ajji" over a truthful mirror of her page — the same avatar line, the same question, the host's audio with its real duration. A padlocked URL row with Copy. <em style="font-style:italic">Send on WhatsApp</em> filled, <em style="font-style:italic">Copy private link</em> outlined, and one line of reassurance: no app or account needed.</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Pending, kept human</div>
+        <div style="color:#3D3129">"Waiting for Ajji" · her question in her script · "Sent today" · one <em style="font-style:italic">Send again</em>. No status pills, no assignees, no due dates, no progress bar. A family is not a backlog.</div>
+      </div>
+      <div style="padding:22px;background:#F1E9DA;border-radius:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">The reward</div>
+        <div style="color:#3D3129">When she answers, the pending block <em style="font-style:italic">becomes</em> the memory in the same slot: a filled heart, "Ajji answered", the title in serif, "not heard yet", and a 48px play button. Same position, same card geometry — the transformation is the reward, so it must not be a toast.</div>
+      </div>
+    </div>
+
+    <div style="border:1px solid #E6DBCA;border-radius:18px;overflow:hidden;background:#FFFDF8">
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:14px 22px;background:#F1E9DA;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858"><div>Component</div><div>Where it lives</div><div>Scope</div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">PersonCard</div><div style="color:#5C4E44">Family home grid</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">PersonHeader + LanguageRow</div><div style="color:#5C4E44">Person page</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">StoryRow</div><div style="color:#5C4E44">Person page · Her stories</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">PromptLibrary (categories + curated)</div><div style="color:#5C4E44">Ask step 1</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">CustomQuestionField</div><div style="color:#5C4E44">Ask step 1</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">HostVoiceRecorder</div><div style="color:#5C4E44">Ask step 2 · say it myself</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">ShareSheet + LinkPreview</div><div style="color:#5C4E44">Share</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">PendingPrompt → AnsweredCard</div><div style="color:#5C4E44">Family home · Person</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">StorytellerLink (3 states)</div><div style="color:#5C4E44">/story/{token}</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">AudioPlayer · original + translated</div><div style="color:#5C4E44">Memory page</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#A94E2B;border:1px solid #DCB9A3;border-radius:999px;padding:3px 8px;flex:none">P0</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">PhotoPrompt (photo + question)</div><div style="color:#5C4E44">Ask step 1</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#4F6874;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px;flex:none">P1</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">SpokenVersion (read aloud for you)</div><div style="color:#5C4E44">Ask step 2</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#4F6874;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px;flex:none">P1</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">InvitePerson · manage storytellers</div><div style="color:#5C4E44">Family home</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#4F6874;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px;flex:none">P1</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">EditTitle · attach photos to a memory</div><div style="color:#5C4E44">Memory page</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#4F6874;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px;flex:none">P1</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">Search · timeline · locations · family vocabulary</div><div style="color:#5C4E44">Archive</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#7A6858;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px;flex:none">Later</span></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1.6fr auto;gap:14px;padding:13px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:center"><div style="font-weight:600">Printed collection / book export</div><div style="color:#5C4E44">Archive</div><div><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;color:#7A6858;border:1px solid #CFDDE3;border-radius:999px;padding:3px 8px;flex:none">Later</span></div></div>
+    </div>
+    <div style="padding:20px 22px;background:#F1E9DA;border-radius:16px;font-size:15.5px;line-height:1.7;color:#3D3129">P1 items appear in the interface as inert, labelled rows — "Ask about a photograph · P1", "Create a spoken version · P1" — so the architecture is visible and the hackathon build is honest about what it does. Everything Later stays out of the UI entirely.</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">14</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">Changelog — the architecture change</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px">
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #EDCFC7;border-radius:20px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#93362A">Removed from the storyteller</div>
+        <div style="font-size:15.5px;line-height:1.85;color:#3D3129">The language switcher · &ldquo;Another question&rdquo; · the sender information card · the two-step microphone tutorial and its illustrated pre-permission screen · the &ldquo;recording together&rdquo; banner · playback of her own recording on the success screen · the separate &ldquo;you can close this page&rdquo; screen (now one line on Done) · every trace of categories.</div>
+      </div>
+      <div style="padding:24px;background:#FFFDF8;border:1px solid #DCB9A3;border-radius:20px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#A94E2B">Moved to the host</div>
+        <div style="font-size:15.5px;line-height:1.85;color:#3D3129">Question choice and custom wording · her interface language · the spoken prompt, now the host&rsquo;s own recording rather than a synthesised reading · link creation and sharing · reminders · everything about titles, translation and organisation. New host screens: Family space, Storyteller profile, Ask, Share.</div>
+      </div>
+      <div style="padding:24px;background:#F1E9DA;border-radius:20px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Preserved untouched</div>
+        <div style="font-size:15.5px;line-height:1.85;color:#3D3129">Warm paper foundation and the whole token set · clay for her original voice, slate for machine translation · the Memory page in full, including &ldquo;Her original voice&rdquo; vs &ldquo;Understand in English&rdquo; · AudioPlayer, Waveform, LanguageSwitcher, TranscriptBlock, MemoryPreview, PersonIdentity · the desktop two-column Memory layout · the illustration language, the motif, and all six motion patterns.</div>
+      </div>
+      <div style="padding:24px;background:#F1E9DA;border-radius:20px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7A6858">Needs implementation work</div>
+        <div style="font-size:15.5px;line-height:1.85;color:#3D3129"><strong style="font-weight:600">RecordingControl</strong> splits into a host variant (48px inline, in the Ask card) and a storyteller variant (112px, full screen). <strong style="font-weight:600">StoryPrompt</strong> becomes two components: an editable host chooser and a read-only storyteller display. <strong style="font-weight:600">New:</strong> StorytellerRow, PendingPrompt, ShareSheet, LinkPreview. <strong style="font-weight:600">ProcessingState</strong> is now host-only — the storyteller never waits on it. Routing splits into an authenticated app and an unauthenticated <span style="font-family:ui-monospace,monospace;font-size:13.5px">/story/{token}</span> route with its own minimal layout.</div>
+      </div>
+    </div>
+    <div style="padding:20px 22px;background:#F1E9DA;border-radius:16px;font-size:15.5px;line-height:1.7;color:#3D3129">The test for any future control: <strong style="font-weight:600">does the storyteller need this to tell THIS story?</strong> If not, it belongs to the host. Applied honestly, that question is what keeps her page at three states while the family app grows.</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#A94E2B">15</span>
+      <span style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:30px">The private link, finished</span>
+      <span style="flex:1;height:1px;background:#E6DBCA"></span>
+    </div>
+    <div style="font-size:17.5px;line-height:1.6;color:#3D3129;max-width:760px;text-wrap:pretty">Dadi, 78, Android Chrome, prefers Hindi, would rather speak than type. She taps her grandson's WhatsApp link and makes <strong style="font-weight:600">three decisions</strong>: hear him or read it · press the microphone · press finish. Everything else on the page is content, not a control.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px">
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px"><div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">1 · Question</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">A 14px Kahaani wordmark in muted ink — present, not proud. Then the host&rsquo;s 52px photo and &ldquo;सुयश ने आपसे पूछा है ❤️&rdquo;. Then <strong style="font-weight:600">one memory-cue illustration</strong> at 158px, chosen by the question&rsquo;s category. Then the question at 35px / 1.45 as the page&rsquo;s dominant element. Then &ldquo;▶ सुयश की आवाज़ में सुनें&rdquo; at 64px, shown only if he actually recorded. Then the 92px microphone, pinned. Then one line: &ldquo;आराम से बताइए। कोई जल्दी नहीं।&rdquo;</div></div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px"><div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">2 · Recording</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">The question drops to 19px muted at the top — still readable, no longer the subject. A 112px clay disc with two rings breathing outward at 3s, offset 1.5s. Twenty-eight 5px bars at 0.6–1s with a 0.09s stagger. &ldquo;हम सुन रहे हैं।&rdquo; at 26px. The timer at 40px tabular mono. One 92px ink button: &ldquo;कहानी पूरी हुई&rdquo;. No pause, no delete, no settings, no speed, no transcript.</div></div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px"><div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">3 · Done</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">The saving animation&rsquo;s card <em style="font-style:italic">stays</em> — the waveform has already settled into it — and a heart badge fades in at its corner, breathing at 4.5s. &ldquo;हो गया ❤️&rdquo; at 38px. &ldquo;आपकी कहानी परिवार तक पहुँच गई।&rdquo; at 21px. &ldquo;अब आप यह पेज बंद कर सकती हैं।&rdquo; at 18px. One quiet 60px text button to record again. Nothing waits on transcription, translation or any model.</div></div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px"><div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">4 · Microphone failure</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">Reached only by refusal — there is no tutorial in the happy path. A 116px rose disc with a struck-through microphone, &ldquo;माइक चालू नहीं हुआ&rdquo; at 31px, and one calm line: &ldquo;कुछ खोया नहीं। एक बार फिर कोशिश कीजिए।&rdquo; Primary 92px &ldquo;फिर कोशिश करें&rdquo;; secondary 64px &ldquo;किसी को बुलाएँ&rdquo; — a phone call. No settings walkthrough, no error code, no HTTP anything. Upload failure keeps the same shape: &ldquo;आपकी कहानी इस फ़ोन में सुरक्षित है&rdquo;.</div></div>
+    </div>
+
+    <div style="border:1px solid #E6DBCA;border-radius:18px;overflow:hidden;background:#FFFDF8">
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;background:#F1E9DA;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858"><div>Category</div><div>Objects in the cue</div><div>What it is there to trigger</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Childhood</div><div style="color:#3D3129">house + bicycle + tree</div><div style="color:#5C4E44">the street you were let out onto</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Places</div><div style="color:#3D3129">house + bicycle + tree</div><div style="color:#5C4E44">the same cue — a neighbourhood is a home seen from outside</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Food</div><div style="color:#3D3129">masala dabba + kadai + chai, steaming</div><div style="color:#5C4E44">the smell before the recipe</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Work</div><div style="color:#3D3129">office bag + pay envelope + wristwatch</div><div style="color:#5C4E44">the first month of being paid</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Love</div><div style="color:#3D3129">framed photograph + three flowers swaying</div><div style="color:#5C4E44">an album page, not a wedding stage</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Traditions</div><div style="color:#3D3129">diya with a breathing flame + hanging lantern + marigolds</div><div style="color:#5C4E44">the evening a festival began</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Advice</div><div style="color:#3D3129">spectacles + folded letter + chai</div><div style="color:#5C4E44">someone sitting down to tell you something</div></div>
+      <div style="display:grid;grid-template-columns:.8fr 1.5fr 1.4fr;gap:14px;padding:14px 22px;border-top:1px solid #F0E7D7;font-size:15px;align-items:baseline"><div style="font-weight:600">Custom</div><div style="color:#3D3129">the Advice cue</div><div style="color:#5C4E44">a neutral, conversational default when the host writes their own</div></div>
+    </div>
+    <div style="padding:20px 22px;background:#F1E9DA;border-radius:16px;font-size:15.5px;line-height:1.7;color:#3D3129">Cues are <strong style="font-weight:600">memory triggers, not decoration</strong>: suggestive object groups on one ground line, never a scene of her life. Exactly one per screen, at 158×99, 0.95 opacity, with a single moving part — a swaying plant, three staggered steam wisps, one flame. Nothing in the illustration is ever the only carrier of meaning.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px">
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px"><div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Android &amp; mobile behaviour</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">Design width 390; verified to 844 with no vertical scroll on any state, in Hindi, Kannada and English. Pinned actions carry <span style="font-family:ui-monospace,monospace;font-size:13.5px">flex:none</span> so a long question scrolls its own block instead of squeezing the microphone. Respect <span style="font-family:ui-monospace,monospace;font-size:13.5px">env(safe-area-inset-bottom)</span> — Chrome&rsquo;s URL bar collapses on scroll and the button must not travel with it. No swipe, no long-press, no gesture anywhere. Test the WhatsApp in-app browser explicitly: some Android builds block <span style="font-family:ui-monospace,monospace;font-size:13.5px">getUserMedia</span> outright, in which case the mic-failure screen is the fallback surface and should offer &ldquo;open in Chrome&rdquo;.</div></div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px"><div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">React implementation</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129"><span style="font-family:ui-monospace,monospace;font-size:13.5px">/story/:token</span> renders outside the app shell — no providers, no auth, no router chrome. The token resolves to <span style="font-family:ui-monospace,monospace;font-size:13.5px">{storyteller, host, promptText, promptAudio, storytellerLanguage, category}</span>; <span style="font-family:ui-monospace,monospace;font-size:13.5px">category</span> is the only input the cue needs. State is a three-value enum plus two exceptions — a <span style="font-family:ui-monospace,monospace;font-size:13.5px">useReducer</span>, not a store. Call <span style="font-family:ui-monospace,monospace;font-size:13.5px">getUserMedia</span> inside the microphone tap; on rejection go to the failure state, never to a modal. Upload on stop; on network failure keep the Blob in IndexedDB and retry — she has already seen Done. Under 10s, show the &ldquo;finished already?&rdquo; confirmation once, never twice.</div></div>
+      <div style="padding:22px;background:#FFFDF8;border:1px solid #E6DBCA;border-radius:18px;display:flex;flex-direction:column;gap:10px"><div style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#7A6858">Assets retained, nothing new invented</div><div style="font-size:15.5px;line-height:1.75;color:#3D3129">The listening visual, the settle animation, the childhood-home and kitchen clusters, the motif, and all six motion patterns come straight from the illustration system. New this pass: four cue clusters (work, love, traditions, advice) built on the identical 128×80 artboard, 2px clay stroke, one ground line, ≤12 paths, same palette. Type, colour, radii, elevation and the elder scale are unchanged.</div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;padding:26px;background:#241C17;border-radius:22px">
+      <div style="font-family:'Tiro Devanagari Hindi',Georgia,serif;font-size:26px;color:#F7F2E9">Things intentionally removed from the storyteller experience</div>
+      <div style="font-size:16px;line-height:1.9;color:#E0D2BC">Language switcher · category chips · &ldquo;another question&rdquo; · question library · a sender information card · the pre-permission tutorial and its two-step illustration · pause · delete · re-take before finishing · playback speed · microphone or audio settings · transcript · translation · any language toggle · story title · tagging · a story list or archive · &ldquo;record another&rdquo; suggestions · recommendations · account creation · sign-in · app install prompt · onboarding · progress percentages · processing or model status · error codes · toasts · a bottom nav · a back button on the question screen · Kahaani branding above 14px · more than one illustration per screen · any gesture.</div>
+      <div style="font-size:15.5px;line-height:1.7;color:#C7B7A3;padding-top:6px;border-top:1px solid #3D3129">Each of these has a home in the host experience, or no home at all. Before adding anything to this page, count her decisions again: if the number goes above three, the thing belongs to the family app.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</x-dc>
+</body>
+</html>
