@@ -29,7 +29,7 @@ function token() {
 }
 
 export const createPrepared = internalMutation({
-  args: { ...invitationInput, questionLocalized: v.string() },
+  args: { ...invitationInput, questionLocalized: v.string(), hostIntroLocalized: v.optional(v.string()) },
   handler: async (ctx, args) =>
     ctx.db.insert("invitations", {
       ...args,
@@ -43,14 +43,14 @@ export const createPrepared = internalMutation({
 export const prepare = action({
   args: invitationInput,
   handler: async (ctx, args): Promise<any> => {
-    const questionLocalized = await translate(
-      args.questionOriginal,
-      args.questionSourceLanguage,
-      args.storytellerLanguage,
-    );
+    const [questionLocalized, hostIntroLocalized] = await Promise.all([
+      translate(args.questionOriginal, args.questionSourceLanguage, args.storytellerLanguage),
+      translate(`${args.hostName} has sent you a question`, "en-IN", args.storytellerLanguage).catch(() => undefined),
+    ]);
     return ctx.runMutation(internal.invitations.createPrepared, {
       ...args,
       questionLocalized,
+      hostIntroLocalized,
     });
   },
 });
@@ -64,7 +64,7 @@ const voiceInvitationInput = {
 };
 
 export const createVoicePrepared = internalMutation({
-  args: { ...voiceInvitationInput, questionOriginal: v.string() },
+  args: { ...voiceInvitationInput, questionOriginal: v.string(), hostIntroLocalized: v.optional(v.string()) },
   handler: async (ctx, args) =>
     ctx.db.insert("invitations", {
       ...args,
@@ -84,13 +84,14 @@ export const prepareVoice = action({
   handler: async (ctx, args): Promise<any> => {
     const promptAudio = await ctx.storage.get(args.promptAudioStorageId);
     if (!promptAudio) throw new Error("Host recording not found");
-    const questionOriginal = await transcribe(
-      promptAudio,
-      args.storytellerLanguage,
-    );
+    const [questionOriginal, hostIntroLocalized] = await Promise.all([
+      transcribe(promptAudio, args.storytellerLanguage),
+      translate(`${args.hostName} has sent you a question`, "en-IN", args.storytellerLanguage).catch(() => undefined),
+    ]);
     return ctx.runMutation(internal.invitations.createVoicePrepared, {
       ...args,
       questionOriginal,
+      hostIntroLocalized,
     });
   },
 });

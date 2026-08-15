@@ -12,12 +12,29 @@ export function Icon({ name, size = 24 }: { name: "mic" | "sound" | "stop" | "pl
 }
 
 export function HeroIllustration() {
-  return <svg className="hero-art" viewBox="0 0 390 300" role="img" aria-label="An elder telling a story while memories of home drift nearby">
-    <rect width="390" height="300" rx="24" fill="#F7EFE3"/><path d="M0 257H390" stroke="#DCC7AC"/>
-    <g opacity=".9"><path d="M252 91 279 68l27 23" fill="#D08A63" stroke="#A94E2B" strokeWidth="2" strokeLinejoin="round"/><rect x="257" y="91" width="44" height="37" rx="2" fill="#EFE4D3" stroke="#A94E2B" strokeWidth="2"/><path d="M276 128v-18h8v18" fill="none" stroke="#A94E2B" strokeWidth="2"/></g>
-    <g style={{ transformOrigin: "330px 111px", animation: "breathe 8s ease-in-out infinite" }}><path d="M330 139V93" stroke="#6B8A5A" strokeWidth="3" strokeLinecap="round"/><circle cx="330" cy="82" r="22" fill="#6B8A5A"/><circle cx="311" cy="93" r="17" fill="#6B8A5A"/><circle cx="349" cy="96" r="17" fill="#6B8A5A"/></g>
-    <g transform="translate(54 126)"><path d="M15 113h143" stroke="#A94E2B" strokeWidth="2" strokeLinecap="round" opacity=".3"/><path d="M41 111V54c0-25 21-38 41-38s40 13 40 38v57" fill="#E4B7A6" stroke="#A94E2B" strokeWidth="2"/><circle cx="82" cy="42" r="30" fill="#D08A63" stroke="#A94E2B" strokeWidth="2"/><path d="M54 35c3-24 46-29 57-4v-9c-17-23-50-22-60 3Z" fill="#7C3B33"/><circle cx="71" cy="42" r="2" fill="#241C17"/><circle cx="93" cy="42" r="2" fill="#241C17"/><path d="M74 56c5 4 11 4 16 0" fill="none" stroke="#7C3B33" strokeWidth="2" strokeLinecap="round"/><path d="M104 79c31 5 44 18 51 32" fill="none" stroke="#A94E2B" strokeWidth="2" strokeLinecap="round"/><circle cx="159" cy="112" r="3" fill="#A94E2B"/></g>
-    <path d="M180 259q7-9 14 0t14 0t14 0" fill="none" stroke="#A94E2B" strokeWidth="2" strokeLinecap="round"/><path d="M222 259h107" stroke="#241C17" strokeWidth="2" strokeLinecap="round" opacity=".25"/>
+  return <svg className="hero-art" viewBox="0 0 390 250" role="img" aria-label="A grandmother's spoken story becoming a kept memory">
+    <rect width="390" height="250" rx="24" fill="#F7EFE3"/>
+    <path d="M34 210h322" stroke="#DCC7AC" strokeWidth="2" strokeLinecap="round"/>
+    <g transform="translate(47 48)">
+      <path d="M18 160V101c0-28 23-45 52-45s52 17 52 45v59" fill="#C98262" stroke="#A94E2B" strokeWidth="2.5"/>
+      <circle cx="70" cy="43" r="34" fill="#D08A63" stroke="#A94E2B" strokeWidth="2.5"/>
+      <path d="M38 39c2-29 56-35 65-3v-12C84 0 52 4 37 25Z" fill="#6F3A31"/>
+      <path d="M46 42h14m20 0h14M60 42h20" stroke="#241C17" strokeWidth="2" strokeLinecap="round" opacity=".7"/>
+      <circle cx="53" cy="42" r="2" fill="#241C17"/><circle cx="87" cy="42" r="2" fill="#241C17"/>
+      <path d="M60 59c6 5 13 5 19 0" fill="none" stroke="#7C3B33" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M30 111c12 12 27 18 40 18s28-6 40-18" fill="none" stroke="#F4E2D4" strokeWidth="3" strokeLinecap="round" opacity=".8"/>
+      <path d="M44 160v-34h52v34" fill="#B66B50" opacity=".6"/>
+    </g>
+    <g style={{ transformOrigin:"192px 118px", animation:"breathe 7s ease-in-out infinite" }}>
+      <path d="M158 109h8m8-14v28m8-41v54m8-30v6m8-20v46" stroke="#A94E2B" strokeWidth="4" strokeLinecap="round"/>
+      <circle cx="149" cy="109" r="3" fill="#A94E2B"/>
+    </g>
+    <g transform="translate(224 57)">
+      <rect width="119" height="120" rx="14" fill="#FFFDF8" stroke="#A94E2B" strokeWidth="2"/>
+      <path d="M22 32h66M22 49h78M22 66h56M22 83h72" stroke="#5C4E44" strokeWidth="4" strokeLinecap="round" opacity=".52"/>
+      <path d="M22 102q6-7 12 0t12 0t12 0" fill="none" stroke="#A94E2B" strokeWidth="2.5" strokeLinecap="round"/>
+    </g>
+    <path d="M160 195q7-8 14 0t14 0t14 0" fill="none" stroke="#A94E2B" strokeWidth="2" strokeLinecap="round" opacity=".6"/>
   </svg>;
 }
 

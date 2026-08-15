@@ -21,7 +21,7 @@ export default defineSchema({
   invitations: defineTable({
     shareToken: v.string(), hostName: v.string(), storytellerName: v.string(), relationship: v.string(),
     storytellerLanguage: language, questionOriginal: v.string(), questionSourceLanguage: language,
-    questionLocalized: v.string(), promptAudioStorageId: v.optional(v.id("_storage")),
+    questionLocalized: v.string(), hostIntroLocalized: v.optional(v.string()), promptAudioStorageId: v.optional(v.id("_storage")),
     promptAudioSource: v.union(v.literal("host-recorded"), v.literal("sarvam-tts"), v.literal("none")),
     status: invitationStatus, createdAt: v.number(),
   }).index("by_share_token", ["shareToken"]),
